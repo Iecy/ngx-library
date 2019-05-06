@@ -17,6 +17,22 @@
     "lib": [
       "es2018",
       "dom"
-    ]
+    ],
+    "paths": {
+      "ng-cookies": [
+        "dist/ng-cookies"
+      ],
+      "ng-cookies/*": [
+        "dist/ng-cookies/*"
+      ],
+      "cookie": [
+        "dist/cookie",
+        "dist/cookie"
+      ],
+      "cookie/*": [
+        "dist/cookie/*",
+        "dist/cookie/*"
+      ]
+    }
   }
 }

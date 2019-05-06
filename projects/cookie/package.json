@@ -1,0 +1,24 @@
+{
+  "name": "ngx-cookie-icy",
+  "version": "0.0.4",
+  "peerDependencies": {
+    "@angular/common": "^7.2.0",
+    "@angular/core": "^7.2.0"
+  },
+  "keywords": [
+    "angular2",
+    "angular",
+    "ng2",
+    "ng",
+    "cookie",
+    "cookies",
+    "angular2-cookie",
+    "angular2-cookies",
+    "ng2-cookies",
+    "ng2-cookie",
+    "ng-cookies",
+    "ng-cookie",
+    "ngx-cookie",
+    "ngx-cookies"
+  ]
+}
