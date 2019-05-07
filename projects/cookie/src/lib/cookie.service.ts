@@ -43,6 +43,10 @@ export interface ICookieService {
    * @param options 其他参数
    */
   remove(key: string, options?: CookieOptions): void;
+  /**
+   * 删除所有cookie
+   * @param options 其他参数
+   */
   removeAll(options?: CookieOptions): void;
 }
 
