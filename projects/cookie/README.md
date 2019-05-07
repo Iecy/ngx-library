@@ -20,7 +20,7 @@ npm install ngx-cookie-icy
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
-import { NgCookiesModule } from 'ng-cookies-icy';
+import { CookieModule } from 'ngx-cookie-icy';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -31,7 +31,7 @@ import { AppComponent } from './app.component';
   ],
   imports: [
     BrowserModule,
-    NgCookiesModule.forRoot(),
+    CookieModule.forRoot(),
     AppRoutingModule,
   ],
   providers: [],
@@ -42,17 +42,18 @@ export class AppModule { }
 
 ```javascript
 import { Component } from '@angular/core';
-import { NgCookiesService } from 'ng-cookies-icy';
+import { CookieService } from 'ngx-cookie-icy';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
+  styleUrls: ['./app.component.less']
 })
 export class AppComponent {
   constructor(
-    private _cookieService: NgCookiesService
+    private _cookieService: CookieService
   ) {
-    this._cookieService.set('icy', '看好你哦');
+    this._cookieService.set('paopao', '看好你哦');
   }
 }
 ```
