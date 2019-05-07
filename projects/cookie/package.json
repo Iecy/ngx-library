@@ -1,6 +1,7 @@
 {
   "name": "ngx-cookie-icy",
   "version": "1.0.0",
+  "author": "paopao",
   "peerDependencies": {
     "@angular/common": "^7.2.0",
     "@angular/core": "^7.2.0"
@@ -9,6 +10,11 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/Iecy/ngx-cookie-icy.git"
+  },
+  "license": "MIT",
+  "homepage": "https://github.com/Iecy/ngx-cookie-icy#readme",
+  "bugs": {
+    "url": "https://github.com/Iecy/ngx-cookie-icy/issues"
   },
   "keywords": [
     "angular2",
