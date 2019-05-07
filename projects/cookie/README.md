@@ -4,7 +4,7 @@
 ## 1、开始使用
   - <a href="#install">安装</a>
   - <a href="#use">使用</a>
-## 2、cookieService中的文法
+## 2、cookieService中的方法
   - <a href="#get">get()</a>
   - <a href="#getObject">getObject()</a>
   - <a href="#getAll">getAll()</a>
