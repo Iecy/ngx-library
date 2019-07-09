@@ -37,6 +37,41 @@
           }
         }
       }
+    },
+    "logger": {
+      "root": "projects/logger",
+      "sourceRoot": "projects/logger/src",
+      "projectType": "library",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/logger/tsconfig.lib.json",
+            "project": "projects/logger/ng-package.json"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/logger/src/test.ts",
+            "tsConfig": "projects/logger/tsconfig.spec.json",
+            "karmaConfig": "projects/logger/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/logger/tsconfig.lib.json",
+              "projects/logger/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
     }
   },
   "defaultProject": "cookie"

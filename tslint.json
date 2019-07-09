@@ -46,7 +46,7 @@
       "ignore-params"
     ],
     "no-non-null-assertion": true,
-    "no-redundant-jsdoc": true,
+    "no-redundant-jsdoc": false,
     "no-switch-case-fall-through": true,
     "no-use-before-declare": true,
     "no-var-requires": false,
@@ -59,6 +59,20 @@
     "quotemark": [
       true,
       "single"
+    ],
+    "ban-types": [
+      true,
+      ["String", "Use 'string' instead."],
+      ["Object"],
+      ["Fo*"]
+    ],
+    "no-console": [
+      false,
+      "debug",
+      "info",
+      "time",
+      "timeEnd",
+      "trace"
     ],
     "trailing-comma": false,
     "no-output-on-prefix": true,

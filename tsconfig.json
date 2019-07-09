@@ -32,6 +32,12 @@
       "cookie/*": [
         "dist/cookie/*",
         "dist/cookie/*"
+      ],
+      "logger": [
+        "dist/logger"
+      ],
+      "logger/*": [
+        "dist/logger/*"
       ]
     }
   }

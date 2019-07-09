@@ -1,0 +1,18 @@
+{
+  "name": "ngx-logger",
+  "version": "0.0.1",
+  "author": "paopao",
+  "description": "angular2.0版本以上的可以使用；继承console所有的方法，可以根据环境变量控制输出",
+  "peerDependencies": {
+    "@angular/common": "^7.2.0",
+    "@angular/core": "^7.2.0"
+  },
+  "keywords": [
+    "angular2",
+    "angular",
+    "ng2",
+    "ng",
+    "log",
+    "logger"
+  ]
+}
