@@ -1,11 +1,20 @@
 {
-  "name": "ngx-logger",
-  "version": "0.0.1",
+  "name": "ngx-logger-icy",
+  "version": "0.1.3",
   "author": "paopao",
   "description": "angular2.0版本以上的可以使用；继承console所有的方法，可以根据环境变量控制输出",
   "peerDependencies": {
     "@angular/common": "^7.2.0",
     "@angular/core": "^7.2.0"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Iecy/ngx-cookie-icy.git"
+  },
+  "homepage": "https://github.com/Iecy/ngx-cookie-icy/blob/master/projects/logger/README.md",
+  "bugs": {
+    "url": "https://github.com/Iecy/ngx-cookie-icy/issues"
   },
   "keywords": [
     "angular2",
@@ -13,6 +22,8 @@
     "ng2",
     "ng",
     "log",
-    "logger"
+    "logger",
+    "ngx-log",
+    "ngx-logger"
   ]
 }

@@ -136,4 +136,13 @@ export class LoggerService {
     }
     return () => {};
   }
+  /**
+   * 性能分析器
+   */
+  get profile(): Function {
+    if (this.enable) {
+      return console.profile.bind(console);
+    }
+    return () => {};
+  }
 }

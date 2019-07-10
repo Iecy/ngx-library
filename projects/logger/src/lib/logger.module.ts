@@ -10,7 +10,7 @@ import { LoggerService } from './logger.service';
   exports: []
 })
 export class LoggerModule {
-  static forRoot(enable: boolean): ModuleWithProviders {
+  static forRoot(enable: boolean = true): ModuleWithProviders {
     return {
       ngModule: LoggerModule,
       providers: [
@@ -19,7 +19,7 @@ export class LoggerModule {
       ]
     };
   }
-  static forChild(enable: boolean): ModuleWithProviders {
+  static forChild(enable: boolean = true): ModuleWithProviders {
     return {
       ngModule: LoggerModule,
       providers: [
