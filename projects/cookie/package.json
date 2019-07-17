@@ -1,6 +1,6 @@
 {
   "name": "ngx-cookie-icy",
-  "version": "1.0.4",
+  "version": "1.0.6",
   "author": "paopao",
   "peerDependencies": {
     "@angular/common": "^7.2.0",
@@ -9,7 +9,7 @@
   "description": "angular4+版本以上的cookieService",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Iecy/ngx-library.git"
+    "url": "https://github.com/Iecy/ngx-library/tree/master/projects/cookie"
   },
   "license": "MIT",
   "homepage": "https://github.com/Iecy/ngx-library/tree/master/projects/cookie",
