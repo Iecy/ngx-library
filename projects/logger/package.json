@@ -10,11 +10,11 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Iecy/ngx-cookie-icy.git"
+    "url": "https://github.com/Iecy/ngx-library.git"
   },
-  "homepage": "https://github.com/Iecy/ngx-cookie-icy/blob/master/projects/logger/README.md",
+  "homepage": "https://github.com/Iecy/ngx-library/blob/master/projects/logger/README.md",
   "bugs": {
-    "url": "https://github.com/Iecy/ngx-cookie-icy/issues"
+    "url": "https://github.com/Iecy/ngx-library/issues"
   },
   "keywords": [
     "angular2",

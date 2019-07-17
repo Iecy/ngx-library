@@ -1,6 +1,6 @@
 
 # ngx-logger-icy
-> angular4+以上的版本可以使用；继承console上所以得方法，可以根据环境变量控制log是否输出，解决开发环境需要打印一些log日志但是生产环境并不需要
+> angular4+以上的版本可以使用；继承console上的方法，可以根据环境变量控制log是否输出，解决开发环境需要打印一些log日志但是生产环境并不需要
 ## 1、开始使用
   - <a href="#install">安装</a>
   - <a href="#use">使用</a>
