@@ -72,6 +72,41 @@
           }
         }
       }
+    },
+    "water-marker": {
+      "root": "projects/water-marker",
+      "sourceRoot": "projects/water-marker/src",
+      "projectType": "library",
+      "prefix": "c",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/water-marker/tsconfig.lib.json",
+            "project": "projects/water-marker/ng-package.json"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/water-marker/src/test.ts",
+            "tsConfig": "projects/water-marker/tsconfig.spec.json",
+            "karmaConfig": "projects/water-marker/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/water-marker/tsconfig.lib.json",
+              "projects/water-marker/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
     }
   },
   "defaultProject": "cookie"

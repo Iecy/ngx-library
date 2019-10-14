@@ -38,6 +38,12 @@
       ],
       "logger/*": [
         "dist/logger/*"
+      ],
+      "water-marker": [
+        "dist/water-marker"
+      ],
+      "water-marker/*": [
+        "dist/water-marker/*"
       ]
     }
   }

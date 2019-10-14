@@ -1,0 +1,28 @@
+{
+  "name": "ngx-water-marker",
+  "version": "0.0.4",
+  "author": "paopao",
+  "description": "angular7+ 水印背景",
+  "peerDependencies": {
+    "@angular/common": "^7.2.0",
+    "@angular/core": "^7.2.0"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Iecy/ngx-library/blob/master/projects/water-markter"
+  },
+  "homepage": "https://github.com/Iecy/ngx-library/blob/master/projects/water-marker/README.md",
+  "bugs": {
+    "url": "https://github.com/Iecy/ngx-library/issues"
+  },
+  "keywords": [
+    "angular2",
+    "angular",
+    "ng2",
+    "ng",
+    "water marker",
+    "water",
+    "ngx-water-marker"
+  ]
+}
