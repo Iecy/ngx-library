@@ -1,16 +1,16 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { BrowserModule } from '@angular/platform-browser';
+// import { BrowserModule } from '@angular/platform-browser';
 
 import { LayoutSideComponent } from './layout-side/layout-side.component';
 import { LayoutSideRouterComponent } from './layout-side/layout-side-router.component';
 import { LayoutHeaderComponent } from './layout-side/layout-header.component';
 
 import { IconDefinition } from '@ant-design/icons-angular';
-import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
+import { NzToolTipModule } from 'ant-reset-private/tooltip';
 
-import { NzIconModule, NZ_ICON_DEFAULT_TWOTONE_COLOR, NZ_ICONS } from 'ng-zorro-antd/icon';
+import { NzIconModule, NZ_ICON_DEFAULT_TWOTONE_COLOR, NZ_ICONS } from 'ant-reset-private/icon';
 // 引入你需要的图标，比如你需要 fill 主题的 AccountBook Alert 和 outline 主题的 Alert，推荐 ✔️
 import { MenuFoldOutline, MenuOutline } from '@ant-design/icons-angular/icons';
 
@@ -19,7 +19,7 @@ const icons: IconDefinition[] = [MenuFoldOutline, MenuOutline];
 @NgModule({
   imports: [
     CommonModule,
-    BrowserModule,
+    // BrowserModule,
     RouterModule,
     NzToolTipModule,
     NzIconModule
