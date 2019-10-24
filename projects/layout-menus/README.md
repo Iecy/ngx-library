@@ -9,6 +9,51 @@
 
 为满足系统``上下``布局和``左右``布局，支持LOGO部分存在`c-layout-header` 及`c-layout-side` 组件内 
 
+`cMenuList`结构参数
+
+| name         | description       | type              | required |
+| ------------ | ----------------- | ----------------- | -------- |
+| `id`         | ID;组件内部无使用 | `number`          | `false`  |
+| `attributes` | 菜单属性集合      | `json`            | `true`   |
+| router       | 路由地址          | `null` | `string` | `ture`   |
+| iconImage    | 路由图标          | `null` | `string` | `false`  |
+| title        | 标题              | `stirng`          | `true`   |
+| children     | 子级              | `Array`           | `false`  |
+
+```json
+[
+    {
+        id: 1,
+        attributes: {
+            router: '/home',
+            iconImage: 'base64 img url',
+            title: '首页'
+            ...其他自定义属性
+        }
+    }, {
+        id: 2,
+        attributes: {
+            router: null,
+            iconImage: 'base64 img url',
+            title: '淘淘'
+            subMenu: true
+        },
+        children: [
+            {
+                id: 3,
+                attributes: {
+                    router: '/taotao/hao',
+                    iconImage: 'base64 img url',
+            		title: '淘淘好'
+                }
+            }
+        ]
+    }
+]
+```
+
+
+
 ### <a href="#header">头部导航</a>
 
 - `c-layout-header`整个顶部导航使用
@@ -185,6 +230,7 @@ export class DemoLayoutHeaderLogoComponent {
 | `[cCollapsed]`       | 当前收起状态                             | `boolean`               | `false`  | `false` |
 | `(cCollapsedChange)` | 展开-收起时的回调函数                    | `EventEmitter<boolean>` | `false`  | `-`     |
 | `(outsideMouseover)` | `logo`区域外部菜单`mouseover`事件        | `EventEmitter<any>`     | `false`  | `-`     |
+| `(clickMenu)` | 点击左侧导航事件 | `EventEmitter<menu>` | `false` | `-` |
 
 #### 简单使用
 简单使用，只留有菜单部分；

@@ -38,8 +38,10 @@ export class LayoutSideComponent implements OnInit {
   @Input()
   @ViewChild('menuItemRouterTemplate')
   cMenuItemRouter: TemplateRef<{ $implicit: any, size: number }>;
-  constructor() { }
   @Output() outsideMouseover = new EventEmitter<any>();
+  @Output() clickMenu = new EventEmitter<any>();
+
+  constructor() { }
 
   ngOnInit() {
   }
@@ -51,6 +53,7 @@ export class LayoutSideComponent implements OnInit {
 
   public expand(e: MouseEvent, item: any): void {
     e.stopPropagation();
+    this.clickMenu.emit(item);
     if (item.children && item.children.length) {
       item.show = !item.show;
     }
