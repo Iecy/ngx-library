@@ -7,7 +7,7 @@
 
 ## 2、使用方式
 
-为满足系统``上下``布局和``左右``布局，支持![](C:\Users\lubingjie1\Desktop\微信图片_20191023190010.png)部分存在`c-layout-header` 及`c-layout-side` 组件内 
+为满足系统``上下``布局和``左右``布局，支持LOGO部分存在`c-layout-header` 及`c-layout-side` 组件内 
 
 ### <a href="#header">头部导航</a>
 
@@ -92,11 +92,12 @@ import { LayoutMenusModule } from 'layout-menus';
   ]
 })
 export class SharedModule { }
-
 ```
 
 ### <a name="header">头部导航</a>
+
 #### 参数
+
 | Name                 | Description                                                  | type                          | required | default |
 | -------------------- | ------------------------------------------------------------ | ----------------------------- | -------- | ------- |
 | `[cCollapsed]`       | 左侧菜单是否展开                                             | `boolean`                     | `false`  | `false` |
@@ -108,11 +109,9 @@ export class SharedModule { }
 | `(outsideMouseover)` | `logo`区域外部菜单`mouseover`事件                            | `EventEmitter<any>`           | `false`  | `-`     |
 
 #### 精简头部菜单模式
-![](C:\Users\lubingjie1\Desktop\微信图片_20191024100122.png)
 
 ```typescript
 import { Component } from '@angular/core';
-
 @Component({
   // tslint:disable-next-line:component-selector
   selector: 'demo-layout-header-simple',
@@ -127,9 +126,8 @@ export class DemoLayoutHeaderSimpleComponent {
 ```
 
 #### 显示右侧菜单。
-由于右侧菜单可能拥有不同的`事件`或者`样式`，所以没有设置默认模板。但是拥有一套`统一`的样式，书写时带有正确的`class`即可；
 
-![](C:\Users\lubingjie1\Desktop\微信图片_20191024101345.png)
+由于右侧菜单可能拥有不同的`事件`或者`样式`，所以没有设置默认模板。但是拥有一套`统一`的样式，书写时带有正确的`class`即可；
 
 ```typescript
 import { Component } from '@angular/core';
@@ -154,8 +152,6 @@ export class DemoLayoutHeaderRightMenuComponent {
 
 #### 显示左侧`logo`
 
-![](C:\Users\lubingjie1\Desktop\微信图片_20191024103930.png)
-
 ```typescript
 import { Component } from '@angular/core';
 
@@ -178,7 +174,6 @@ export class DemoLayoutHeaderLogoComponent {
 
 ### <a name="left">左侧导航</a>
 #### 参数
-
 | Name                 | Description                              | type                    | required | default |
 | -------------------- | ---------------------------------------- | ----------------------- | -------- | ------- |
 | `[cMenuList]`        | 菜单列表                                 | `Array`                 | `true`   | `-`     |
@@ -192,10 +187,7 @@ export class DemoLayoutHeaderLogoComponent {
 | `(outsideMouseover)` | `logo`区域外部菜单`mouseover`事件        | `EventEmitter<any>`     | `false`  | `-`     |
 
 #### 简单使用
-
 简单使用，只留有菜单部分；
-
-![](C:\Users\lubingjie1\Desktop\微信图片_20191024111302.png)
 
 ```typescript
 import { Component } from '@angular/core';
@@ -223,8 +215,6 @@ export class DemoLayoutSideSimpleComponent {
 ```
 
 #### 带有logo模式
-
-![](C:\Users\lubingjie1\Desktop\微信图片_20191024111805.png)
 
 ```typescript
 import { Component } from '@angular/core';
@@ -258,8 +248,6 @@ export class DemoLayoutSideLogoComponent {
 
 #### 自定义LOGO区域
 
-![](C:\Users\lubingjie1\Desktop\微信图片_20191024112530.png)
-
 ```typescript
 import { Component } from '@angular/core';
 
@@ -290,12 +278,9 @@ export class DemoLayoutHeaderRightMenuComponent {
   public isCollapsed = false;
   public menuList = [];
 }
-
 ```
 
 #### 菜单列表增加自定义头部和底部
-
-![](C:\Users\lubingjie1\Desktop\微信图片_20191024113329.png)
 
 ```typescript
 import { Component } from '@angular/core';
@@ -342,13 +327,9 @@ export class DemoLayoutSideCustomTopAndBottomComponent {
 }
 ```
 
- ### <a name="layout">整体结构</a>
+### <a name="layout">整体结构</a>
 
 #### logo在左侧布局
-
-![](C:\Users\lubingjie1\Desktop\微信图片_20191024115436.png)
-
-![](C:\Users\lubingjie1\Desktop\微信图片_20191024115439.png)
 
 ```typescript
 import { Component } from '@angular/core';
@@ -410,7 +391,6 @@ export class DemoLayoutLogoLeftComponent {
 ```
 
 #### LOGO在顶部布局
-
 样式效果，同`LOGO`在左侧布局效果一样；
 
 ```typescript
