@@ -1,0 +1,45 @@
+<div *ngIf="cLogoRender" class="side-menu-logo-content">
+  <ng-template
+    [ngTemplateOutlet]="cLogoRender"
+  ></ng-template>
+</div>
+<div class="side-menu-container" [style.top.px]="cLogoRender ? 50 : 0">
+  
+  <ng-template #menuTop></ng-template>
+  <ul class="menu-list">
+    <ng-container *ngTemplateOutlet="menuTpl; context: { $implicit: cMenuList, imgSize: 16 }"></ng-container>
+    
+    <ng-template #menuTpl let-menus let-imgSize="imgSize">
+      <ng-container *ngFor="let menu of menus">
+        <li
+        (click)="expand($event, menu)"
+        [class.collapsed]="cCollapsed"
+        >
+          <ng-template [ngTemplateOutlet]="cMenuItemRouter" [ngTemplateOutletContext]="{ $implicit: menu, size: imgSize, fold: cCollapsed }"></ng-template>
+          <ng-container *ngIf="menu.show && menu.children && menu.children.length">
+            <ul>
+              <ng-container *ngTemplateOutlet="menuTpl; context: { $implicit: menu.children, imgSize: imgSize - 4 }"></ng-container>
+            </ul>
+          </ng-container>
+        </li>
+      </ng-container>
+    </ng-template>
+  </ul>
+  <ng-template #menuBottom></ng-template>
+</div>
+<div class="side-menu-trigger" [class.side-menu-trigger-unfold]="cCollapsed">
+  <i nz-icon nzType="menu-fold" nzTheme="outline" (click)="triggerCollapsed()"></i>
+</div>
+
+<ng-template #menuItemRouterTemplate let-menu let-size="size" let-fold="cCollapsed">
+  <c-layout-side-router [menu]="menu" [cCollapsed]="cCollapsed" [imgSize]="size"></c-layout-side-router>
+</ng-template>
+<ng-template #renderLogoTemplate>
+  <a href="">
+    <div class="global-app-menu-logo" [class.global-app-menu-logo--collapsed]="cCollapsed">
+      <span *ngIf="!cCollapsed" class="global-app-menu-logo--item global-app-outside-menu-icon"><i nz-icon [nzType]="cLogoConfig?.outsideIcon" nzTheme="outline"></i></span>
+      <span class="global-app-menu-logo--item"><img class="global-app-menu-logo--img" src="{{cLogoConfig?.logoImg}}" height="20" alt="" srcset=""></span>
+      <span class="global-app-menu-logo--title">{{cLogoConfig?.title}}</span>
+    </div>
+  </a>
+</ng-template>

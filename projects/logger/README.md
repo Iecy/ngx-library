@@ -48,7 +48,6 @@ import { environment } from '../environments/environment';
   ],
   imports: [
     BrowserModule,
-    CookieModule.forRoot(),
     LoggerModule.forRoot(environment.enableConsole),// forRoot()如果为空,默认值为true
     AppRoutingModule,
   ],

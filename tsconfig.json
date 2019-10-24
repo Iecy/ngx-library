@@ -44,6 +44,12 @@
       ],
       "water-marker/*": [
         "dist/water-marker/*"
+      ],
+      "layout-menus": [
+        "dist/layout-menus"
+      ],
+      "layout-menus/*": [
+        "dist/layout-menus/*"
       ]
     }
   }

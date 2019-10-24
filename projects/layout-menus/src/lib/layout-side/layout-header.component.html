@@ -1,0 +1,41 @@
+<header class="c-layout-header" [style.left.px]="cCollapsed!==undefined ? (cCollapsed ? 50 : 200) : 0">
+  <div *ngIf="cLogoRender && cIsLogo" class="side-menu-logo-content">
+    <ng-template
+      [ngTemplateOutlet]="cLogoRender"
+    ></ng-template>
+  </div>
+  <div class="layout-header-container">
+    <div class="layout-header-container--left">
+      <ng-container *ngFor="let menu of cMenuList">
+        <span class="layout-header-nav--item">
+          <a 
+            [routerLink]="menu.attributes.router"
+            routerLinkActive
+            #routerRef="routerLinkActive"
+            [class.active]="routerRef.isActive && menu.attributes.router"
+          >{{menu.attributes.title}}</a>
+        </span>
+      </ng-container>
+    </div>
+    <div class="layout-header-container--right">
+      <ng-template #rightTemplate></ng-template>
+    </div>
+  </div>
+</header>
+
+
+<ng-template #renderLogoTemplate>
+  <a href="">
+    <div class="global-app-menu-logo" [style.width.px]="cCollapsed ? 50 : 200" [class.global-app-menu-logo--collapsed]="cCollapsed">
+      <span 
+        *ngIf="!cCollapsed" 
+        class="global-app-menu-logo--item global-app-outside-menu-icon"
+        (mouseover)="outsideMouseover.emit($event)"
+      >
+        <i nz-icon [nzType]="cLogoConfig?.outsideIcon" nzTheme="outline"></i>
+      </span>
+      <span class="global-app-menu-logo--item"><img class="global-app-menu-logo--img" src="{{cLogoConfig?.logoImg}}" height="20" alt="" srcset=""></span>
+      <span class="global-app-menu-logo--title">{{cLogoConfig?.title}}</span>
+    </div>
+  </a>
+</ng-template>
