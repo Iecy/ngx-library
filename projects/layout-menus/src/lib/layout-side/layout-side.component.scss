@@ -77,7 +77,8 @@
     img {
       position: absolute;
       left: 15px;
-      top: 18px;
+      top: 50%;
+      transform: translateY(-50%);
       line-height: 50px;
     }
     i.menu-more {

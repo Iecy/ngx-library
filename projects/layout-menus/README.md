@@ -280,6 +280,105 @@ export class DemoLayoutHeaderRightMenuComponent {
 }
 ```
 
+#### 自定义菜单列表`item`
+
+```typescript
+import { Component } from '@angular/core';
+
+@Component({
+  // tslint:disable-next-line:component-selector
+  selector: 'demo-layout-side-custom-menu-item-router',
+  template: `
+    <nz-sider nzCollapsible [(nzCollapsed)]="isCollapsed" [nzTrigger]="null" [nzCollapsedWidth]="isCollapsed ? 50 : 200">
+    <c-layout-side
+      [cMenuList]="menuList"
+      [(cCollapsed)]="isCollapsed"
+      [cLogoConfig]="logoConfig"
+      [cMenuItemRouter]="menuItemTemplate"
+      ></c-layout-side>
+    </nz-sider>
+
+    <ng-template #menuItemTemplate let-menu let-size="size">
+      <ng-container *ngIf="menu.attributes.subMenu">
+        <div
+          nz-tooltip
+          [nzTitle]="isCollapsed ? menu?.attributes?.title : ''"
+          nzPlacement="right"
+          class="menu-item"
+          [routerLink]="menu.attributes.router"
+          routerLinkActive
+          #routerRef="routerLinkActive"
+          [class.active]="routerRef.isActive && menu.attributes.router"
+          [class.open]="menu.show"
+        >
+          <img [style.width.px]="size" [src]="sanitizer.bypassSecurityTrustUrl(menu.attributes.iconImage)">
+            自定义属性subMenu
+          <i class="menu-more" nz-icon nzType="right" nzTheme="outline" (click)="expandMore($event, menu)"></i>
+        </div>
+      </ng-container>
+
+      <ng-container *ngIf="!menu.attributes.subMenu">
+        <c-layout-side-router [menu]="menu" [cCollapsed]="isCollapsed" [imgSize]="size"></c-layout-side-router>
+      </ng-container>
+    </ng-template>
+  `,
+  styles: [`
+  nz-sider {
+    position: fixed;
+    top: 0px;
+    bottom: 0;
+    box-shadow: 5px 0 4px -4px #ddd;
+  }
+
+  nz-content {
+    margin: 0 16px;
+  }
+
+  c-layout-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    transition: all .2s;
+  }
+  `]
+})
+export class DemoLayoutSideCustomMenuItemRouterComponent {
+  public isCollapsed = false;
+  public menuList = [
+    ...
+    {
+      id: 104,
+      attributes: {
+        router: null,
+        subMenu: true,
+        // tslint:disable-next-line:max-line-length
+        iconImage: '',
+        icon: 'iconfont icon-guanli',
+        title: '审批管理'
+      },
+      children: [
+        {
+          id: 106,
+          attributes: {
+            router: '/approval/authority-approval',
+            iconImage: null,
+            icon: 'authority-approval',
+            title: '权限审批'
+          },
+          children: []
+        }
+      ]
+    }
+  ];
+  logoConfig = {
+    title: '权限管理',
+    outsideIcon: 'menu',
+    logoImg: '../assets/logo.png'
+  };
+}
+```
+
 #### 菜单列表增加自定义头部和底部
 
 ```typescript
