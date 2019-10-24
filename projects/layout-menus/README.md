@@ -152,6 +152,7 @@ export class SharedModule { }
 | `[cLogoConfig]`      | `logo`不使用自定义的结构。可使用参数传值                     | `json`                        |          |         |
 | `[cMenuRight]`       | 右侧菜单                                                     | `template: TemplateRef<void>` | `false`  | `-`     |
 | `(outsideMouseover)` | `logo`区域外部菜单`mouseover`事件                            | `EventEmitter<any>`           | `false`  | `-`     |
+| `(clickMenu)`        | 点击菜单事件                                                 | `EventEmitter<menu>`          | `false`  | `-`     |
 
 #### 精简头部菜单模式
 

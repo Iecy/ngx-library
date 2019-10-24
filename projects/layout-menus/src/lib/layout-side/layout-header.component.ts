@@ -30,8 +30,14 @@ export class LayoutHeaderComponent implements OnInit {
     }
   }
   @Output() outsideMouseover = new EventEmitter<any>();
+  @Output() clickMenu = new EventEmitter<any>();
 
   constructor() {}
 
   ngOnInit() {}
+
+  public clickMenus(e: MouseEvent, menu: any) {
+    e.stopPropagation();
+    this.clickMenu.emit(menu);
+  }
 }

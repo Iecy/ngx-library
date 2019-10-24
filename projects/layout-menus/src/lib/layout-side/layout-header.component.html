@@ -7,7 +7,7 @@
   <div class="layout-header-container">
     <div class="layout-header-container--left">
       <ng-container *ngFor="let menu of cMenuList">
-        <span class="layout-header-nav--item">
+        <span class="layout-header-nav--item" (click)="clickMenus($event, menu)">
           <a 
             [routerLink]="menu.attributes.router"
             routerLinkActive
