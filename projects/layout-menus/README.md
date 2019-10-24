@@ -22,33 +22,33 @@
 
 ```json
 [
-    {
-        id: 1,
-        attributes: {
-            router: '/home',
-            iconImage: 'base64 img url',
-            title: '首页'
-            ...其他自定义属性
-        }
-    }, {
-        id: 2,
-        attributes: {
-            router: null,
-            iconImage: 'base64 img url',
-            title: '淘淘'
-            subMenu: true
-        },
-        children: [
-            {
-                id: 3,
-                attributes: {
-                    router: '/taotao/hao',
-                    iconImage: 'base64 img url',
-            		title: '淘淘好'
-                }
-            }
-        ]
+  {
+    "id": "1",
+    "attributes": {
+      "router": "/home",
+      "iconImage": "base64 img url",
+      "title": "首页"
+      // ...其他自定义属性
     }
+  }, {
+    "id": "2",
+    "attributes": {
+      "router": "ul",
+      "iconImage": "base64 img url",
+      "title": "淘淘",
+      "subMenu": true
+    },
+    "children": [
+      {
+        "id": "3",
+        "attributes": {
+          "router": "/taotao/hao",
+          "iconImage": "base64 img url",
+          "title": "淘淘好"
+        }
+      }
+    ]
+  }
 ]
 ```
 
