@@ -37,7 +37,7 @@
 <ng-template #renderLogoTemplate>
   <a href="">
     <div class="global-app-menu-logo" [class.global-app-menu-logo--collapsed]="cCollapsed">
-      <span *ngIf="!cCollapsed" class="global-app-menu-logo--item global-app-outside-menu-icon"><i nz-icon [nzType]="cLogoConfig?.outsideIcon" nzTheme="outline"></i></span>
+      <span *ngIf="!cCollapsed" class="global-app-menu-logo--item global-app-outside-menu-icon" (mouseover)="outsideMouseover.emit($event)"><i nz-icon [nzType]="cLogoConfig?.outsideIcon" nzTheme="outline"></i></span>
       <span class="global-app-menu-logo--item"><img class="global-app-menu-logo--img" src="{{cLogoConfig?.logoImg}}" height="20" alt="" srcset=""></span>
       <span class="global-app-menu-logo--title">{{cLogoConfig?.title}}</span>
     </div>
