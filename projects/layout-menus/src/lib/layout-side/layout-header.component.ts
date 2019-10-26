@@ -23,7 +23,6 @@ export class LayoutHeaderComponent implements OnInit {
   cLogoRender: TemplateRef<void>;
   /** 右侧 */
   @Input() set cMenuRight(template: TemplateRef<void>) {
-    console.log(template);
     if (template) {
       this.menuRightContainer.clear();
       this.menuRightContainer.createEmbeddedView(template);
