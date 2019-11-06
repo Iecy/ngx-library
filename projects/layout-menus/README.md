@@ -14,11 +14,18 @@
 | name         | description       | type              | required |
 | ------------ | ----------------- | ----------------- | -------- |
 | `id`         | ID;组件内部无使用 | `number`          | `false`  |
-| `attributes` | 菜单属性集合      | `json`            | `true`   |
-| router       | 路由地址          | `null` | `string` | `ture`   |
-| iconImage    | 路由图标          | `null` | `string` | `false`  |
+| `attributes` | 菜单属性集合,可以拥有自定义的属性 | `json`            | `true`   |
+| router       | 路由地址          | `null` | `string` |
+| iconImage    | 路由图标          | `null` | `string` |
 | title        | 标题              | `stirng`          | `true`   |
 | children     | 子级              | `Array`           | `false`  |
+
+#### 自定义数据[attributes]
+
+| name          | description                                   | type                              | required |
+| ------------- | --------------------------------------------- | --------------------------------- | -------- |
+| outSideRouter | 是否第三方菜单                                | boolean                           | false    |
+| target        | 当`outSideRouter`为`true`是，可以设置打开方式 | `_blank` `_parent` `_self` `_top` | `_blank` |
 
 ```json
 [
@@ -36,7 +43,6 @@
       "router": "ul",
       "iconImage": "base64 img url",
       "title": "淘淘",
-      "subMenu": true
     },
     "children": [
       {
@@ -150,8 +156,9 @@ export class SharedModule { }
 | `[cMenuList]`        | 菜单列表，当为`true`是，`[cLogoRender]`和`[cLogoConfig]`生效 | `Array`                       | `true`   | `-`     |
 | `[cLogoRender]`      | 自定义`logo`区域的内容,                                      | `TemplateRef<void>`           | `false`  | `-`     |
 | `[cLogoConfig]`      | `logo`不使用自定义的结构。可使用参数传值                     | `json`                        |          |         |
+| `[cMenuLeft]`      | 左侧菜单，可以进行自定义            |  `template: TemplateRef<{ $implicit: menu}>`   |  `false`        |    `-`     |
 | `[cMenuRight]`       | 右侧菜单                                                     | `template: TemplateRef<void>` | `false`  | `-`     |
-| `(outsideMouseover)` | `logo`区域外部菜单`mouseover`事件                            | `EventEmitter<any>`           | `false`  | `-`     |
+| `(outsideMouseover)` | `logo`区域外部菜单`mouseover`事件                            | `EventEmitter<$event>`      | `false`  | `-`     |
 | `(clickMenu)`        | 点击菜单事件                                                 | `EventEmitter<menu>`          | `false`  | `-`     |
 
 #### 精简头部菜单模式
@@ -230,7 +237,7 @@ export class DemoLayoutHeaderLogoComponent {
 | `[cMenuItemRouter]`  | 自定义路由列表                           | `templateRef<void>`     | `false`  | `-`     |
 | `[cCollapsed]`       | 当前收起状态                             | `boolean`               | `false`  | `false` |
 | `(cCollapsedChange)` | 展开-收起时的回调函数                    | `EventEmitter<boolean>` | `false`  | `-`     |
-| `(outsideMouseover)` | `logo`区域外部菜单`mouseover`事件        | `EventEmitter<any>`     | `false`  | `-`     |
+| `(outsideMouseover)` | `logo`区域外部菜单`mouseover`事件        | `EventEmitter<$event>` | `false`  | `-`     |
 | `(clickMenu)` | 点击左侧导航事件 | `EventEmitter<menu>` | `false` | `-` |
 
 #### 简单使用

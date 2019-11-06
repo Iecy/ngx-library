@@ -8,12 +8,7 @@
     <div class="layout-header-container--left">
       <ng-container *ngFor="let menu of cMenuList">
         <span class="layout-header-nav--item" (click)="clickMenus($event, menu)">
-          <a 
-            [routerLink]="menu.attributes.router"
-            routerLinkActive
-            #routerRef="routerLinkActive"
-            [class.active]="routerRef.isActive && menu.attributes.router"
-          >{{menu.attributes.title}}</a>
+          <ng-template [ngTemplateOutlet]="cMenuLeft" [ngTemplateOutletContext]="{$implicit: menu}"></ng-template>
         </span>
       </ng-container>
     </div>
@@ -23,6 +18,21 @@
   </div>
 </header>
 
+<ng-template #renderLeftTemplate let-menu>
+  <a 
+  *ngIf="menu.attributes.outSideRouter else routerLinkTemplate" 
+  [attr.href]="menu.attributes.router"
+  [attr.target]="menu.attributes.target ? menu.attributes.target : '_blank'"
+  >{{menu.attributes.title}}</a>
+  <ng-template #routerLinkTemplate>
+    <a
+      [routerLink]="menu.attributes.router"
+      routerLinkActive
+      #routerRef="routerLinkActive"
+      [class.active]="routerRef.isActive && menu.attributes.router"
+    >{{menu.attributes.title}}</a>
+  </ng-template>
+</ng-template>
 
 <ng-template #renderLogoTemplate>
   <a href="">
