@@ -22,13 +22,17 @@ export class LayoutSideComponent implements OnInit {
   @Input() public cLogoConfig: LogoConfig;
   /** 头部 */
   @Input() set cMenuTop(template: TemplateRef<void>) {
-    this.menuTopContainer.clear();
-    this.menuTopContainer.createEmbeddedView(template);
+    if (template) {
+      this.menuTopContainer.clear();
+      this.menuTopContainer.createEmbeddedView(template);
+    }
   }
   /** 底部 */
   @Input() set cMenuBottom(template: TemplateRef<void>) {
-    this.menuBottomContainer.clear();
-    this.menuBottomContainer.createEmbeddedView(template);
+    if (template) {
+      this.menuBottomContainer.clear();
+      this.menuBottomContainer.createEmbeddedView(template);
+    }
   }
   /** 自定义头部 */
   @Input()
