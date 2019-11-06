@@ -42,6 +42,7 @@
       color: #8F98AB;
       padding-right: 22px;
       padding-left: 50px;
+      // border-left: 4px solid transparent;
       outline: none;
       overflow: hidden;
       text-overflow: ellipsis;
@@ -77,6 +78,7 @@
     img {
       position: absolute;
       left: 15px;
+      // top: 18px;
       top: 50%;
       transform: translateY(-50%);
       line-height: 50px;
@@ -132,7 +134,10 @@
     text-align: center;
   }
   .global-app-outside-menu-icon {
-    margin-left: 8px;
+    width: 50px;
+    &.side-open {
+      background: #006BFF;
+    }
   }
   .global-app-menu-logo--title {
     margin-left: 10px;

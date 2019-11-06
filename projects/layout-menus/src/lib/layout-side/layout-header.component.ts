@@ -31,7 +31,9 @@ export class LayoutHeaderComponent {
   @ViewChild('renderLeftTemplate')
   cMenuLeft: TemplateRef<void>;
 
+  @Input() public isOutSideMenuOpen = false;
   @Output() outsideMouseover = new EventEmitter<any>();
+  @Output() outsideMouseleave = new EventEmitter<any>();
   @Output() clickMenu = new EventEmitter<any>();
 
   constructor(

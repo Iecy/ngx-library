@@ -39,8 +39,10 @@
     <div class="global-app-menu-logo" [style.width.px]="cCollapsed ? 50 : 200" [class.global-app-menu-logo--collapsed]="cCollapsed">
       <span 
         *ngIf="!cCollapsed" 
+        [class.side-open]="isOutSideMenuOpen"
         class="global-app-menu-logo--item global-app-outside-menu-icon"
         (mouseover)="outsideMouseover.emit($event)"
+        (mouseleave)="outsideMouseleave.emit($event)"
       >
         <i nz-icon [nzType]="cLogoConfig?.outsideIcon" nzTheme="outline"></i>
       </span>

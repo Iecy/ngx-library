@@ -42,7 +42,10 @@ export class LayoutSideComponent implements OnInit {
   @Input()
   @ViewChild('menuItemRouterTemplate')
   cMenuItemRouter: TemplateRef<{ $implicit: any, size: number }>;
+
+  @Input() public isOutSideMenuOpen = false;
   @Output() outsideMouseover = new EventEmitter<any>();
+  @Output() outsideMouseleave = new EventEmitter<any>();
   @Output() clickMenu = new EventEmitter<any>();
 
   constructor() { }

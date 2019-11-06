@@ -9,7 +9,7 @@
 
 为满足系统``上下``布局和``左右``布局，支持LOGO部分存在`c-layout-header` 及`c-layout-side` 组件内 
 
-`cMenuList`结构参数
+### 菜单数据结构 `cMenuList`结构参数
 
 | name         | description       | type              | required |
 | ------------ | ----------------- | ----------------- | -------- |
@@ -158,8 +158,10 @@ export class SharedModule { }
 | `[cLogoConfig]`      | `logo`不使用自定义的结构。可使用参数传值                     | `json`                        |          |         |
 | `[cMenuLeft]`      | 左侧菜单，可以进行自定义            |  `template: TemplateRef<{ $implicit: menu}>`   |  `false`        |    `-`     |
 | `[cMenuRight]`       | 右侧菜单                                                     | `template: TemplateRef<void>` | `false`  | `-`     |
-| `(outsideMouseover)` | `logo`区域外部菜单`mouseover`事件                            | `EventEmitter<$event>`      | `false`  | `-`     |
-| `(clickMenu)`        | 点击菜单事件                                                 | `EventEmitter<menu>`          | `false`  | `-`     |
+| `[isOutSideMenuOpen]` | `logo`区域外部菜单是否展开 | `boolean` | `false` | `false` |
+| `(outsideMouseover)` | `logo`区域外部菜单`mouseover`事件   | `EventEmitter<$event>`      | `false`  | `-`     |
+| `(outsideMouseleave)` | `logo`区域外部菜单`mouseleave`事件 | `EventEmitter<$event>` | `false` | `-`  |
+| `(clickMenu)` | 点击菜单事件 | `EventEmitter<menu>` | `false` | `-` |
 
 #### 精简头部菜单模式
 
@@ -237,7 +239,9 @@ export class DemoLayoutHeaderLogoComponent {
 | `[cMenuItemRouter]`  | 自定义路由列表                           | `templateRef<void>`     | `false`  | `-`     |
 | `[cCollapsed]`       | 当前收起状态                             | `boolean`               | `false`  | `false` |
 | `(cCollapsedChange)` | 展开-收起时的回调函数                    | `EventEmitter<boolean>` | `false`  | `-`     |
-| `(outsideMouseover)` | `logo`区域外部菜单`mouseover`事件        | `EventEmitter<$event>` | `false`  | `-`     |
+| `[isOutSideMenuOpen]` | `logo`区域外部菜单是否展开              | `boolean`               | `false` | `false` |
+| `(outsideMouseover)`  | `logo`区域外部菜单`mouseover`事件       | `EventEmitter<$event>`  | `false`  | `-`     |
+| `(outsideMouseleave)` | `logo`区域外部菜单`mouseleave`事件      | `EventEmitter<$event>`  | `false` | `-`  |
 | `(clickMenu)` | 点击左侧导航事件 | `EventEmitter<menu>` | `false` | `-` |
 
 #### 简单使用
