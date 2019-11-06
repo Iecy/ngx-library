@@ -1,5 +1,6 @@
 import { Component, Input, ViewChild, TemplateRef, ViewContainerRef, ViewEncapsulation, Output, EventEmitter } from '@angular/core';
 import { LogoConfig } from './layout.interface';
+import { RouterLinkActive } from '@angular/router';
 
 @Component({
   selector: 'c-layout-header',
@@ -35,6 +36,8 @@ export class LayoutHeaderComponent {
   @Output() outsideMouseover = new EventEmitter<any>();
   @Output() outsideMouseleave = new EventEmitter<any>();
   @Output() clickMenu = new EventEmitter<any>();
+  @Output() changeMenu = new EventEmitter<any>();
+  public lastRout = '';
 
   constructor(
   ) {
@@ -45,4 +48,12 @@ export class LayoutHeaderComponent {
     this.clickMenu.emit(menu);
   }
 
+  isLinkActive(active: RouterLinkActive, menu: any): boolean {
+    const status = active.isActive && menu.attributes.router;
+    if (status && status !== this.lastRout) {
+      this.changeMenu.emit(menu);
+      this.lastRout = status;
+    }
+    return status;
+  }
 }

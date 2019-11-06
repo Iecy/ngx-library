@@ -29,7 +29,7 @@
       [routerLink]="menu.attributes.router"
       routerLinkActive
       #routerRef="routerLinkActive"
-      [class.active]="routerRef.isActive && menu.attributes.router"
+      [class.active]="isLinkActive(routerRef, menu)"
     >{{menu.attributes.title}}</a>
   </ng-template>
 </ng-template>
