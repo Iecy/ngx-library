@@ -53,7 +53,8 @@ export class AppComponent {
   };
 
   clickm(res) {
-    console.log(res);
-    this.leftMenu = res.children;
+    setTimeout(() => {
+      this.leftMenu = res.children;
+    }, 30);
   }
 }
