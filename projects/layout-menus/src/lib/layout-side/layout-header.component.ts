@@ -1,4 +1,5 @@
 import { Component, Input, ViewChild, TemplateRef, ViewContainerRef, ViewEncapsulation, Output, EventEmitter } from '@angular/core';
+import { RouterLinkActive } from '@angular/router';
 import { LogoConfig, Menu } from './layout.interface';
 
 @Component({
@@ -8,7 +9,10 @@ import { LogoConfig, Menu } from './layout.interface';
   encapsulation: ViewEncapsulation.None
 })
 export class LayoutHeaderComponent {
+  public lastRout: string;
+  /** 是否展开左侧Logo */
   @Input() public cCollapsed: boolean;
+  /** 是否显示Logo区域 */
   @Input() public cIsLogo = false;
   /** 自定义菜单右侧template */
   @ViewChild('rightTemplate', { read: ViewContainerRef }) menuRightContainer: ViewContainerRef;
@@ -27,14 +31,16 @@ export class LayoutHeaderComponent {
       this.menuRightContainer.createEmbeddedView(template);
     }
   }
+  /** 左侧菜单自定义 */
   @Input()
   @ViewChild('renderLeftTemplate')
   cMenuLeft: TemplateRef<void>;
-
+  /** 系统统一外部菜单是否展开 */
   @Input() public isOutSideMenuOpen = false;
   @Output() outsideMouseover = new EventEmitter<any>();
   @Output() outsideMouseleave = new EventEmitter<any>();
-  @Output() clickMenu = new EventEmitter<any>();
+  @Output() clickMenu = new EventEmitter<Menu>();
+  @Output() changeMenu = new EventEmitter<Menu>();
 
   constructor(
   ) {
@@ -43,6 +49,15 @@ export class LayoutHeaderComponent {
   public clickMenus(e: MouseEvent, menu: any) {
     e.stopPropagation();
     this.clickMenu.emit(menu);
+  }
+
+  public isLinkActive(active: RouterLinkActive, menu: any): boolean {
+    const status = active.isActive && menu.attributes.router;
+    if (status && status !== this.lastRout) {
+      this.changeMenu.emit(menu);
+      this.lastRout = status;
+    }
+    return status;
   }
 
 }

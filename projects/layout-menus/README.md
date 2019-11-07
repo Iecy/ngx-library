@@ -130,7 +130,8 @@ export class SharedModule { }
 | `[isOutSideMenuOpen]` | `logo`区域外部菜单是否展开 | `boolean` | `false` | `false` |
 | `(outsideMouseover)` | `logo`区域外部菜单`mouseover`事件   | `EventEmitter<$event>`      | `false`  | `-`     |
 | `(outsideMouseleave)` | `logo`区域外部菜单`mouseleave`事件 | `EventEmitter<$event>` | `false` | `-`  |
-| `(clickMenu)` | 点击菜单事件 | `EventEmitter<menu>` | `false` | `-` |
+| `(clickMenu)` | 点击菜单事件 | `EventEmitter<Menu>` | `false` | `-` |
+| `(changeMenu)` | 菜单更改的回调 | `EventEmitter<Menu>` | `false` | `-` |
 
 #### 精简头部菜单模式
 
