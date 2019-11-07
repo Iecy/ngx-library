@@ -46,10 +46,10 @@
         "dist/water-marker/*"
       ],
       "layout-menus": [
-        "dist/layout-menus"
+        "projects/layout-menus/src"
       ],
       "layout-menus/*": [
-        "dist/layout-menus/*"
+        "projects/layout-menus/src/lib/*"
       ]
     }
   }
