@@ -13,6 +13,7 @@ export class LayoutSideComponent implements OnInit {
   @ViewChild('menuTop', { read: ViewContainerRef }) menuTopContainer: ViewContainerRef;
   /** 自定义菜单底部template */
   @ViewChild('menuBottom', { read: ViewContainerRef }) menuBottomContainer: ViewContainerRef;
+  @Input() public cShowTrigger = true;
   /** 菜单列表 */
   @Input() public cMenuList: Menu[] = [];
   /** 左侧菜单是否展开 */

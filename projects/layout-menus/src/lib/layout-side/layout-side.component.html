@@ -3,7 +3,7 @@
     [ngTemplateOutlet]="cLogoRender"
   ></ng-template>
 </div>
-<div class="side-menu-container" [style.top.px]="cLogoRender ? 50 : 0">
+<div class="side-menu-container" [style.top.px]="cLogoRender ? 50 : 0" [style.bottom.px]="cShowTrigger ? 30 : 0">
   
   <ng-template #menuTop></ng-template>
   <ul class="menu-list">
@@ -27,7 +27,7 @@
   </ul>
   <ng-template #menuBottom></ng-template>
 </div>
-<div class="side-menu-trigger" [class.side-menu-trigger-unfold]="cCollapsed">
+<div *ngIf="cShowTrigger" class="side-menu-trigger" [class.side-menu-trigger-unfold]="cCollapsed">
   <i nz-icon nzType="menu-fold" nzTheme="outline" (click)="triggerCollapsed()"></i>
 </div>
 

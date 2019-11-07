@@ -202,6 +202,7 @@ export class DemoLayoutHeaderLogoComponent {
 | Name                 | Description                              | type                    | required | default |
 | -------------------- | ---------------------------------------- | ----------------------- | -------- | ------- |
 | `[cMenuList]`        | 菜单列表                                 | `Array`                 | `true`   | `-`     |
+| `[cShowTrigger]`     | 是否显示`trigger`                       | `boolean`               | `false`  | `true` |
 | `[cLogoConfig]`      | `logo`不使用自定义的结构。可使用参数传值 | `json`                  | `false`  | `-`     |
 | `[cMenuTop]`         | 在菜单列表区域添加`自定义的顶部内容`     | `TemplateRef<void>`     | `false`  | `-`     |
 | `[cMenuBottom]`      | 在菜单区域添加底部`自定义的内容`         | `TemplateRef<void>`     | `false`  | `-`     |
