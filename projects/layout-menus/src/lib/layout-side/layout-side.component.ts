@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter, ViewChild, TemplateRef, ViewContainerRef, ViewEncapsulation } from '@angular/core';
-import { LogoConfig } from './layout.interface';
+import { LogoConfig, Menu } from './layout.interface';
 
 @Component({
   selector: 'c-layout-side',
@@ -14,7 +14,7 @@ export class LayoutSideComponent implements OnInit {
   /** 自定义菜单底部template */
   @ViewChild('menuBottom', { read: ViewContainerRef }) menuBottomContainer: ViewContainerRef;
   /** 菜单列表 */
-  @Input() public cMenuList = [];
+  @Input() public cMenuList: Menu[] = [];
   /** 左侧菜单是否展开 */
   @Input() public cCollapsed: boolean;
   @Output() public cCollapsedChange: EventEmitter<boolean> = new EventEmitter();

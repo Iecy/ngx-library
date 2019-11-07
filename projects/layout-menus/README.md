@@ -9,55 +9,24 @@
 
 为满足系统``上下``布局和``左右``布局，支持LOGO部分存在`c-layout-header` 及`c-layout-side` 组件内 
 
-### 菜单数据结构 `cMenuList`结构参数
+### 菜单数据结构 `cMenuList`的`Menu`结构
 
 | name         | description       | type              | required |
 | ------------ | ----------------- | ----------------- | -------- |
-| `id`         | ID;组件内部无使用 | `number`          | `false`  |
-| `attributes` | 菜单属性集合,可以拥有自定义的属性 | `json`            | `true`   |
-| router       | 路由地址          | `null` | `string` |
-| iconImage    | 路由图标          | `null` | `string` |
-| title        | 标题              | `stirng`          | `true`   |
-| children     | 子级              | `Array`           | `false`  |
+| `id`         | ID;组件内部无使用 | `number` `\|` `string`| `false`  |
+| `attributes` | 菜单属性集合,可以拥有自定义的属性 | `Attributes` | `true`   |
+| `children`     | 子级              | `Array<Menu>`           | `false`  |
 
-#### 自定义数据[attributes]
+#### 自定义数据[Attributes]
 
-| name          | description                                   | type                              | required |
-| ------------- | --------------------------------------------- | --------------------------------- | -------- |
-| outSideRouter | 是否第三方菜单                                | boolean                           | false    |
-| target        | 当`outSideRouter`为`true`是，可以设置打开方式 | `_blank` `_parent` `_self` `_top` | `_blank` |
-
-```json
-[
-  {
-    "id": "1",
-    "attributes": {
-      "router": "/home",
-      "iconImage": "base64 img url",
-      "title": "首页"
-      // ...其他自定义属性
-    }
-  }, {
-    "id": "2",
-    "attributes": {
-      "router": "ul",
-      "iconImage": "base64 img url",
-      "title": "淘淘",
-    },
-    "children": [
-      {
-        "id": "3",
-        "attributes": {
-          "router": "/taotao/hao",
-          "iconImage": "base64 img url",
-          "title": "淘淘好"
-        }
-      }
-    ]
-  }
-]
-```
-
+| name          | description | type  | required |
+| ------------- | ----------- | ----- | -------- |
+| `title`        | 标题              | `stirng`             | `true`   |
+| `router`       | 路由地址          | `null` `\|` `string`  | `true` |
+| `iconImage`    | 路由图标          | `string`              | `-`    |
+| `show`         | 是否展开          | `boolean`             | `false`|
+| `outSideRouter` | 是否第三方菜单  | `boolean`               | `false`    |
+| `target`        | 当`outSideRouter`为`true`是，可以设置打开方式 | `_blank` `_parent` `_self` `_top` | `_blank` |
 
 
 ### <a href="#header">头部导航</a>

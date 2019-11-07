@@ -1,5 +1,5 @@
 import { Component, Input, ViewChild, TemplateRef, ViewContainerRef, ViewEncapsulation, Output, EventEmitter } from '@angular/core';
-import { LogoConfig } from './layout.interface';
+import { LogoConfig, Menu } from './layout.interface';
 
 @Component({
   selector: 'c-layout-header',
@@ -13,7 +13,7 @@ export class LayoutHeaderComponent {
   /** 自定义菜单右侧template */
   @ViewChild('rightTemplate', { read: ViewContainerRef }) menuRightContainer: ViewContainerRef;
   /** 菜单列表 */
-  @Input() public cMenuList = [];
+  @Input() public cMenuList: Menu[] = [];
   /** 系统logo控制 */
   @Input() public cLogoConfig: LogoConfig;
   /** 自定义头部 */
