@@ -142,7 +142,139 @@
           }
         }
       }
+    },
+    "dome": {
+      "root": "projects/dome/",
+      "sourceRoot": "projects/dome/src",
+      "projectType": "application",
+      "prefix": "app",
+      "schematics": {
+        "@schematics/angular:component": {
+          "styleext": "scss"
+        }
+      },
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/dome",
+            "index": "projects/dome/src/index.html",
+            "main": "projects/dome/src/main.ts",
+            "polyfills": "projects/dome/src/polyfills.ts",
+            "tsConfig": "projects/dome/tsconfig.app.json",
+            "assets": [
+              "projects/dome/src/favicon.ico",
+              "projects/dome/src/assets"
+            ],
+            "styles": [
+              "projects/dome/src/styles.scss"
+            ],
+            "scripts": [],
+            "es5BrowserSupport": true
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/dome/src/environments/environment.ts",
+                  "with": "projects/dome/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "dome:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "dome:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "dome:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/dome/src/test.ts",
+            "polyfills": "projects/dome/src/polyfills.ts",
+            "tsConfig": "projects/dome/tsconfig.spec.json",
+            "karmaConfig": "projects/dome/karma.conf.js",
+            "styles": [
+              "projects/dome/src/styles.css"
+            ],
+            "scripts": [],
+            "assets": [
+              "projects/dome/src/favicon.ico",
+              "projects/dome/src/assets"
+            ]
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/dome/tsconfig.app.json",
+              "projects/dome/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "dome-e2e": {
+      "root": "projects/dome-e2e/",
+      "projectType": "application",
+      "prefix": "",
+      "architect": {
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "projects/dome-e2e/protractor.conf.js",
+            "devServerTarget": "dome:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "dome:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": "projects/dome-e2e/tsconfig.e2e.json",
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
     }
   },
-  "defaultProject": "cookie"
+  "defaultProject": "dome"
 }

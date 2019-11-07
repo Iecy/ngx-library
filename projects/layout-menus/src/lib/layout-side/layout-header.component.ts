@@ -59,5 +59,4 @@ export class LayoutHeaderComponent {
     }
     return status;
   }
-
 }
