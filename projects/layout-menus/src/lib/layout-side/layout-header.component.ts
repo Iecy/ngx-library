@@ -6,6 +6,7 @@ import { LogoConfig, Menu } from './layout.interface';
   selector: 'c-layout-header',
   exportAs: 'cLayoutHeader',
   templateUrl: './layout-header.component.html',
+  styleUrls: ['./layout-side.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
 export class LayoutHeaderComponent {
