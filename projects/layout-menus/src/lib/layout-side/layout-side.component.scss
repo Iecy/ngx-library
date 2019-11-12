@@ -36,8 +36,8 @@
     .menu-item {
       display: block;
       position: relative;
-      height: 40px;
-      line-height: 40px;
+      height: 50px;
+      line-height: 50px;
       font-size: 14px;
       color: #8F98AB;
       padding-right: 22px;
@@ -122,8 +122,8 @@
   }
 }
 .global-app-menu-logo {
-  line-height: 48px;
-  height: 48px;
+  line-height: 50px;
+  height: 50px;
   color: #fff;
   font-size: 16px;
   background: #232837;
@@ -134,7 +134,7 @@
     text-align: center;
   }
   .global-app-outside-menu-icon {
-    width: 48px;
+    width: 50px;
     &.side-open {
       background: #006BFF;
     }
@@ -144,7 +144,7 @@
   }
   &.global-app-menu-logo--collapsed {
     .global-app-menu-logo--item {
-      width: 48px;
+      width: 50px;
     }
   }
 }
@@ -156,8 +156,8 @@
   display: flex;
 }
 .layout-header-container {
-  height: 48px;
-  line-height: 48px;
+  height: 50px;
+  line-height: 50px;
   color: #fff;
   display: flex;
   flex: 1;
@@ -167,7 +167,7 @@
       display: inline-block;
       padding: 0 15px;
       a {
-        height: 48px;
+        height: 50px;
         display: inline-block;
         color: #8f98ab;
         padding: 0 10px;
