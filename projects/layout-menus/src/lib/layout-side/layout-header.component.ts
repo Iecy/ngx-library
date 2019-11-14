@@ -13,6 +13,10 @@ export class LayoutHeaderComponent {
   public lastRout: string;
   /** 是否展开左侧Logo */
   @Input() public cCollapsed: boolean;
+  /** 展开是的宽度：logo区域使用 */
+  @Input() public cWidth = 180;
+  /** 左侧菜单收起是的宽度：logo区域使用 */
+  @Input() public cCollapsedWidth = 50;
   /** 是否显示Logo区域 */
   @Input() public cIsLogo = false;
   /** 自定义菜单右侧template */

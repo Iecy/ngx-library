@@ -125,6 +125,8 @@ export class SharedModule { }
 | `[cMenuList]`        | 菜单列表，当为`true`是，`[cLogoRender]`和`[cLogoConfig]`生效 | `Array`                       | `true`   | `-`     |
 | `[cLogoRender]`      | 自定义`logo`区域的内容,                                      | `TemplateRef<void>`           | `false`  | `-`     |
 | `[cLogoConfig]`      | `logo`不使用自定义的结构。可使用参数传值                     | `json`                        |          |         |
+| `[cWidth]`           | `logo`区域的宽度                                           | `number`     |      `false`  | `180`   |
+| `[cCollapsedWidth]`           | `logo`区域收起时的宽度                    | `number`     |      `false`  | `50`   |
 | `[cMenuLeft]`      | 左侧菜单，可以进行自定义            |  `template: TemplateRef<{ $implicit: menu}>`   |  `false`        |    `-`     |
 | `[cMenuRight]`       | 右侧菜单                                                     | `template: TemplateRef<void>` | `false`  | `-`     |
 | `[isOutSideMenuOpen]` | `logo`区域外部菜单是否展开 | `boolean` | `false` | `false` |

@@ -1,4 +1,4 @@
-<header class="c-layout-header" [style.left.px]="cCollapsed!==undefined ? (cCollapsed ? 50 : 200) : 0">
+<header class="c-layout-header">
   <div *ngIf="cLogoRender && cIsLogo" class="side-menu-logo-content">
     <ng-template
       [ngTemplateOutlet]="cLogoRender"
@@ -36,7 +36,7 @@
 
 <ng-template #renderLogoTemplate>
   <a href="">
-    <div class="global-app-menu-logo" [style.width.px]="cCollapsed ? 50 : 200" [class.global-app-menu-logo--collapsed]="cCollapsed">
+    <div class="global-app-menu-logo" [style.width.px]="cCollapsed ? cCollapsedWidth : cWidth" [class.global-app-menu-logo--collapsed]="cCollapsed">
       <span 
         *ngIf="!cCollapsed" 
         [class.side-open]="isOutSideMenuOpen"
