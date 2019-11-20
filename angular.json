@@ -274,6 +274,41 @@
           }
         }
       }
+    },
+    "editor": {
+      "root": "projects/editor",
+      "sourceRoot": "projects/editor/src",
+      "projectType": "library",
+      "prefix": "icy",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/editor/tsconfig.lib.json",
+            "project": "projects/editor/ng-package.json"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/editor/src/test.ts",
+            "tsConfig": "projects/editor/tsconfig.spec.json",
+            "karmaConfig": "projects/editor/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/editor/tsconfig.lib.json",
+              "projects/editor/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
     }
   },
   "defaultProject": "dome"

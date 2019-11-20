@@ -1,9 +1,12 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MainComponent } from './main/main.component';
 
+
+import { MainComponent } from './main/main.component';
+import { EditorModule } from 'editor/editor.module';
 
 import { RouterModule, Routes } from '@angular/router';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 const routes: Routes = [
   {
     path: '',
@@ -17,7 +20,9 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forChild(routes)],
+  imports: [
+    RouterModule.forChild(routes),
+  ],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
@@ -26,7 +31,10 @@ export class AppRoutingModule { }
   declarations: [MainComponent],
   imports: [
     CommonModule,
-    AppRoutingModule
+    FormsModule,
+    ReactiveFormsModule,
+    EditorModule,
+    AppRoutingModule,
   ]
 })
 export class HomeModule { }

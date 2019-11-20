@@ -1,0 +1,163 @@
+{
+  "id": "1517878",
+  "name": "icy-editor",
+  "font_family": "icy",
+  "css_prefix_text": "icy-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "167448",
+      "name": "outdent",
+      "font_class": "outdent",
+      "unicode": "e620",
+      "unicode_decimal": 58912
+    },
+    {
+      "icon_id": "318395",
+      "name": "align-left",
+      "font_class": "alignleft",
+      "unicode": "e62e",
+      "unicode_decimal": 58926
+    },
+    {
+      "icon_id": "318396",
+      "name": "align-right汉语",
+      "font_class": "alignright",
+      "unicode": "e62f",
+      "unicode_decimal": 58927
+    },
+    {
+      "icon_id": "320363",
+      "name": "bold",
+      "font_class": "bold",
+      "unicode": "e675",
+      "unicode_decimal": 58997
+    },
+    {
+      "icon_id": "349041",
+      "name": "superscript",
+      "font_class": "superscript",
+      "unicode": "eced",
+      "unicode_decimal": 60653
+    },
+    {
+      "icon_id": "383835",
+      "name": "repeat",
+      "font_class": "repeat",
+      "unicode": "e654",
+      "unicode_decimal": 58964
+    },
+    {
+      "icon_id": "384189",
+      "name": "undo",
+      "font_class": "undo",
+      "unicode": "e665",
+      "unicode_decimal": 58981
+    },
+    {
+      "icon_id": "490153",
+      "name": "font_download",
+      "font_class": "fontdownload",
+      "unicode": "eb80",
+      "unicode_decimal": 60288
+    },
+    {
+      "icon_id": "835858",
+      "name": "align-center",
+      "font_class": "aligncenter",
+      "unicode": "e606",
+      "unicode_decimal": 58886
+    },
+    {
+      "icon_id": "836680",
+      "name": "indent",
+      "font_class": "indent",
+      "unicode": "e748",
+      "unicode_decimal": 59208
+    },
+    {
+      "icon_id": "837243",
+      "name": "subscript",
+      "font_class": "subscript",
+      "unicode": "e81e",
+      "unicode_decimal": 59422
+    },
+    {
+      "icon_id": "929145",
+      "name": "chain-broken",
+      "font_class": "chainbroken",
+      "unicode": "e681",
+      "unicode_decimal": 59009
+    },
+    {
+      "icon_id": "929539",
+      "name": "list-ul",
+      "font_class": "listul",
+      "unicode": "e76c",
+      "unicode_decimal": 59244
+    },
+    {
+      "icon_id": "1261894",
+      "name": "link",
+      "font_class": "link",
+      "unicode": "e6bf",
+      "unicode_decimal": 59071
+    },
+    {
+      "icon_id": "1261899",
+      "name": "list-ol",
+      "font_class": "list-ol",
+      "unicode": "e6c1",
+      "unicode_decimal": 59073
+    },
+    {
+      "icon_id": "1262322",
+      "name": "underline",
+      "font_class": "underline",
+      "unicode": "e72b",
+      "unicode_decimal": 59179
+    },
+    {
+      "icon_id": "1898648",
+      "name": "code",
+      "font_class": "code",
+      "unicode": "e657",
+      "unicode_decimal": 58967
+    },
+    {
+      "icon_id": "1898844",
+      "name": "italic",
+      "font_class": "italic",
+      "unicode": "e6c3",
+      "unicode_decimal": 59075
+    },
+    {
+      "icon_id": "1899054",
+      "name": "strikethrough",
+      "font_class": "strikethrough",
+      "unicode": "e728",
+      "unicode_decimal": 59176
+    },
+    {
+      "icon_id": "7683838",
+      "name": "remove",
+      "font_class": "remove",
+      "unicode": "e622",
+      "unicode_decimal": 58914
+    },
+    {
+      "icon_id": "7736490",
+      "name": "video-camera",
+      "font_class": "video-camera",
+      "unicode": "e932",
+      "unicode_decimal": 59698
+    },
+    {
+      "icon_id": "9053393",
+      "name": "font-color",
+      "font_class": "font-color",
+      "unicode": "e735",
+      "unicode_decimal": 59189
+    }
+  ]
+}

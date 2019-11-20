@@ -1,0 +1,154 @@
+@import './iconfont/iconfont.css';
+
+$base-font  : 14px;
+$border-base: 1px solid #ddd;
+$focus-color: #1890ff;
+
+.editor-toolbar {
+  font            : 100 .8rem/15px;
+  font-family     : "Chinese Quote", -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  background-color: #f5f5f5;
+  padding         : .2rem;
+  border          : $border-base;
+
+  &-set {
+    display         : inline-block;
+    border-radius   : 5px;
+    background-color: #fff;
+    margin-right    : 5px;
+    vertical-align  : middle;
+    border          : $border-base;
+    margin-bottom   : 3px;
+    height          : 28px;
+  }
+
+  &-button {
+    background-color: transparent;
+    padding         : .4rem;
+    min-width       : 2rem;
+    float           : left;
+    border          : 0 solid #ddd;
+
+    &:hover {
+      cursor          : pointer;
+      background-color: #f1f1f1;
+      transition      : 0.2s ease;
+    }
+
+    &:focus,
+    &.focus {
+      outline: none;
+    }
+  }
+
+  select {
+    font-size       : 12px;
+    width           : 90px;
+    vertical-align  : middle;
+    background-color: transparent;
+    border          : 0.5px solid rgba(255, 255, 255, 0);
+    border-radius   : 5px;
+    padding         : .4rem;
+    cursor          : pointer;
+  }
+
+  .editor-toolbar--selector {
+    display: inline-block;
+    width  : 90px;
+    height : 24px;
+    outline: none;
+
+    @supports not(-moz-appearance: none) {
+      optgroup {
+        font-size       : 12px;
+        background-color: #f4f4f4;
+        padding         : 5px;
+      }
+
+      option {
+        border          : 1px solid;
+        background-color: #fff;
+      }
+    }
+
+    &:disabled {
+      background-color: #f5f5f5;
+      pointer-events  : none;
+      cursor          : not-allowed;
+    }
+
+    &:hover {
+      cursor          : pointer;
+      background-color: #f1f1f1;
+      transition      : .2s ease;
+    }
+  }
+
+  .editor-toolbar-heading {
+    @supports not(-moz-appearance: none) {
+      .default {
+        font-size: $base-font;
+      }
+
+      .h1 {
+        font-size: $base-font + 10px;
+      }
+
+      .h2 {
+        font-size: $base-font + 6px;
+      }
+
+      .h3 {
+        font-size: $base-font + 4px;
+      }
+
+      .h4 {
+        font-size: $base-font + 2px;
+      }
+
+      .h5 {
+        font-size: $base-font;
+      }
+
+      .h6,
+      .div,
+      .pre {
+        font-size: $base-font -2px;
+      }
+    }
+  }
+
+  .editor-toolbar-font--size {
+    width: 50px;
+
+    @supports not(-moz-appearance: none) {
+      .size1 {
+        font-size: $base-font - 4px;
+      }
+
+      .size2 {
+        font-size: $base-font - 2px;
+      }
+
+      .size3 {
+        font-size: $base-font;
+      }
+
+      .size4 {
+        font-size: $base-font + 2px;
+      }
+
+      .size5 {
+        font-size: $base-font + 4px;
+      }
+
+      .size6 {
+        font-size: $base-font + 6px;
+      }
+
+      .size7 {
+        font-size: $base-font + 8px;
+      }
+    }
+  }
+}

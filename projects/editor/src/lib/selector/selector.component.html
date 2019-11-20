@@ -1,0 +1,35 @@
+<div 
+  class="editor-toolbar--selector__main" 
+  [class.editor-toolbar--selector__expanded]="isOpen"
+>
+  <button 
+  [tabIndex]="-1" 
+  #labelButton
+  tabindex="0" 
+  type="button" 
+  role="button"
+  class="editor-toolbar--selector--label" 
+  (click)="toggleOpen()"
+  >
+    {{label}}
+    <svg viewBox="0 0 18 18">
+      <polygon class="selector-stroke" points="7 11 9 13 11 11 7 11"></polygon>
+      <polygon class="selector-stroke" points="7 7 9 5 11 7 7 7"></polygon>
+    </svg>
+  </button>
+  <div class="editor-toolbar--selector--options">
+    <p 
+    selector
+    class="options--item"
+    *ngFor="let item of options; let i = index;"
+    role="tab"
+    [tabindex]="i" 
+    [class.selected]="item.value === value"
+    [class.focused]="i === activeIndex"
+    (click)="optionSelect(i, $event)"
+    >
+      {{item.label}}
+    </p>
+    <span *ngIf="!options.length" class="no-result-data">没有可选择项</span>
+  </div>
+</div>

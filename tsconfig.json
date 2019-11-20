@@ -19,37 +19,35 @@
       "dom"
     ],
     "paths": {
-      "ng-cookies": [
-        "dist/ng-cookies"
-      ],
-      "ng-cookies/*": [
-        "dist/ng-cookies/*"
-      ],
       "cookie": [
-        "dist/cookie",
-        "dist/cookie"
+        "projects/cookie/src"
       ],
       "cookie/*": [
-        "dist/cookie/*",
-        "dist/cookie/*"
+        "projects/cookie/src/lib/*"
       ],
       "logger": [
-        "dist/logger"
+        "projects/logger/src"
       ],
       "logger/*": [
-        "dist/logger/*"
+        "projects/logger/src/lib/*"
       ],
       "water-marker": [
-        "dist/water-marker"
+        "projects/water-marker/src"
       ],
       "water-marker/*": [
-        "dist/water-marker/*"
+        "projects/water-marker/src/lib/*"
       ],
       "layout-menus": [
         "projects/layout-menus/src"
       ],
       "layout-menus/*": [
         "projects/layout-menus/src/lib/*"
+      ],
+      "editor": [
+        "projects/editor/src"
+      ],
+      "editor/*": [
+        "projects/editor/src/lib/*"
       ]
     }
   }

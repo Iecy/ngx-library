@@ -1,0 +1,19 @@
+<div class="editor-toolbar" *ngIf="showToolbar">
+
+  <div class="editor-toolbar-set">
+    <icy-selector 
+    class="editor-toolbar-heading editor-toolbar--selector"
+    [options]="headings"
+    [(ngModel)]="block"
+    (change)="triggerCommand(block)"
+    [disabled]="htmlMode"
+    [hidden]="isButtonHidden('heading')"
+    tabindex="-1"
+    ></icy-selector>
+  </div>
+
+  <div class="editor-toolbar-set">
+    <button title="Undo" class="editor-toolbar-button" tabindex="-1"><i class="icy icy-undo"></i></button>
+    <button title="Redo" class="editor-toolbar-button" tabindex="-1"><i class="icy icy-repeat"></i></button>
+  </div>
+</div>

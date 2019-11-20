@@ -1,0 +1,36 @@
+<div 
+  class="icy-editor"
+  #icyEditor
+  [style.width]="config.width"
+  [style.minWidth]="config.minWidth"
+>
+  <ng-container *ngIf="config.toolbarPosition === 'top'">
+    <ng-template [ngTemplateOutlet]="editorToolbar"></ng-template>
+  </ng-container>
+  <div class="icy-editor-wrapper" #editorWrapper>
+    <div 
+    class="icy-editor-textarea" 
+    #editor
+    [attr.contenteditable]="config.editable"
+    [tabindex]="disabled ? -1 : tabIndex"
+    [attr.translate]="config.translate"
+    [attr.spellcheck]="config.spellcheck"
+    [style.height]="config.height"
+    [style.minHeight]="config.minHeight"
+    [style.maxHeight]="config.maxHeight"
+    ></div>
+    <span class="icy-editor-placeholder">{{placeholder || config['placeholder']}}</span>
+  </div>
+  <ng-container *ngIf="config.toolbarPosition === 'bottom'">
+    <ng-template [ngTemplateOutlet]="editorToolbar"></ng-template>
+  </ng-container>
+</div>
+
+<ng-template #editorToolbar>
+  <icy-editor-toolbar
+  [id]="id"
+  [showToolbar]="config.showToolbar"
+  [hiddenButtons]="config.toolbarHiddenButtons"
+  (execute)="executeCommand($event)"
+  ></icy-editor-toolbar>
+</ng-template>
