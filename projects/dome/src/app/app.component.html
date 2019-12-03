@@ -1,5 +1,5 @@
 <nz-layout>
-  <nz-sider nzCollapsible [(nzCollapsed)]="isCollapsed" [nzTrigger]="null" [nzCollapsedWidth]="isCollapsed ? 50 : 200">
+  <nz-sider nzCollapsible [(nzCollapsed)]="isCollapsed" [nzTrigger]="null" [nzCollapsedWidth]="48" nzWidth="180">
     <c-layout-side [cMenuList]="leftMenu" [(cCollapsed)]="isCollapsed" [cLogoRender]="null"></c-layout-side>
   </nz-sider>
   <nz-layout>
@@ -11,7 +11,7 @@
       [cLogoConfig]="logoConfig"
     [cMenuRight]="rightMenu"></c-layout-header>
     <nz-content
-      [style.marginLeft.px]="isCollapsed ? 50 : 200"
+      [style.marginLeft.px]="isCollapsed ? 48 : 180"
     >
       <router-outlet></router-outlet>
     </nz-content>
