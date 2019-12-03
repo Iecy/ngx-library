@@ -101,6 +101,7 @@
   font-size: 18px;
   padding: 0 10px;
   text-align: right;
+  background: #fff;
   color: rgba(0, 0, 0, 0.65);
   i {
     transition: all .25s ease-in;
@@ -149,6 +150,7 @@
   color: #202020;
   transition: all 0.2s;
   display: flex;
+  position: relative;
 }
 .layout-header-container {
   height: 48px;
