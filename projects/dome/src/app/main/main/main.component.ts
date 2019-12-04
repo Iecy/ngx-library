@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
+import { CookieService } from 'cookie';
+
 @Component({
   selector: 'app-main',
   templateUrl: './main.component.html',
@@ -7,9 +9,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MainComponent implements OnInit {
 
-  constructor() { }
+  constructor(private cookieService: CookieService) { }
 
   ngOnInit() {
+    this.cookieService.set('cookieTest', 'cookie test');
   }
 
 }

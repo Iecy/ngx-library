@@ -17,7 +17,7 @@ const routes: Routes = [
       loadChildren: './main/main.module#MainModule',
   },
   {
-      path: 'home',
+      path: 'water-marker',
       loadChildren: './home/home.module#HomeModule',
   },
   {

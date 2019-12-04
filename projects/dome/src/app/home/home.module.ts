@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MainComponent } from './main/main.component';
 
+import { WaterMarkerModule } from 'water-marker';
 
 import { RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
@@ -26,7 +27,8 @@ export class AppRoutingModule { }
   declarations: [MainComponent],
   imports: [
     CommonModule,
-    AppRoutingModule
+    AppRoutingModule,
+    WaterMarkerModule,
   ]
 })
 export class HomeModule { }

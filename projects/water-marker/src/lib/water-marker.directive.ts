@@ -31,7 +31,6 @@ export class WaterMarkerDirective implements OnInit {
     this.cWaterMarker.setting = this.cWaterMarker ?
       Object.assign({}, this.defaultConfig.setting, this.cWaterMarker.setting) :
       this.defaultConfig.setting;
-    console.log(this.cWaterMarker, 'this is app water.');
     this.ngZone.runOutsideAngular(() => {
       if (this.elementRef.nativeElement !== null) {
         setTimeout(() => {

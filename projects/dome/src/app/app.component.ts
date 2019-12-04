@@ -14,31 +14,36 @@ export class AppComponent {
       attributes: {
         outsideIcon: null,
         router: '/main',
-        title: '测试主页'
+        title: '工具'
       },
       children: [
         {
           attributes: {
-            outsideIcon: 'home',
             router: '/main/main',
-            title: '概览数据'
+            title: 'cookie'
           },
           children: []
+        },
+        {
+          attributes: {
+            router: '/main/logger',
+            title: 'logger'
+          }
         }
       ]
     },
     {
       attributes: {
         outsideIcon: null,
-        router: '/home',
-        title: '测试主页2'
+        router: '/water-marker',
+        title: '水印'
       },
       children: [
         {
           attributes: {
-            outsideIcon: 'home',
-            router: '/home/main',
-            title: '概览数据2'
+            outsideIcon: 'water-marker',
+            router: '/water-marker/main',
+            title: '水印使用'
           },
           children: []
         }
