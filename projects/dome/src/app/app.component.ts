@@ -13,20 +13,20 @@ export class AppComponent {
     {
       attributes: {
         outsideIcon: null,
-        router: '/main',
+        router: '/tools',
         title: '工具'
       },
       children: [
         {
           attributes: {
-            router: '/main/main',
+            router: '/tools/cookie',
             title: 'cookie'
           },
           children: []
         },
         {
           attributes: {
-            router: '/main/logger',
+            router: '/tools/logger',
             title: 'logger'
           }
         }

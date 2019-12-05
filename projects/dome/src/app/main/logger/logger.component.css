@@ -1,0 +1,6 @@
+.logger-wrap {
+  display: flex;
+  width: 500px;
+  align-items: center;
+  margin-bottom: 20px;
+}

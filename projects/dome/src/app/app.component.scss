@@ -12,9 +12,11 @@ c-layout-header {
   left: 0;
   right: 0;
   transition: all .2s;
+  z-index: 999;
 }
 
 nz-content{
   margin-top: 50px;
   padding: 15px;
+  min-height: calc(100vh - 50px);
 }

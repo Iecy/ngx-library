@@ -164,9 +164,15 @@
             "tsConfig": "projects/dome/tsconfig.app.json",
             "assets": [
               "projects/dome/src/favicon.ico",
+              {
+                "glob": "**/*",
+                "input": "./node_modules/@ant-design/icons-angular/src/inline-svg/",
+                "output": "projects/dome/src/assets/"
+              },
               "projects/dome/src/assets"
             ],
             "styles": [
+              "node_modules/ant-reset-private/ant-reset-private.min.css",
               "projects/dome/src/styles.scss"
             ],
             "scripts": [],

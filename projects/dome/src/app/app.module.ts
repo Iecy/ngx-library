@@ -1,19 +1,22 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
-import { LayoutMenusModule } from 'layout-menus';
-import { NZ_I18N, zh_CN, NZ_NOTIFICATION_CONFIG, NgZorroAntdModule } from 'ant-reset-private';
+// import { SharedModule } from 'shared/shared.module';
+import { SharedModule } from './shared/shared.module';
+import { NZ_I18N, zh_CN, NZ_NOTIFICATION_CONFIG } from 'ant-reset-private';
 
 import { RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {
       path: '',
-      redirectTo: 'main',
+      redirectTo: 'tools',
       pathMatch: 'full'
   },
   {
-      path: 'main',
+      path: 'tools',
       loadChildren: './main/main.module#MainModule',
   },
   {
@@ -38,10 +41,11 @@ export class AppRoutingModule { }
     AppComponent
   ],
   imports: [
-    NgZorroAntdModule,
     BrowserModule,
+    BrowserAnimationsModule,
+    HttpClientModule,
+    SharedModule,
     AppRoutingModule,
-    LayoutMenusModule
   ],
   providers: [
     { provide: NZ_I18N, useValue: zh_CN },

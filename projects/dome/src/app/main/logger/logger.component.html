@@ -1,3 +1,12 @@
+<div>
+
+  <!-- <input placeholder="请输入logger信息" [(ngModel)]="logger" /> -->
+</div>
+<div class="logger-wrap">
+  <span style="display: inline-block;width: 100px;">logger：</span>
+  <input nz-input type="text" [(ngModel)]="logger">
+  <button nz-button (click)="setLogger()">设置</button>
+</div>
 <p>
-  logger works! <a href="https://www.npmjs.com/package/ngx-logger-icy">具体使用说明</a>
+  打开控制台查看logger输出 <a href="https://www.npmjs.com/package/ngx-logger-icy">具体使用说明</a>
 </p>

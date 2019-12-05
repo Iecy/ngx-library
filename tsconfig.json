@@ -19,6 +19,9 @@
       "dom"
     ],
     "paths": {
+      "shared/*": [
+        "projects/dome/src/app/shared/*"
+      ],
       "cookie": [
         "projects/cookie/src"
       ],
