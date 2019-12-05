@@ -1,5 +1,5 @@
 # angular library集合
-[demo地址](https://ngx-library.now.sh/water-marker/main)
+[demo地址](https://ngx-library.now.sh)
 
 ## 项目一：
 <a href="https://github.com/Iecy/ngx-library/blob/master/projects/cookie/README.md">cookie</a>
