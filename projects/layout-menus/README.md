@@ -1,5 +1,5 @@
 # LayoutMenus
-> 满足公司内部，菜单使用 ng 7.0+
+> 满足公司内部，菜单使用 ng 7.0+;[demo地址](https://ngx-library.now.sh)
 
 ## 1、开始使用
   - <a href="#install">安装</a>

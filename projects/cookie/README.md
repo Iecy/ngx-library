@@ -1,5 +1,5 @@
 # ngx-cookie-icy
-> angular4+以上的版本可以使用；
+> angular4+以上的版本可以使用；[demo地址](https://ngx-library.now.sh/tools/cookie)
 
 
 ## 1、开始使用
