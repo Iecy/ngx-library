@@ -29,6 +29,12 @@ export class AppComponent {
             router: '/tools/logger',
             title: 'logger'
           }
+        },
+        {
+          attributes: {
+            router: '/tools/full-screen',
+            title: 'full-screen'
+          }
         }
       ]
     },

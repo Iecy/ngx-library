@@ -1,15 +1,12 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { CookieModule } from 'cookie';
-import { LoggerModule } from 'logger';
-import {NgZorroAntdModule} from 'ant-reset-private';
 import { SharedModule } from 'shared/shared.module';
 import { RouterModule, Routes } from '@angular/router';
 
 import { MainComponent } from './main/main.component';
 import { LoggerComponent } from './logger/logger.component';
-import { FormsModule } from '@angular/forms';
+import { FullScreenComponent } from './full-screen/full-screen.component';
 
 const routes: Routes = [
   {
@@ -24,6 +21,10 @@ const routes: Routes = [
   {
     path: 'logger',
     component: LoggerComponent
+  },
+  {
+    path: 'full-screen',
+    component: FullScreenComponent
   }
 ];
 
@@ -37,14 +38,13 @@ export class AppRoutingModule { }
 @NgModule({
   declarations: [
     MainComponent,
-    LoggerComponent
+    LoggerComponent,
+    FullScreenComponent
   ],
   imports: [
     CommonModule,
     SharedModule,
     AppRoutingModule,
-    CookieModule.forRoot(),
-    LoggerModule.forRoot()
   ]
 })
 export class MainModule { }

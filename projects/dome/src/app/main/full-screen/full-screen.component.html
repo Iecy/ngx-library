@@ -1,0 +1,15 @@
+<div class="container" #takeMeFullscreen>
+  <h3>全屏效果</h3>
+  <h4>这个区域是全屏区域</h4>
+  <button *cIfFullscreen cFullscreenExit>退出全屏</button>
+  <button *cIfNotFullscreen [cFullscreenEnter]="takeMeFullscreen">全屏</button>
+</div>
+<div class="container" #takeMeFullscreen2>
+  <div>
+    <video src="https://www.w3school.com.cn/i/movie.ogg" controls="controls">
+      your browser does not support the video tag
+    </video>
+  </div>
+  <button *cIfFullscreen cFullscreenExit>退出全屏</button>
+  <button *cIfNotFullscreen [cFullscreenEnter]="takeMeFullscreen2">全屏</button>
+</div>
