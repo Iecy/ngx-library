@@ -1,13 +1,14 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 
 import { NgZorroAntdModule} from 'ant-reset-private';
 import { CookieModule } from 'cookie';
 import { LoggerModule } from 'logger';
 import { LayoutMenusModule } from 'layout-menus';
 import { WaterMarkerModule } from 'water-marker';
-import { RouterModule } from '@angular/router';
+import { FullscreenModule } from 'fullscreen';
 
 @NgModule({
   declarations: [],
@@ -21,6 +22,7 @@ import { RouterModule } from '@angular/router';
     LoggerModule.forRoot(),
     LayoutMenusModule,
     WaterMarkerModule,
+    FullscreenModule,
   ],
   exports: [
     FormsModule,
@@ -30,6 +32,7 @@ import { RouterModule } from '@angular/router';
     LoggerModule,
     LayoutMenusModule,
     WaterMarkerModule,
+    FullscreenModule,
   ]
 })
 export class SharedModule { }

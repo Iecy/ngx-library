@@ -1,0 +1,12 @@
+<div class="container" #takeMeFullscreen>
+  <h3>全屏效果</h3>
+  <h4>这个区域是全屏区域</h4>
+  <button *cIfFullscreen cFullscreenExit>退出全屏</button>
+  <button *cIfNotFullscreen [cFullscreenEnter]="takeMeFullscreen">全屏</button>
+</div>
+<div class="container" #takeMeFullscreen2>
+  <h3>全屏效果</h3>
+  <h4>这个区域是全屏区域</h4>
+  <button cFullscreenExit>退出全屏</button>
+  <button [cFullscreenEnter]="takeMeFullscreen2">全屏</button>
+</div>

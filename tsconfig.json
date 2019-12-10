@@ -45,6 +45,12 @@
       ],
       "layout-menus/*": [
         "projects/layout-menus/src/lib/*"
+      ],
+      "fullscreen": [
+        "projects/fullscreen/src"
+      ],
+      "fullscreen/*": [
+        "projects/fullscreen/src/lib/*"
       ]
     }
   }
