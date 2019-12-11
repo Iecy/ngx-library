@@ -4,10 +4,11 @@
 
 export * from './lib/fullscreen.module';
 
+export * from './lib/common/utils';
 export * from './lib/common/fullscreen.service';
 export * from './lib/common/fullscreen.token';
 export * from './lib/common/fullscreen.token.defaults';
-export * from './lib/common/fullscreen-common.module';
+export * from './lib/common/fullscreen.module';
 
 export * from './lib/toggle/fullscreen.toggle.module';
 export * from './lib/toggle/fullscreen.toggle.directive';

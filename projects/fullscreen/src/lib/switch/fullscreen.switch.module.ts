@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
+
 import { FullscreenOffDirective, FullscreenOnDirective } from './fullscreen.switch.directive';
-import { FullscreenCommonModule } from 'fullscreen/common/fullscreen-common.module';
+import { FullscreenCommonModule } from '../common/fullscreen.module';
 
 @NgModule({
   imports: [ FullscreenCommonModule],

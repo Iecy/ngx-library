@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { FullscreenCommonModule } from './common/fullscreen-common.module';
+import { FullscreenCommonModule } from './common/fullscreen.module';
 import { FullscreenToggleModule } from './toggle/fullscreen.toggle.module';
 import { FullscreenSwitchModule } from './switch/fullscreen.switch.module';
 

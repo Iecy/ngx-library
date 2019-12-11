@@ -1,8 +1,8 @@
 import { Directive, Inject, ChangeDetectorRef, Input, HostListener } from '@angular/core';
-import { FullscreenService } from 'fullscreen/common/fullscreen.service';
 import { DOCUMENT } from '@angular/common';
 import { take } from 'rxjs/operators';
 
+import { FullscreenService } from '../common/fullscreen.service';
 @Directive({
   selector: '[cFullscreenEnter]'
 })

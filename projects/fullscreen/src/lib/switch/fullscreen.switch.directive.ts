@@ -10,11 +10,12 @@ import {
   ChangeDetectorRef,
   SimpleChanges
 } from '@angular/core';
-import { FullscreenService } from 'fullscreen/common/fullscreen.service';
-import { FULLSCREEN_IOS_POLL_MS, FULLSCREEN_IOS_POLL_ENABLED } from 'fullscreen/common/fullscreen.token';
 import { Subject, combineLatest, interval } from 'rxjs';
 import { tap, startWith, delay, flatMap, distinctUntilChanged, takeUntil } from 'rxjs/operators';
-import { isIphone } from 'fullscreen/common/utils';
+
+import { FullscreenService } from '../common/fullscreen.service';
+import { FULLSCREEN_IOS_POLL_MS, FULLSCREEN_IOS_POLL_ENABLED } from '../common/fullscreen.token';
+import { isIphone } from '../common/utils';
 
 export abstract class FullscreenDirective implements OnDestroy, OnInit, OnChanges {
 
