@@ -1,8 +1,30 @@
 {
   "name": "ngx-fullscreen-icy",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "peerDependencies": {
     "@angular/common": "^7.2.0",
     "@angular/core": "^7.2.0"
-  }
+  },
+  "description": "angular7+版本以上fullscreen",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Iecy/ngx-library/tree/master/projects/fullscreen"
+  },
+  "license": "MIT",
+  "homepage": "https://github.com/Iecy/ngx-library/tree/master/projects/fullscreen",
+  "bugs": {
+    "url": "https://github.com/Iecy/ngx-library/issues"
+  },
+  "keywords": [
+    "angular2",
+    "angular",
+    "ng2",
+    "ng",
+    "fullscreen",
+    "angular fullscreen",
+    "angular2 fullscreen",
+    "ng2 fullscreen",
+    "ng2-fullscreen",
+    "ngx-fullscreen"
+  ]
 }
