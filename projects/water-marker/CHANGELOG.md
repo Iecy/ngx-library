@@ -3,7 +3,7 @@
 
 
 <a name="1.0.0"></a>
-# [1.0.0](https://github.com/Iecy/ngx-library/compare/0.0.1...1.0.1) (2019-12-11)
+# 1.0.0 (2019-12-11)
 
 ### Docs Fixes
 * 删除无用代码
