@@ -108,6 +108,76 @@
         }
       }
     },
+    "angular-create-pdf": {
+      "root": "projects/angular-create-pdf",
+      "sourceRoot": "projects/angular-create-pdf/src",
+      "projectType": "library",
+      "prefix": "c",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/angular-create-pdf/tsconfig.lib.json",
+            "project": "projects/angular-create-pdf/ng-package.json"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/angular-create-pdf/src/test.ts",
+            "tsConfig": "projects/angular-create-pdf/tsconfig.spec.json",
+            "karmaConfig": "projects/angular-create-pdf/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/angular-create-pdf/tsconfig.lib.json",
+              "projects/angular-create-pdf/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "view-info": {
+      "root": "projects/view-info",
+      "sourceRoot": "projects/view-info/src",
+      "projectType": "library",
+      "prefix": "c",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/view-info/tsconfig.lib.json",
+            "project": "projects/view-info/ng-package.json"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/view-info/src/test.ts",
+            "tsConfig": "projects/view-info/tsconfig.spec.json",
+            "karmaConfig": "projects/view-info/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/view-info/tsconfig.lib.json",
+              "projects/view-info/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
     "layout-menus": {
       "root": "projects/layout-menus",
       "sourceRoot": "projects/layout-menus/src",

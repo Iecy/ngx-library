@@ -28,7 +28,7 @@ export class AppRoutingModule { }
   imports: [
     CommonModule,
     AppRoutingModule,
-    WaterMarkerModule,
+    WaterMarkerModule
   ]
 })
 export class HomeModule { }

@@ -15,3 +15,6 @@
 
 ## 项目五：
 <a href="https://github.com/Iecy/ngx-library/tree/master/projects/fullscreen/README.md">full screen</a>
+
+## 项目六：
+<a href="https://github.com/Iecy/ngx-library/blob/master/projects/angular-create-pdf/README.md">angular creat pdf</a>
