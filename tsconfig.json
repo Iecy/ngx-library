@@ -40,6 +40,18 @@
       "water-marker/*": [
         "projects/water-marker/src/lib/*"
       ],
+      "angular-create-pdf": [
+        "projects/angular-create-pdf/src"
+      ],
+      "angular-create-pdf/*": [
+        "projects/angular-create-pdf/src/lib/*"
+      ],
+      "view-info": [
+        "projects/view-info/src"
+      ],
+      "view-info/*": [
+        "projects/view-info/src/lib/*"
+      ],
       "layout-menus": [
         "projects/layout-menus/src"
       ],

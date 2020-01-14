@@ -8,7 +8,9 @@ import { CookieModule } from 'cookie';
 import { LoggerModule } from 'logger';
 import { LayoutMenusModule } from 'layout-menus';
 import { WaterMarkerModule } from 'water-marker';
+import { ViewInfoModule } from 'view-info';
 import { FullscreenModule } from 'fullscreen';
+import { AngularCreatePdfModule } from 'angular-create-pdf';
 
 @NgModule({
   declarations: [],
@@ -22,7 +24,9 @@ import { FullscreenModule } from 'fullscreen';
     LoggerModule.forRoot(),
     LayoutMenusModule,
     WaterMarkerModule,
+    ViewInfoModule,
     FullscreenModule,
+    AngularCreatePdfModule
   ],
   exports: [
     FormsModule,
@@ -32,6 +36,7 @@ import { FullscreenModule } from 'fullscreen';
     LoggerModule,
     LayoutMenusModule,
     WaterMarkerModule,
+    ViewInfoModule,
     FullscreenModule,
   ]
 })

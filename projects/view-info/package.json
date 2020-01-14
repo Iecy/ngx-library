@@ -1,0 +1,26 @@
+{
+  "name": "view-info",
+  "version": "1.0.2",
+  "author": "miyoko",
+  "peerDependencies": {
+    "@angular/common": "^7.2.0",
+    "@angular/core": "^7.2.0"
+  },
+  "description": "angular7.0+ ViewInfo",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Iecy/ngx-library/tree/master/projects/view-info"
+  },
+  "license": "MIT",
+  "homepage": "https://github.com/Iecy/ngx-library/tree/master/projects/view-info/README.md",
+  "bugs": {
+    "url": "https://github.com/Iecy/ngx-library/issues"
+  },
+  "keywords": [
+    "angular2",
+    "angular",
+    "ng2",
+    "ng",
+    "view-info"
+  ]
+}

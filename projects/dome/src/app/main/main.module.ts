@@ -7,6 +7,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { MainComponent } from './main/main.component';
 import { LoggerComponent } from './logger/logger.component';
 import { FullScreenComponent } from './full-screen/full-screen.component';
+import { ViewInfoComponent } from './view-info/view-info.component';
+import { AngularCreatePdfComponent } from './angular-create-pdf/angular-create-pdf.component';
 
 const routes: Routes = [
   {
@@ -25,6 +27,14 @@ const routes: Routes = [
   {
     path: 'full-screen',
     component: FullScreenComponent
+  },
+  {
+    path: 'view-info',
+    component: ViewInfoComponent,
+  },
+  {
+    path: 'angular-create-pdf',
+    component: AngularCreatePdfComponent,
   }
 ];
 
@@ -39,7 +49,9 @@ export class AppRoutingModule { }
   declarations: [
     MainComponent,
     LoggerComponent,
-    FullScreenComponent
+    FullScreenComponent,
+    ViewInfoComponent,
+    AngularCreatePdfComponent
   ],
   imports: [
     CommonModule,

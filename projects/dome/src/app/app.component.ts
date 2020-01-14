@@ -35,7 +35,19 @@ export class AppComponent {
             router: '/tools/full-screen',
             title: 'full-screen'
           }
-        }
+        },
+        {
+          attributes: {
+            router: '/tools/view-info',
+            title: 'view-info'
+          }
+        },
+        {
+          attributes: {
+            router: '/tools/angular-create-pdf',
+            title: 'angular-create-pdf'
+          }
+        },
       ]
     },
     {
