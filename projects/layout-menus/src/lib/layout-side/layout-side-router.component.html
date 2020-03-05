@@ -1,15 +1,30 @@
-<a
+<a 
+  *ngIf="menu.attributes.outSideRouter else routerLinkTemplate"
+  [attr.href]="menu.attributes.router"
+  [attr.target]="menu.attributes.target ? menu.attributes.target : '_blank'"
   nz-tooltip
   [nzTitle]="cCollapsed ? menu?.attributes?.title : ''"
   nzPlacement="right"
-  [routerLink]="menu.attributes.router"
-  routerLinkActive
-  #routerRef="routerLinkActive"
-  [class.active]="routerRef.isActive && menu.attributes.router"
   class="menu-item"
-  [class.open]="menu.show"
 >
   <img *ngIf="menu.attributes.iconImage" [style.width.px]="imgSize" [src]="sanitizer.bypassSecurityTrustUrl(menu.attributes.iconImage)">
   {{menu.attributes.title}}
   <i *ngIf="menu.children && menu.children.length" class="menu-more" nz-icon nzType="right" nzTheme="outline"></i>
 </a>
+<ng-template  #routerLinkTemplate>
+  <a
+    nz-tooltip
+    [nzTitle]="cCollapsed ? menu?.attributes?.title : ''"
+    nzPlacement="right"
+    [routerLink]="menu.attributes.router"
+    routerLinkActive
+    #routerRef="routerLinkActive"
+    [class.active]="routerRef.isActive && menu.attributes.router"
+    class="menu-item"
+    [class.open]="menu.show"
+  >
+    <img *ngIf="menu.attributes.iconImage" [style.width.px]="imgSize" [src]="sanitizer.bypassSecurityTrustUrl(menu.attributes.iconImage)">
+    {{menu.attributes.title}}
+    <i *ngIf="menu.children && menu.children.length" class="menu-more" nz-icon nzType="right" nzTheme="outline"></i>
+  </a>
+</ng-template>

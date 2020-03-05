@@ -48,6 +48,13 @@ export class AppComponent {
             title: 'angular-create-pdf'
           }
         },
+        {
+          attributes: {
+            router: 'https://www.baidu.com',
+            title: '外部链接',
+            outSideRouter: true,
+          }
+        }
       ]
     },
     {
