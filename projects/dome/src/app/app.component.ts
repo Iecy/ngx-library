@@ -20,9 +20,20 @@ export class AppComponent {
         {
           attributes: {
             router: '/tools/cookie',
-            title: 'cookie'
+            title: 'cookie',
+            notLink: true
           },
-          children: []
+          show: true,
+          children: [
+            {
+              attributes: {
+                router: '/tools/cookie',
+                title: 'cookie'
+              },
+              children: [
+              ]
+            }
+          ]
         },
         {
           attributes: {

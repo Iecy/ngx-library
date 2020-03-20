@@ -21,6 +21,15 @@ export class LayoutHeaderComponent {
   @Input() public cIsLogo = false;
   /** 自定义菜单右侧template */
   @ViewChild('rightTemplate', { read: ViewContainerRef }) menuRightContainer: ViewContainerRef;
+  /** 自定义菜单左侧头部template */
+  @ViewChild('leftBeforeTemplate', { read: ViewContainerRef }) menuLeftBeforeContainer: ViewContainerRef;
+  /** 自定义菜单左侧头部 */
+  @Input() set cMenuLeftBefore(template: TemplateRef<void>) {
+    if (template) {
+      this.menuLeftBeforeContainer.clear();
+      this.menuLeftBeforeContainer.createEmbeddedView(template);
+    }
+  }
   /** 菜单列表 */
   @Input() public cMenuList: Menu[] = [];
   /** 系统logo控制 */

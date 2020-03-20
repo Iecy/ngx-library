@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewEncapsulation, Input } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'c-layout-side-router',
@@ -12,10 +13,15 @@ export class LayoutSideRouterComponent implements OnInit {
   @Input() public imgSize = 16;
 
   constructor(
-    public sanitizer: DomSanitizer
+    public sanitizer: DomSanitizer,
+    public route: Router
   ) { }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
+  linkTo(data) {
+    if (!data.attributes.notLink) {
+      this.route.navigate([data.attributes.router]);
+    }
+  }
 }

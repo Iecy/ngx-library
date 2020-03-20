@@ -16,6 +16,7 @@
 | `id`         | ID;组件内部无使用 | `number` `\|` `string`| `false`  |
 | `attributes` | 菜单属性集合,可以拥有自定义的属性 | `Attributes` | `true`   |
 | `children`     | 子级              | `Array<Menu>`           | `false`  |
+| `show`         | 是否展开          | `boolean`             | `false`|
 
 #### 自定义数据[Attributes]
 
@@ -24,7 +25,7 @@
 | `title`        | 标题              | `stirng`             | `true`   |
 | `router`       | 路由地址          | `null` `\|` `string`  | `true` |
 | `iconImage`    | 路由图标          | `string`              | `-`    |
-| `show`         | 是否展开          | `boolean`             | `false`|
+| `notLink`      | 是否不允许跳转          | `boolean`             | `false`|
 | `outSideRouter` | 是否第三方菜单  | `boolean`               | `false`    |
 | `target`        | 当`outSideRouter`为`true`是，可以设置打开方式 | `_blank` `_parent` `_self` `_top` | `_blank` |
 
@@ -128,6 +129,7 @@ export class SharedModule { }
 | `[cWidth]`           | `logo`区域的宽度                                           | `number`     |      `false`  | `180`   |
 | `[cCollapsedWidth]`           | `logo`区域收起时的宽度                    | `number`     |      `false`  | `50`   |
 | `[cMenuLeft]`      | 左侧菜单，可以进行自定义            |  `template: TemplateRef<{ $implicit: menu}>`   |  `false`        |    `-`     |
+| `[cMenuLeftBefore]`       | 左侧菜单之前                                                     | `template: TemplateRef<void>` | `false`  | `-`     |
 | `[cMenuRight]`       | 右侧菜单                                                     | `template: TemplateRef<void>` | `false`  | `-`     |
 | `[isOutSideMenuOpen]` | `logo`区域外部菜单是否展开 | `boolean` | `false` | `false` |
 | `(outsideMouseover)` | `logo`区域外部菜单`mouseover`事件   | `EventEmitter<$event>`      | `false`  | `-`     |

@@ -9,7 +9,8 @@
       [cIsLogo]="true"
       (changeMenu)="clickm($event)"
       [cLogoConfig]="logoConfig"
-    [cMenuRight]="rightMenu"></c-layout-header>
+      [cMenuLeftBefore]="cMenuLeftBefore"
+      [cMenuRight]="rightMenu"></c-layout-header>
     <nz-content
       [style.marginLeft.px]="isCollapsed ? 48 : 180"
     >
@@ -17,3 +18,19 @@
     </nz-content>
   </nz-layout>
 </nz-layout>
+
+<ng-template #cMenuLeftBefore >
+  <nz-select [style.width.px]="120" nzPlaceHolder="请选择项目" nzAllowClear>
+    <nz-option
+      [nzLabel]="'dome1'"
+      [nzValue]="'1'"
+    >
+    </nz-option>
+    <nz-option
+      [nzLabel]="'dome2'"
+      [nzValue]="'2'"
+    >
+    </nz-option>
+  </nz-select>
+  
+</ng-template>
