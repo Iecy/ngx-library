@@ -18,10 +18,4 @@ export class LayoutSideRouterComponent implements OnInit {
   ) { }
 
   ngOnInit() {}
-
-  linkTo(data) {
-    if (!data.attributes.notLink) {
-      this.route.navigate([data.attributes.router]);
-    }
-  }
 }

@@ -16,7 +16,7 @@
     nz-tooltip
     [nzTitle]="cCollapsed ? menu?.attributes?.title : ''"
     nzPlacement="right"
-    (click)="linkTo(menu)"
+    [routerLink]="menu.attributes.router"
     routerLinkActive
     #routerRef="routerLinkActive"
     [class.active]="routerRef.isActive && menu.attributes.router"
