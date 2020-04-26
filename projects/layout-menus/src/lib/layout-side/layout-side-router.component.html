@@ -18,6 +18,7 @@
     nzPlacement="right"
     [routerLink]="menu.attributes.router"
     routerLinkActive
+    [skipLocationChange]="menu.attributes.notLink"
     #routerRef="routerLinkActive"
     [class.active]="routerRef.isActive && menu.attributes.router"
     class="menu-item"
