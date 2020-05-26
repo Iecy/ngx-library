@@ -38,8 +38,16 @@ export class AppComponent {
         {
           attributes: {
             router: '/tools/logger',
-            title: 'logger'
-          }
+            title: 'logger',
+          },
+          children: [
+            {
+              attributes: {
+                router: '/tools/logger',
+                title: 'logger'
+              }
+            }
+          ]
         },
         {
           attributes: {

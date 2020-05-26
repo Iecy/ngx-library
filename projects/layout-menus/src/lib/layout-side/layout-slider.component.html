@@ -1,0 +1,87 @@
+<div *ngIf="cShowLogoRender" class="side-menu-logo-content">
+  <ng-template
+    [ngTemplateOutlet]="cLogoRender"
+  ></ng-template>
+</div>
+<div class="side-menu-container side-menu-anted" [style.top.px]="cShowLogoRender ? 48 : 0" [style.bottom.px]="cShowTrigger ? 30 : 0">
+  <ng-template #menuTop></ng-template>
+  <ul nz-menu nzMode="inline" [nzInlineCollapsed]="cCollapsed">
+    <ng-container *ngTemplateOutlet="menuTpl; context: { $implicit: cMenuList, imgSize: 16 }"></ng-container>
+
+    <ng-template #menuTpl let-menus let-imgSize="imgSize">
+      <ng-container *ngFor="let menu of menus">
+        <li
+          nz-menu-item
+          [nzPaddingLeft]="menu._depth * 48"
+          *ngIf="!menu.children || menu.children.length === 0"
+          nz-tooltip
+          [nzTitle]="(cCollapsed && menu._depth === 0) ? menu?.attributes?.title : ''"
+          nzPlacement="right"
+          [nzDisabled]="menu.disabled"
+          [nzSelected]="menu._selected"
+          (click)="to(menu)"
+        >
+          <span title>
+            <ng-template [ngTemplateOutlet]="icon" [ngTemplateOutletContext]="{ $implicit: menu.icon, imgSize: imgSize }"></ng-template>
+            <span class="menu-item__text" [innerHTML]="menu._text"></span>
+          </span>
+        </li>
+        <li
+          nz-submenu
+          [nzPaddingLeft]="menu._depth * 24"
+          *ngIf="menu.children && menu.children.length > 0"
+          [nzOpen]="menu._open"
+          [nzDisabled]="menu.disabled"
+        >
+          <span title>
+            <ng-template [ngTemplateOutlet]="icon" [ngTemplateOutletContext]="{ $implicit: menu.icon, imgSize: imgSize }"></ng-template>
+            <span class="menu-item__text" [innerHTML]="menu._text"></span>
+          </span>
+          <ul>
+            <ng-container *ngTemplateOutlet="menuTpl; context: { $implicit: menu.children, imgSize: imgSize - 4 }"></ng-container>
+          </ul>
+        </li>
+      </ng-container>
+    </ng-template>
+
+  </ul>
+  <ng-template #menuBottom></ng-template>
+</div>
+<div *ngIf="cShowTrigger" class="side-menu-trigger" [class.side-menu-trigger-unfold]="cCollapsed">
+  <i nz-icon nzType="menu-fold" nzTheme="outline" (click)="triggerCollapsed()"></i>
+</div>
+
+<ng-template #icon let-icon let-imgSize="imgSize">
+  <ng-container *ngIf="icon" [ngSwitch]="icon.type">
+    <i
+      *ngSwitchCase="'icon'"
+      nz-icon
+      [nzType]="icon.value"
+      [nzTheme]="icon.theme"
+      [nzSpin]="icon.spin"
+      [nzTwotoneColor]="icon.twoToneColor"
+      [nzIconfont]="icon.iconfont"
+    ></i>
+    <i *ngSwitchCase="'iconfont'" nz-icon [nzIconfont]="icon.iconfont"></i>
+    <img [style.width.px]="imgSize" *ngSwitchCase="'img'" [src]="icon.value" />
+    <i *ngSwitchDefault class=" {{ icon.value }}"></i>
+  </ng-container>
+</ng-template>
+
+<ng-template #renderLogoTemplate>
+  <a href="">
+    <div class="global-app-menu-logo" [class.global-app-menu-logo--collapsed]="cCollapsed">
+      <span 
+      *ngIf="!cCollapsed" 
+      [class.side-open]="isOutSideMenuOpen" 
+      class="global-app-menu-logo--item global-app-outside-menu-icon" 
+      (mouseover)="outsideMouseover.emit($event)"
+      (mouseleave)="outsideMouseleave.emit($event)"
+      >
+        <i nz-icon [nzType]="cLogoConfig?.outsideIcon" nzTheme="outline"></i>
+      </span>
+      <span class="global-app-menu-logo--item"><img class="global-app-menu-logo--img" src="{{cLogoConfig?.logoImg}}" height="20" alt="" srcset=""></span>
+      <span class="global-app-menu-logo--title">{{cLogoConfig?.title}}</span>
+    </div>
+  </a>
+</ng-template>

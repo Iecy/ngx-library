@@ -8,6 +8,7 @@ export interface Menu {
   id?: string | number;
   attributes: Attribute;
   children: Array<Menu>;
+  [propName: string]: any;
 }
 
 interface Attribute {
