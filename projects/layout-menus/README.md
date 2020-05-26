@@ -38,6 +38,7 @@
 
 - `c-layout-side`整体左侧组件使用
 - `c-layout-side-router`左侧组件当个`item`使用
+- `c-layout-slider` 整体左侧菜单【基于anted】，使用方式同`c-layout-side`
 
 ### <a href="#layout">整体布局</a>
 
