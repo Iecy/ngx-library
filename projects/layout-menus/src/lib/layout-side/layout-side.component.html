@@ -11,6 +11,31 @@
     <ng-template #menuTpl let-menus let-imgSize="imgSize">
       <ng-container *ngFor="let menu of menus">
         <li
+          [class.collapsed]="cCollapsed"
+          [class.selected]="menu._selected"
+          *ngIf="!menu.children || menu.children.length === 0"
+          nz-tooltip
+          [nzTitle]="(cCollapsed) ? menu?.attributes?.title : ''"
+          nzPlacement="right"
+          (click)="to($event, menu)"
+        >
+          <ng-template [ngTemplateOutlet]="cMenuItemRouter" [ngTemplateOutletContext]="{ $implicit: menu, size: imgSize, fold: cCollapsed }"></ng-template>
+        </li>
+        <li
+        *ngIf="menu.children && menu.children.length > 0"
+        [class.open]="menu._open && !cCollapsed"
+        [class.collapsed]="cCollapsed"
+        [class.selected]="menu._selected"
+        (click)="toggleMenu($event, menu)"
+        >
+          <ng-template [ngTemplateOutlet]="cMenuItemRouter" [ngTemplateOutletContext]="{ $implicit: menu, size: imgSize, fold: cCollapsed }"></ng-template>
+          <ng-container *ngIf="menu._open && menu.children && menu.children.length">
+            <ul>
+              <ng-container *ngTemplateOutlet="menuTpl; context: { $implicit: menu.children, imgSize: imgSize - 4 }"></ng-container>
+            </ul>
+          </ng-container>
+        </li>
+        <!-- <li
         (click)="expand($event, menu)"
         [class.collapsed]="cCollapsed"
         >
@@ -20,7 +45,7 @@
               <ng-container *ngTemplateOutlet="menuTpl; context: { $implicit: menu.children, imgSize: imgSize - 4 }"></ng-container>
             </ul>
           </ng-container>
-        </li>
+        </li> -->
       </ng-container>
     </ng-template>
   </ul>
@@ -31,7 +56,11 @@
 </div>
 
 <ng-template #menuItemRouterTemplate let-menu let-size="size" let-fold="cCollapsed">
-  <c-layout-side-router [menu]="menu" [cCollapsed]="cCollapsed" [imgSize]="size"></c-layout-side-router>
+  <a class="menu-item">
+    <ng-template [ngTemplateOutlet]="icon" [ngTemplateOutletContext]="{ $implicit: menu.icon, imgSize: size }"></ng-template>
+    {{menu.attributes.title}}
+    <i *ngIf="menu.children && menu.children.length" class="menu-more" nz-icon nzType="right" nzTheme="outline"></i>
+  </a>
 </ng-template>
 <ng-template #renderLogoTemplate>
   <a href="">
@@ -49,4 +78,20 @@
       <span class="global-app-menu-logo--title">{{cLogoConfig?.title}}</span>
     </div>
   </a>
+</ng-template>
+<ng-template #icon let-icon let-imgSize="imgSize">
+  <ng-container *ngIf="icon" [ngSwitch]="icon.type">
+    <i
+      *ngSwitchCase="'icon'"
+      nz-icon
+      [nzType]="icon.value"
+      [nzTheme]="icon.theme"
+      [nzSpin]="icon.spin"
+      [nzTwotoneColor]="icon.twoToneColor"
+      [nzIconfont]="icon.iconfont"
+    ></i>
+    <i *ngSwitchCase="'iconfont'" nz-icon [nzIconfont]="icon.iconfont"></i>
+    <img [style.width.px]="imgSize" *ngSwitchCase="'img'" [src]="icon.value" />
+    <i *ngSwitchDefault class=" {{ icon.value }}"></i>
+  </ng-container>
 </ng-template>

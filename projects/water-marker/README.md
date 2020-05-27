@@ -6,13 +6,13 @@
 
 ## <a name="install">安装</a>
 
-```
+```ruby
 npm i ngx-water-marker
 ```
 ## <a name="use">使用</a>
 ``WaterMarkerModule``需添加到使用的``module``的文件中。此处以``AppModule``为例：
 
-```javascript
+```typescript
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
@@ -36,7 +36,7 @@ import { AppComponent } from './app.component';
 export class AppModule { }
 ```
 
-```javascript
+```typescript
 import { Component } from '@angular/core';
 import { WaterMarkerOption } from 'ngx-water-marker';
 

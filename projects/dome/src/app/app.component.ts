@@ -19,11 +19,10 @@ export class AppComponent {
       children: [
         {
           attributes: {
-            router: '/tools/cookie',
-            title: 'cookie',
+            router: null,
+            title: 'cookie 目录',
             notLink: true
           },
-          show: true,
           children: [
             {
               attributes: {
@@ -37,7 +36,7 @@ export class AppComponent {
         },
         {
           attributes: {
-            router: '/tools/logger',
+            router: null,
             title: 'logger',
           },
           children: [
@@ -72,6 +71,7 @@ export class AppComponent {
             router: 'https://www.baidu.com',
             title: '外部链接',
             outSideRouter: true,
+            target: '_blank'
           }
         }
       ]
