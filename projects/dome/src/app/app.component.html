@@ -1,7 +1,7 @@
 <nz-layout>
   <nz-sider nzCollapsible [(nzCollapsed)]="isCollapsed" [nzTrigger]="null" [nzCollapsedWidth]="48" nzWidth="180">
-    <c-layout-side [cMenuList]="leftMenu" [(cCollapsed)]="isCollapsed" [cLogoRender]="null"></c-layout-side>
-    <!-- <c-layout-slider [cMenuList]="leftMenu" [(cCollapsed)]="isCollapsed"></c-layout-slider> -->
+    <!-- <c-layout-side [cMenuList]="leftMenu" [(cCollapsed)]="isCollapsed" [cLogoRender]="null"></c-layout-side> -->
+    <c-layout-slider [cMenuList]="leftMenu" [(cCollapsed)]="isCollapsed"></c-layout-slider>
   </nz-sider>
   <nz-layout>
     <c-layout-header

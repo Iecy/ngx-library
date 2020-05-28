@@ -3,6 +3,7 @@ import { LogoConfig, Menu } from './layout.interface';
 import { Router, NavigationEnd } from '@angular/router';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'c-layout-side',
@@ -66,6 +67,7 @@ export class LayoutSideComponent implements OnInit {
   constructor(
     private ngZone: NgZone,
     private router: Router,
+    private sanitizer: DomSanitizer
   ) { }
 
   ngOnInit() {
@@ -112,6 +114,7 @@ export class LayoutSideComponent implements OnInit {
         let value = item.attributes.iconImage;
         if (/^data:image\//.test(item.attributes.iconImage)) {
           type = 'img';
+          (value as any) = this.sanitizer.bypassSecurityTrustUrl(value);
         }
         item.icon = { type, value };
       }

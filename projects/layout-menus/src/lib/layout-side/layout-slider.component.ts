@@ -101,6 +101,7 @@ export class LayoutSliderComponent implements OnInit, OnDestroy {
         let value = item.attributes.iconImage;
         if (/^data:image\//.test(item.attributes.iconImage)) {
           type = 'img';
+          (value as any) = this.sanitizer.bypassSecurityTrustUrl(value);
         }
         item.icon = { type, value };
       }
