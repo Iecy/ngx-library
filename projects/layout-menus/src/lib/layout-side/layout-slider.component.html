@@ -12,7 +12,7 @@
       <ng-container *ngFor="let menu of menus">
         <li
           nz-menu-item
-          [nzPaddingLeft]="menu._depth * 24"
+          [nzPaddingLeft]="menu._depth * 48"
           *ngIf="!menu.children || menu.children.length === 0"
           nz-tooltip
           [nzTitle]="(cCollapsed && menu._depth === 0) ? menu?.attributes?.title : ''"
