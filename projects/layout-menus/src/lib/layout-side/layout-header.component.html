@@ -26,6 +26,7 @@
   *ngIf="menu.attributes.outSideRouter else routerLinkTemplate" 
   [attr.href]="menu.attributes.router"
   [attr.target]="menu.attributes.target ? menu.attributes.target : '_blank'"
+  [class.active]="menu?.attributes?.selected"
   >{{menu.attributes.title}}</a>
   <ng-template #routerLinkTemplate>
     <a

@@ -37,7 +37,6 @@
 ### <a href="#left">左侧导航</a>
 
 - `c-layout-side`整体左侧组件使用
-- `c-layout-side-router`左侧组件当个`item`使用
 - `c-layout-slider` 整体左侧菜单【基于anted】，使用方式同`c-layout-side`
 
 ### <a href="#layout">整体布局</a>
@@ -352,7 +351,9 @@ import { Component } from '@angular/core';
       </ng-container>
 
       <ng-container *ngIf="!menu.attributes.subMenu">
-        <c-layout-side-router [menu]="menu" [cCollapsed]="isCollapsed" [imgSize]="size"></c-layout-side-router>
+        <img *ngIf="menu?.attributes?.iconImage" [style.width.px]="size" [src]="sanitizer.bypassSecurityTrustUrl(menu.attributes.iconImage)">
+        {{menu.attributes.title}}
+        <i *ngIf="menu.children && menu.children.length" class="menu-more" nz-icon nzType="right" nzTheme="outline"></i>
       </ng-container>
     </ng-template>
   `,
