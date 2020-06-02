@@ -56,22 +56,33 @@
         color: #006BFF;
       }
     }
+    &.collapsed {
+      .menu-item {
+        span {
+          opacity: 0;
+          max-width: 0;
+        }
+      }
+    }
     .menu-item {
-      display: block;
       position: relative;
       height: 50px;
       line-height: 50px;
       font-size: 14px;
       color: #8F98AB;
       padding-right: 22px;
-      padding-left: 50px;
-      // border-left: 4px solid transparent;
+      padding-left: 16px;
       outline: none;
+      display: flex;
       overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
       &:hover {
         color: #006BFF;
+      }
+      span {
+        display: inline-block;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
       }
     }
     .menu-title {
@@ -82,11 +93,12 @@
       height: 100%;
     }
     img {
-      position: absolute;
-      left: 15px;
-      top: 50%;
-      transform: translateY(-50%);
+      // position: absolute;
+      // left: 15px;
+      // top: 50%;
+      // transform: translateY(-50%);
       line-height: 50px;
+      margin-right: 8px;
     }
     i.menu-more {
       opacity: 0.7;

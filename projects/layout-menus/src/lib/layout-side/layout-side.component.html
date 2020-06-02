@@ -31,7 +31,7 @@
           <ng-template [ngTemplateOutlet]="cMenuItemRouter" [ngTemplateOutletContext]="{ $implicit: menu, size: imgSize, fold: cCollapsed }"></ng-template>
           <ng-container *ngIf="menu._open && menu.children && menu.children.length">
             <ul>
-              <ng-container *ngTemplateOutlet="menuTpl; context: { $implicit: menu.children, imgSize: imgSize - 4 }"></ng-container>
+              <ng-container *ngTemplateOutlet="menuTpl; context: { $implicit: menu.children, imgSize: imgSize }"></ng-container>
             </ul>
           </ng-container>
         </li>
@@ -56,9 +56,9 @@
 </div>
 
 <ng-template #menuItemRouterTemplate let-menu let-size="size" let-fold="cCollapsed">
-  <a class="menu-item">
+  <a class="menu-item" [style.paddingLeft.px]="16 + (cCollapsed ? 0 : (menu?._depth * 12))">
     <ng-template [ngTemplateOutlet]="icon" [ngTemplateOutletContext]="{ $implicit: menu.icon, imgSize: size }"></ng-template>
-    {{menu.attributes.title}}
+    <span>{{menu.attributes.title}}</span>
     <i *ngIf="menu.children && menu.children.length" class="menu-more" nz-icon nzType="right" nzTheme="outline"></i>
   </a>
 </ng-template>

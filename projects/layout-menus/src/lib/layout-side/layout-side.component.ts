@@ -27,6 +27,7 @@ export class LayoutSideComponent implements OnInit {
     this.data = menus;
     this.resume();
     this.openedByUrl(this.router.url);
+    console.log(this.data, 'this is data.');
   };
   get cMenuList(): Menu[] {
     return this.data;
