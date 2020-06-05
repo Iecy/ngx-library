@@ -11,6 +11,8 @@ import { WaterMarkerModule } from 'water-marker';
 import { ViewInfoModule } from 'view-info';
 import { FullscreenModule } from 'fullscreen';
 import { AngularCreatePdfModule } from 'angular-create-pdf';
+import { GridLayoutModule } from 'grid-layout';
+import { NgxGridLayoutModule } from 'ngx-grid-layout';
 
 @NgModule({
   declarations: [],
@@ -26,7 +28,9 @@ import { AngularCreatePdfModule } from 'angular-create-pdf';
     WaterMarkerModule,
     ViewInfoModule,
     FullscreenModule,
-    AngularCreatePdfModule
+    AngularCreatePdfModule,
+    GridLayoutModule,
+    NgxGridLayoutModule,
   ],
   exports: [
     FormsModule,
@@ -38,6 +42,8 @@ import { AngularCreatePdfModule } from 'angular-create-pdf';
     WaterMarkerModule,
     ViewInfoModule,
     FullscreenModule,
+    GridLayoutModule,
+    NgxGridLayoutModule,
   ]
 })
 export class SharedModule { }

@@ -66,6 +66,12 @@ export class AppComponent {
         },
         {
           attributes: {
+            router: '/tools/grid-layout',
+            title: 'grid-layout'
+          }
+        },
+        {
+          attributes: {
             router: '/tools/angular-create-pdf',
             title: 'angular-create-pdf'
           }

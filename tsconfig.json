@@ -63,6 +63,18 @@
       ],
       "fullscreen/*": [
         "projects/fullscreen/src/lib/*"
+      ],
+      "grid-layout": [
+        "projects/grid-layout/src"
+      ],
+      "grid-layout/*": [
+        "projects/grid-layout/src/lib/*"
+      ],
+      "ngx-grid-layout": [
+        "projects/ngx-grid-layout/src"
+      ],
+      "ngx-grid-layout/*": [
+        "projects/ngx-grid-layout/src/lib/*"
       ]
     }
   }

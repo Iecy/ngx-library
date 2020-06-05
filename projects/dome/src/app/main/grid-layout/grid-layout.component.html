@@ -1,0 +1,30 @@
+<!-- <c-grid-layout class="custom-layout" [layout]="layout">
+  <c-grid-item 
+    *ngFor="let item of layout"
+    [static]="item.static"
+    [x]="item.x"
+    [y]="item.y"
+    [h]="item.h"
+    [w]="item.w"
+    [i]="item.i"
+  >
+    {{item.i}}
+  </c-grid-item>
+</c-grid-layout> -->
+
+<ngx-grid-layout
+  [layout]="layout"
+>
+  <ngx-grid-item 
+    *ngFor="let item of layout"
+    [static]="item.static"
+    [x]="item.x"
+    [y]="item.y"
+    [h]="item.h"
+    [w]="item.w"
+    [i]="item.i"
+  >
+    {{item | json}}
+  </ngx-grid-item>
+</ngx-grid-layout>
+

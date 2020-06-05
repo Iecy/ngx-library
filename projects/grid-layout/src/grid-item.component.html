@@ -1,0 +1,8 @@
+<!-- <ng-template #gridItem>
+  <ng-content></ng-content>
+</ng-template> -->
+
+<div class="c-grid-body">
+  <ng-content></ng-content>
+</div>
+<span *ngIf="resizableAndNotStatic" class="c-resizable-handle" [class.c-rtl-resizable-handle]="renderRtl"></span>

@@ -9,6 +9,7 @@ import { LoggerComponent } from './logger/logger.component';
 import { FullScreenComponent } from './full-screen/full-screen.component';
 import { ViewInfoComponent } from './view-info/view-info.component';
 import { AngularCreatePdfComponent } from './angular-create-pdf/angular-create-pdf.component';
+import { GridLayoutComponent } from './grid-layout/grid-layout.component';
 
 const routes: Routes = [
   {
@@ -35,6 +36,10 @@ const routes: Routes = [
   {
     path: 'angular-create-pdf',
     component: AngularCreatePdfComponent,
+  },
+  {
+    path: 'grid-layout',
+    component: GridLayoutComponent,
   }
 ];
 
@@ -51,7 +56,8 @@ export class AppRoutingModule { }
     LoggerComponent,
     FullScreenComponent,
     ViewInfoComponent,
-    AngularCreatePdfComponent
+    AngularCreatePdfComponent,
+    GridLayoutComponent
   ],
   imports: [
     CommonModule,
