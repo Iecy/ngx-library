@@ -206,6 +206,7 @@ export class DemoLayoutHeaderLogoComponent {
 | Name                 | Description                              | type                    | required | default |
 | -------------------- | ---------------------------------------- | ----------------------- | -------- | ------- |
 | `[cMenuList]`        | 菜单列表                                 | `Array`                 | `true`   | `-`     |
+| `[cPaddingLeft]`     | 菜单左缩进`16 + menu._depth * cPaddingLeft` | `Array`               | `true`   | `14`     |
 | `[cShowTrigger]`     | 是否显示`trigger`                       | `boolean`               | `false`  | `true` |
 | `[cLogoConfig]`      | `logo`不使用自定义的结构。可使用参数传值 | `json`                  | `false`  | `-`     |
 | `[cMenuTop]`         | 在菜单列表区域添加`自定义的顶部内容`     | `TemplateRef<void>`     | `false`  | `-`     |
@@ -351,9 +352,11 @@ import { Component } from '@angular/core';
       </ng-container>
 
       <ng-container *ngIf="!menu.attributes.subMenu">
-        <img *ngIf="menu?.attributes?.iconImage" [style.width.px]="size" [src]="sanitizer.bypassSecurityTrustUrl(menu.attributes.iconImage)">
-        {{menu.attributes.title}}
-        <i *ngIf="menu.children && menu.children.length" class="menu-more" nz-icon nzType="right" nzTheme="outline"></i>
+        <a class="menu-item" [style.paddingLeft.px]="16 + (cCollapsed ? 0 : (menu?._depth * 12))">
+          <img *ngIf="menu?.attributes?.iconImage" [style.width.px]="size" [src]="sanitizer.bypassSecurityTrustUrl(menu.attributes.iconImage)">
+          <span>{{menu.attributes.title}}<span>
+          <i *ngIf="menu.children && menu.children.length" class="menu-more" nz-icon nzType="right" nzTheme="outline"></i>
+        </a>
       </ng-container>
     </ng-template>
   `,

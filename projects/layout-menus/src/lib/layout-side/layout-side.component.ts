@@ -22,6 +22,7 @@ export class LayoutSideComponent implements OnInit {
   @Input() public cShowTrigger = true;
   @Input() openStrictly = false;
   @Input() recursivePath = true;
+  @Input() cPaddingLeft: number = 14;
   /** 菜单列表 */
   @Input() set cMenuList(menus: Menu[]) {
     this.data = menus;

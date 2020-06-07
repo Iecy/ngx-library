@@ -56,7 +56,7 @@
 </div>
 
 <ng-template #menuItemRouterTemplate let-menu let-size="size" let-fold="cCollapsed">
-  <a class="menu-item" [style.paddingLeft.px]="16 + (cCollapsed ? 0 : (menu?._depth * 12))">
+  <a class="menu-item" [style.paddingLeft.px]="16 + (cCollapsed ? 0 : (menu?._depth * cPaddingLeft))">
     <ng-template [ngTemplateOutlet]="icon" [ngTemplateOutletContext]="{ $implicit: menu.icon, imgSize: size }"></ng-template>
     <span>{{menu.attributes.title}}</span>
     <i *ngIf="menu.children && menu.children.length" class="menu-more" nz-icon nzType="right" nzTheme="outline"></i>
