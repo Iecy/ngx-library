@@ -190,10 +190,36 @@ export function compactItem(compareWith: ILayout[], l: ILayout, verticalCompact:
   return l;
 }
 
+/**
+ * Returns the first item this layout collides with.
+ * It doesn't appear to matter which order we approach this from, although
+ * perhaps that is the wrong thing to do.
+ *
+ * @param  {Object} layoutItem Layout item.
+ * @return {Object|undefined}  A colliding layout item, or undefined.
+ */
 export function getFirstCollision(layout: ILayout[], layoutItem: ILayout): ILayout {
   for (let i = 0, len = layout.length; i < len; i++) {
     if (collides(layout[i], layoutItem)) return layout[i];
   }
+}
+
+export function getAllCollisions(layout: ILayout[], layoutItem: ILayout): ILayout[] {
+  return layout.filter((l) => collides(l, layoutItem));
+}
+
+/**
+ * Get a layout item by ID. Used so we can override later on if necessary.
+ *
+ * @param  {Array}  layout Layout array.
+ * @param  {String} id     ID
+ * @return {LayoutItem}    Item at ID.
+ */
+export function getLayoutItem(layout: ILayout[], id: string): ILayout {
+  for (let i = 0, len = layout.length; i < len; i++) {
+    if (layout[i].i === id) return layout[i];
+  }
+  return null;
 }
 
 export function collides(l1: ILayout, l2: ILayout): boolean {

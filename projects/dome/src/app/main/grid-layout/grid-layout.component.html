@@ -13,7 +13,8 @@
 </c-grid-layout> -->
 
 <ngx-grid-layout
-  [layout]="layout"
+  [(layout)]="layout"
+  [responsive]="true"
 >
   <ngx-grid-item 
     *ngFor="let item of layout"

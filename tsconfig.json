@@ -1,5 +1,8 @@
 {
   "compileOnSave": false,
+  "exclude": [
+    "Scripts/app"
+  ],
   "compilerOptions": {
     "baseUrl": "./",
     "outDir": "./dist/out-tsc",

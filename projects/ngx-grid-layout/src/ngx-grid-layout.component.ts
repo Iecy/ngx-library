@@ -1,11 +1,14 @@
 import { Component, OnInit, Renderer2, ElementRef, ViewChildren, QueryList, Input, ViewEncapsulation, OnChanges, SimpleChanges, Output, EventEmitter } from '@angular/core';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 
 import { UpdateHostClassService } from './update-host-class.service';
 import { NgxGridItemComponent } from './ngx-grid-item.component';
 import { ILayout, ILayoutCols } from './grid.interface';
 import { NgxGridLayoutService } from './ngx-grid-layout.service';
-import { validateLayout, compact } from './utils';
+import { validateLayout, compact, getLayoutItem, getAllCollisions } from './utils';
+import { equals } from '@interaction/eagle';
 
 
 @Component({
@@ -20,12 +23,10 @@ import { validateLayout, compact } from './utils';
 })
 export class NgxGridLayoutComponent implements OnInit, OnChanges {
   private ele: HTMLElement = this.elementRef.nativeElement;
-  private _useCssTransforms: boolean = true;
-  private _margin: number[] = [10, 10];
-  private _colNum: number = 12;
-  private _autoSize: boolean = true;
-  private _isResizable: boolean = true;
-  private _isDraggable: boolean = true;
+  // private _colNum: number = 12;
+  // private _autoSize: boolean = true;
+  // private _isResizable: boolean = true;
+  private destroyed$: Subject<any> = new Subject();
 
   @ViewChildren(NgxGridItemComponent) listOfNgxGridItemComponent: QueryList<NgxGridItemComponent>;
   @Input() set layout(layout: ILayout[]) {
@@ -50,60 +51,74 @@ export class NgxGridLayoutComponent implements OnInit, OnChanges {
     return this.ngxGridLayoutService.cols;
   }
   @Input() set useCssTransforms(use: boolean) {
-    this._useCssTransforms = use;
+    this.ngxGridLayoutService.useCssTransforms = use;
     this.changeOption('useCssTransforms', use);
   }
   get useCssTransforms(): boolean {
-    return this._useCssTransforms;
+    return this.ngxGridLayoutService.useCssTransforms;
   }
   @Input() set margin(m: number[]) {
-    this._margin = m;
+    this.ngxGridLayoutService.margin = m;
     this.changeOption('margin', m);
   }
   get margin(): number[] {
-    return this._margin;
+    return this.ngxGridLayoutService.margin;
   }
   @Input() set colNum(num: number) {
-    this._colNum = num;
+    this.ngxGridLayoutService.colNum = num;
     this.changeOption('colNum', num);
   }
   get colNum(): number {
-    return this._colNum;
+    return this.ngxGridLayoutService.colNum;
   }
   @Input() set autoSize(auto: boolean) {
-    this._autoSize = auto;
-    this.changeOption('autoSize', auto);
+    // this._autoSize = auto;
+    this.ngxGridLayoutService.autoSize = auto;
+    // this.changeOption('autoSize', auto);
   }
   get autoSize(): boolean {
-    return this._autoSize;
+    // return this._autoSize;
+    return this.ngxGridLayoutService.autoSize;
   }
   @Input() set isMirrored(isMi: boolean) {
     this.ngxGridLayoutService.isMirrored = isMi;
-    this.changeOption('isMirrored', isMi);
   }
   get isMirrored(): boolean {
     return this.ngxGridLayoutService.isMirrored;
   }
   @Input() set isResizable(isRe: boolean) {
-    this._isResizable = isRe;
-    this.changeOption('isResizable', isRe);
+    this.ngxGridLayoutService.isResizable = isRe;
   }
   get isResizable(): boolean {
-    return this._isResizable;
+    return this.isResizable;
   }
   @Input() set isDraggable(isDr: boolean) {
-    this._isDraggable = isDr;
-    this.changeOption('isDraggable', isDr);
+    this.ngxGridLayoutService.isDraggable = isDr;
   }
   get isDraggable(): boolean {
-    return this._isDraggable;
+    return this.ngxGridLayoutService.isDraggable;
   }
   @Input() set verticalCompact(vertical: boolean) {
     this.ngxGridLayoutService.verticalCompact = vertical;
-    this.changeOption('verticalCompact', vertical);
   }
   get verticalCompact(): boolean {
     return this.ngxGridLayoutService.verticalCompact;
+  }
+  @Input() set preventCollision(prevent: boolean) {
+    this.ngxGridLayoutService.preventCollision = prevent;
+    // this.changeOption('preventCollision', prevent);
+  }
+  get preventCollision(): boolean {
+    return this.ngxGridLayoutService.preventCollision;
+  }
+
+  @Input() set responsive(respon: boolean) {
+    this.ngxGridLayoutService.responsive = respon;
+    // this.changeOption('responsive', respon);
+  }
+
+  get responsive(): boolean {
+    return this.ngxGridLayoutService.responsive;
   }
 
   @Output() layoutChange: EventEmitter<ILayout[]> = new EventEmitter<ILayout[]>();
@@ -114,10 +129,24 @@ export class NgxGridLayoutComponent implements OnInit, OnChanges {
     private updateClassService: UpdateHostClassService,
     public ngxGridLayoutService: NgxGridLayoutService
   ) {
-    this.ngxGridLayoutService.changeGridLayoutOptions$.subscribe((result: { type: string; value: any }) => {
-      if (result.type === 'updateLayout') {
-        this.layoutChange.emit(result.value)
+
+    this.ngxGridLayoutService.gridLayout$.pipe(
+      takeUntil(this.destroyed$)
+    ).subscribe(result => {
+      if (result.type === 'layout-updated') {
+        if (!equals(this.ngxGridLayoutService.layout, result.value)) {
+          this.ngxGridLayoutService.layout = result.value;
+          this.layoutChange.emit(result.value);
+          this.ngxGridLayoutService.layoutUpdate();
+        }
       }
+    })
+    this.ngxGridLayoutService.changeGridLayoutOptions$.pipe(
+      takeUntil(this.destroyed$)
+    ).subscribe((result: { type: string; value: any }) => {
+      // if (result.type === 'updateLayout') {
+      //   this.layoutChange.emit(result.value)
+      // }
     })
   }
 
@@ -138,48 +167,6 @@ export class NgxGridLayoutComponent implements OnInit, OnChanges {
       'ngx-grid-layout': true,
       'useCssTransforms': this.useCssTransforms
     });
-  }
-
-  private findDifference(layout: ILayout[], originalLayout: ILayout[]): ILayout[] {
-    let uniqueResultOne = layout.filter(function (obj) {
-      return !originalLayout.some(function (obj2) {
-        return obj.i === obj2.i;
-      });
-    });
-
-    let uniqueResultTwo = originalLayout.filter(function (obj) {
-      return !layout.some(function (obj2) {
-        return obj.i === obj2.i;
-      });
-    });
-
-    return uniqueResultOne.concat(uniqueResultTwo);
-  }
-
-  private initResponsiveFeatures() {
-    this.ngxGridLayoutService.layouts = {};
-  }
-
-  private layoutUpdate(): void {
-    const { layout, originalLayout } = this.ngxGridLayoutService;
-    if (layout !== undefined && originalLayout !== undefined) {
-      if (layout.length !== originalLayout.length) {
-        let diff = this.findDifference(layout, originalLayout);
-        if (diff.length > 0) {
-          if (layout.length > originalLayout.length) {
-            this.ngxGridLayoutService.originalLayout = originalLayout.concat(diff);
-          } else {
-            this.ngxGridLayoutService.originalLayout = originalLayout.filter(obj => {
-              return !diff.some(obj2 => {
-                return obj.i === obj2.i;
-              });
-            });
-          }
-        }
-        this.ngxGridLayoutService.lastLayoutLength = this.ngxGridLayoutService.layout.length;
-      }
-      compact(this.ngxGridLayoutService.layout, this.ngxGridLayoutService.verticalCompact);
-    }
   }
 
   private changeOption(type: string, value: any) {
