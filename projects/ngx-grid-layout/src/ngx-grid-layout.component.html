@@ -1,1 +1,9 @@
+<ngx-grid-item
+  [class.ngx-grid-item--hide]="!ngxGridLayoutService.isDragging"
+  class="ngx-grid-item ngx-grid-placeholder"
+  [x]="ngxGridLayoutService.placeholder.x"
+  [y]="ngxGridLayoutService.placeholder.y"
+  [h]="ngxGridLayoutService.placeholder.h"
+  [w]="ngxGridLayoutService.placeholder.w"
+></ngx-grid-item>
 <ng-content></ng-content>

@@ -9,6 +9,7 @@ import { ILayout, ILayoutCols } from './grid.interface';
 import { NgxGridLayoutService } from './ngx-grid-layout.service';
 import { validateLayout, compact, getLayoutItem, getAllCollisions } from './utils';
 import { equals } from '@interaction/eagle';
+import { type } from 'os';
 
 
 @Component({
@@ -132,13 +133,20 @@ export class NgxGridLayoutComponent implements OnInit, OnChanges {
 
     this.ngxGridLayoutService.gridLayout$.pipe(
       takeUntil(this.destroyed$)
-    ).subscribe(result => {
-      if (result.type === 'layout-updated') {
-        if (!equals(this.ngxGridLayoutService.layout, result.value)) {
-          this.ngxGridLayoutService.layout = result.value;
+    ).subscribe((result: {type: string; value: any}) => {
+      switch(result.type) {
+        case 'layout-updated':
           this.layoutChange.emit(result.value);
+          break;
+        case 'update:layout':
           this.ngxGridLayoutService.layoutUpdate();
-        }
+          break;
+      }
+      if (result.type === 'layout-updated') {
+        // if (!equals(this.ngxGridLayoutService.layout, result.value)) {
+        //   this.ngxGridLayoutService.layout = result.value;
+        //   this.ngxGridLayoutService.layoutUpdate();
+        // }
       }
     })
     this.ngxGridLayoutService.changeGridLayoutOptions$.pipe(
@@ -147,6 +155,22 @@ export class NgxGridLayoutComponent implements OnInit, OnChanges {
       // if (result.type === 'updateLayout') {
       //   this.layoutChange.emit(result.value)
       // }
+    });
+
+    this.ngxGridLayoutService.eventBus$.pipe(
+      takeUntil(this.destroyed$)
+    ).subscribe((result: { type: string; eventName: string; value: any }) => {
+      switch (result.type) {
+        case 'dragEvent':
+          const { i, x, y, h, w } = result.value;
+          this.ngxGridLayoutService.dragEvent(result.eventName, i, x, y, h, w);
+          break;
+        case 'resizeEvent':
+          const resize = result.value;
+          console.log(resize, 'this is test.');
+          this.ngxGridLayoutService.resizeEvent(result.eventName, resize.i, resize.x, resize.y, resize.h, resize.w);
+          break;
+      }
     })
   }
 

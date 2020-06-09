@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ILayout, ILayoutCols, IResponsiveLayout } from './grid.interface';
 import { Subject } from 'rxjs';
-import { getLayoutItem, getAllCollisions, cloneLayout, bootom } from './utils';
+import { getLayoutItem, getAllCollisions, cloneLayout, bootom, moveElement } from './utils';
 import { getBreakpointFromWidth, getColsFromBreakpoint, findOrGenerateResponsiveLayout } from './responsiveUtils';
 import { compact } from 'projects/grid-layout/src/utils';
 
@@ -15,6 +15,7 @@ export class NgxGridLayoutService {
   public layout: ILayout[];
   public margin: number[] = [10, 10];
   public useCssTransforms: boolean = true;
+  public isDragging = false;
   public isDraggable: boolean = true;
   public isResizable: boolean = true;
   public autoSize: boolean = true;
@@ -35,10 +36,9 @@ export class NgxGridLayoutService {
     i: -1
   };
 
-  public isDragging = false;
   public changeGridLayoutOptions$: Subject<any> = new Subject();
+  public eventBus$: Subject<any> = new Subject();
   public gridLayout$: Subject<any> = new Subject();
-  // public compact$: Subject<any> = new Subject();
 
   constructor() { }
 
@@ -66,9 +66,8 @@ export class NgxGridLayoutService {
         this.initResponsiveFeatures();
       }
       compact(this.layout, this.verticalCompact);
-      this.layout = layout;
-      this.changeGridLayoutOptions$.next({type: 'updateLayout', value: layout});
-      // this.changeGridLayoutOptions$.next("updateWidth", this.width);
+      this.eventBus$.next({type: 'updateWidth'});
+      // this.changeGridLayoutOptions$.next({ type: 'updateLayout', value: layout });
       this.updateHeight();
     }
   }
@@ -89,7 +88,7 @@ export class NgxGridLayoutService {
     return uniqueResultOne.concat(uniqueResultTwo);
   }
 
-  public responsiveGridLayout(): void {
+  public responsiveGridLayout(eventName?: string): void {
     const { breakpoints, cols, lastBreakpoint, layouts, layout, originalLayout, verticalCompact } = this;
     let newBreakpoint = getBreakpointFromWidth(breakpoints, this.containerWidth);
     let newCols = getColsFromBreakpoint(newBreakpoint, cols);
@@ -108,7 +107,10 @@ export class NgxGridLayoutService {
       verticalCompact
     );
     this.layouts[newBreakpoint] = _layout;
-    this.gridLayout$.next({type: 'layout-updated', value: _layout});
+    this.gridLayout$.next({ type: 'update:layout', value: _layout });
+    console.log(_layout, 'this is test.');
+    // this.layout = _layout;
+
     this.lastBreakpoint = newBreakpoint;
     const colNum = getColsFromBreakpoint(newBreakpoint, cols);
     this.colNum = colNum;
@@ -142,7 +144,6 @@ export class NgxGridLayoutService {
       }
     }
     if (!hasCollisions) {
-      // Set new width and height.
       l.w = w;
       l.h = h;
     }
@@ -154,28 +155,46 @@ export class NgxGridLayoutService {
       this.placeholder.h = l.h;
 
       this.isDragging = true;
-      // this.ngxGridLayoutService.$nextTick(function() {
-      //     this.isDragging = true;
-      // });
-      //this.$broadcast("updateWidth", this.width);
-      // this.eventBus.$emit("updateWidth", this.width);
-
+      this.eventBus$.next('updateWidth');
     } else {
-
-      // this.$nextTick(function() {
       this.isDragging = false;
-      // });
     }
 
     if (this.responsive) {
-      this.responsiveGridLayout();
+      this.responsiveGridLayout(eventName);
     }
-    compact(this.layout, this.verticalCompact);
-    // this.compact$.next('compact');
-    this.changeGridLayoutOptions$.next({ type: 'compact' });
+    this.eventBus$.next({ type: 'compact' });
     this.updateHeight();
 
     if (eventName === 'resizeend') {
+      this.gridLayout$.next({ type: 'layout-updated', value: this.layout });
+    }
+  }
+
+  public dragEvent(eventName: string, id: any, x: number, y: number, h: number, w: number): void {
+    let l: any = getLayoutItem(this.layout, id);
+    if (l === undefined || l === null) {
+      l = { x: 0, y: 0 }
+    }
+
+    if (eventName === "dragmove" || eventName === "dragstart") {
+      this.placeholder.i = id;
+      this.placeholder.x = l.x;
+      this.placeholder.y = l.y;
+      this.placeholder.w = w;
+      this.placeholder.h = h;
+
+      this.isDragging = true;
+      this.eventBus$.next('updateWidth');
+    } else {
+      this.isDragging = false;
+    }
+
+    this.layout = moveElement(this.layout, l, x, y, true, this.preventCollision);
+    compact(this.layout, this.verticalCompact);
+    this.eventBus$.next({ type: 'compact' });
+    this.updateHeight();
+    if (eventName === 'dragend') {
       this.gridLayout$.next({ type: 'layout-updated', value: this.layout });
     }
   }

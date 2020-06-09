@@ -1,16 +1,14 @@
 import { Component, OnInit, Input, ViewEncapsulation, ElementRef, HostListener, OnChanges, SimpleChanges, HostBinding, Renderer2, Output, EventEmitter } from '@angular/core';
 import { SafeStyle, DomSanitizer } from '@angular/platform-browser';
 import { Subject } from 'rxjs';
-
-import { UpdateHostClassService } from './update-host-class.service';
-import { NgxGridLayoutService } from './ngx-grid-layout.service';
 import { takeUntil } from 'rxjs/operators';
-import { IPosition, ILayout } from './grid.interface';
-import { setTransformRtl, setTransform, setTopRight, setTopLeft, bootom, compact, cloneLayout } from './utils';
-// import * as interact from '@interactjs/types';
 import interact from 'interactjs';
-// import {} from '@interactjs/types';
+
+import { IPosition } from './grid.interface';
+import { NgxGridLayoutService } from './ngx-grid-layout.service';
+import { UpdateHostClassService } from './update-host-class.service';
 import { getControlPosition, createCoreData } from './draggableUtils';
+import { setTransformRtl, setTransform, setTopRight, setTopLeft, compact } from './utils';
 
 @Component({
   selector: 'ngx-grid-item',
@@ -73,6 +71,10 @@ export class NgxGridItemComponent implements OnInit, OnChanges {
   @Input() resizeIgnoreFrom: string = 'a, button';
 
   @Output() containerResized: EventEmitter<any> = new EventEmitter<any>();
+  @Output() move: EventEmitter<any> = new EventEmitter<any>();
+  @Output() moved: EventEmitter<any> = new EventEmitter<any>();
+  @Output() resize: EventEmitter<any> = new EventEmitter<any>();
+  @Output() resized: EventEmitter<any> = new EventEmitter<any>();
 
   constructor(
     private sanitizer: DomSanitizer,
@@ -104,16 +106,23 @@ export class NgxGridItemComponent implements OnInit, OnChanges {
             this.renderer.setStyle(this.ele.parentElement, 'height', result.value);
           }
           break;
-        case 'updateWidth':
-          // this.gridLayoutService.containerWidth = this.getParentWidth();
-          break;
         case 'updateLayout':
           compact(this.gridLayoutService.layout, this.gridLayoutService.verticalCompact);
           this.createStyle();
           break;
+      }
+    })
+    this.gridLayoutService.eventBus$.pipe(
+      takeUntil(this.destroyedSubject$)
+    ).subscribe((result: { type: string; value: any }) => {
+      switch (result.type) {
         case 'compact':
-          // console.log('this is test. compact')
           this.createStyle();
+          break;
+        case 'updateWidth':
+          this.tryMakeResizable();
+          this.createStyle();
+          this.emitContainerResized();
           break;
       }
     })
@@ -124,18 +133,17 @@ export class NgxGridItemComponent implements OnInit, OnChanges {
     this.innerY = this.y;
     this.innerW = this.w;
     this.innerH = this.h;
+    this.dragEventSet = false;
 
-    // this.draggable = this.isDraggable;
     this.initDragable();
     this.initResizable();
-    // this.resizable = this.isResizable;
     this.gridLayoutService.containerWidth = this.getParentWidth();
 
     compact(this.gridLayoutService.layout, this.gridLayoutService.verticalCompact);
 
     this.setClassMap();
+
     this.createStyle();
-    // this.gridLayoutService.updateHeight();
     if (!this.gridLayoutService.responsive) {
       this.gridLayoutService.changeGridLayoutOptions$.next({ type: 'setCol', value: this.gridLayoutService.colNum });
     }
@@ -145,19 +153,39 @@ export class NgxGridItemComponent implements OnInit, OnChanges {
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.x) {
       this.innerX = changes.x.currentValue;
+      this.tryMakeDraggable();
+      this.tryMakeResizable();
       this.createStyle();
     }
     if (changes.y) {
       this.innerY = changes.y.currentValue;
+      this.tryMakeDraggable();
+      this.tryMakeResizable();
       this.createStyle();
     }
     if (changes.w) {
       this.innerW = changes.w.currentValue;
+      this.tryMakeDraggable();
+      this.tryMakeResizable();
       this.createStyle();
     }
     if (changes.h) {
       this.innerH = changes.h.currentValue;
+      this.tryMakeDraggable();
+      this.tryMakeResizable();
       this.createStyle();
+    }
+    if (changes.isDraggable) {
+      this.draggable = changes.isDraggable.currentValue;
+      this.tryMakeDraggable();
+    }
+    if (changes.isResizable) {
+      this.resizable = changes.isResizable.currentValue;
+      this.tryMakeResizable();
+    }
+    if (changes.static) {
+      this.tryMakeDraggable();
+      this.tryMakeResizable();
     }
   }
 
@@ -186,6 +214,7 @@ export class NgxGridItemComponent implements OnInit, OnChanges {
     } else {
       this.draggable = this.draggable;
     }
+    this.tryMakeDraggable();
   }
 
   private initResizable(): void {
@@ -194,11 +223,18 @@ export class NgxGridItemComponent implements OnInit, OnChanges {
     } else {
       this.resizable = this.resizable;
     }
+    this.tryMakeResizable();
   }
 
   setClassMap(): void {
     this.updateClassService.updateHostClass(this.ele, {
       'ngx-grid-item': true,
+      'ngx-grid-resizable': this.resizable && !this.static,
+      'ngx-grid-draggable': this.draggable && !this.static,
+      'ngx-grid-static': this.static,
+      'ngx-draggable-dragging': this.isDragging,
+      'resizing': this.isResizing,
+      'disable-userselect': this.isDragging,
     });
   }
 
@@ -283,7 +319,50 @@ export class NgxGridItemComponent implements OnInit, OnChanges {
   }
 
   private tryMakeResizable(): void {
-    console.log(1);
+    if (this.interactObj === null || this.interactObj === undefined) {
+      this.interactObj = interact(this.ele);
+    }
+    if (this.resizable && !this.static) {
+      let maximum = this.calcPosition(0, 0, this.maxW, this.maxH);
+      let minimum = this.calcPosition(0, 0, this.minW, this.minH);
+      const opts = {
+        preserveAspectRatio: true,
+        // allowFrom: "." + this.resizableHandleClass,
+        edges: {
+          left: false,
+          right: "." + (this.renderRtl ? 'ngx-resizable-handle' : 'ngx-resizable-handle'),
+          bottom: "." + (this.renderRtl ? 'ngx-resizable-handle' : 'ngx-resizable-handle'),
+          top: false
+        },
+        ignoreFrom: this.resizeIgnoreFrom,
+        restrictSize: {
+          min: {
+            height: minimum.height,
+            width: minimum.width
+          },
+          max: {
+            height: maximum.height,
+            width: maximum.width
+          }
+        }
+      };
+
+      this.interactObj.resizable(opts);
+      if (!this.resizeEventSet) {
+        this.resizeEventSet = true;
+        this.interactObj
+          .on('resizestart resizemove resizeend', event => {
+            this.handleResize(event);
+          });
+      }
+    } else {
+      this.interactObj.resizable({
+        enabled: false
+      });
+    }
+  }
+
+  private tryMakeDraggable(): void {
     if (this.interactObj === null || this.interactObj === undefined) {
       this.interactObj = interact(this.ele);
     }
@@ -307,12 +386,101 @@ export class NgxGridItemComponent implements OnInit, OnChanges {
   }
 
   public handleDrag(event) {
-    console.log(event, 'this is event.');
     if (this.static) return;
     if (this.isResizing) return;
+
+    const position = getControlPosition(event);
+
+    if (position === null) return; // not possible but satisfies flow
+    const { x, y } = position;
+    let newPosition = { top: 0, left: 0 };
+    switch (event.type) {
+      case "dragstart": {
+        this.previousX = this.innerX;
+        this.previousY = this.innerY;
+
+        let parentRect = event.target.offsetParent.getBoundingClientRect();
+        let clientRect = event.target.getBoundingClientRect();
+        if (this.renderRtl) {
+          newPosition.left = (clientRect.right - parentRect.right) * -1;
+        } else {
+          newPosition.left = clientRect.left - parentRect.left;
+        }
+        newPosition.top = clientRect.top - parentRect.top;
+        this.dragging = newPosition;
+        this.isDragging = true;
+        break;
+      }
+      case "dragend": {
+        if (!this.isDragging) return;
+        let parentRect = event.target.offsetParent.getBoundingClientRect();
+        let clientRect = event.target.getBoundingClientRect();
+        if (this.renderRtl) {
+          newPosition.left = (clientRect.right - parentRect.right) * -1;
+        } else {
+          newPosition.left = clientRect.left - parentRect.left;
+        }
+        newPosition.top = clientRect.top - parentRect.top;
+        // console.log("### drag end => " + JSON.stringify(newPosition));
+        //  console.log("### DROP: " + JSON.stringify(newPosition));
+        this.dragging = null;
+        this.isDragging = false;
+        // shouldUpdate = true;
+        break;
+      }
+      case "dragmove": {
+        const coreEvent = createCoreData(this.lastX, this.lastY, x, y);
+        //  Add rtl support
+        if (this.renderRtl) {
+          newPosition.left = this.dragging.left - coreEvent.deltaX;
+        } else {
+          newPosition.left = this.dragging.left + coreEvent.deltaX;
+        }
+        newPosition.top = this.dragging.top + coreEvent.deltaY;
+        // console.log("### drag => " + event.type + ", x=" + x + ", y=" + y);
+        // console.log("### drag => " + event.type + ", deltaX=" + coreEvent.deltaX + ", deltaY=" + coreEvent.deltaY);
+        // console.log("### drag end => " + JSON.stringify(newPosition));
+        this.dragging = newPosition;
+        break;
+      }
+    }
+
+    // Get new XY
+    let pos;
+    if (this.renderRtl) {
+      pos = this.calcXY(newPosition.top, newPosition.left);
+    } else {
+      pos = this.calcXY(newPosition.top, newPosition.left);
+    }
+
+    this.lastX = x;
+    this.lastY = y;
+
+    if (this.innerX !== pos.x || this.innerY !== pos.y) {
+      // this.$emit("move", this.i, pos.x, pos.y);
+      this.move.emit({ i: this.i, x: pos.x, y: pos.y })
+    }
+    if (event.type === "dragend" && (this.previousX !== this.innerX || this.previousY !== this.innerY)) {
+      // this.$emit("moved", this.i, pos.x, pos.y);
+      this.moved.emit({ i: this.i, x: pos.x, y: pos.y });
+    }
+    this.setClassMap();
+    this.gridLayoutService.eventBus$.next({
+      type: 'dragEvent',
+      eventName: event.type,
+      value: { i: this.i, x: pos.x, y: pos.y, h: this.innerH, w: this.innerW }
+    });
+    // this.eventBus.$emit("dragEvent", event.type, this.i, pos.x, pos.y, this.innerH, this.innerW);
+
+  }
+
+  public handleResize(event: any) {
+    console.log(this.i, 'this is handleResize.');
+    if (this.static) return;
     const position = getControlPosition(event);
     if (position == null) return; // not possible but satisfies flow
     const { x, y } = position;
+
     const newSize = { width: 0, height: 0 };
     let pos;
     switch (event.type) {
@@ -349,8 +517,6 @@ export class NgxGridItemComponent implements OnInit, OnChanges {
         break;
       }
     }
-
-    // Get new WH
     pos = this.calcWH(newSize.height, newSize.width);
     if (pos.w < this.minW) {
       pos.w = this.minW;
@@ -376,17 +542,24 @@ export class NgxGridItemComponent implements OnInit, OnChanges {
     this.lastH = y;
 
     if (this.innerW !== pos.w || this.innerH !== pos.h) {
-      // this.$emit("resize", this.i, pos.h, pos.w, newSize.height, newSize.width);
-      this.gridLayoutService.gridLayout$.next({ type: 'resize', value: { i: this.i, y: pos.h, x: pos.w, h: newSize.height, w: newSize.width } })
+      this.resize.emit({ i: this.i, h: pos.h, w: pos.w, hPx: newSize.height, wPx: newSize.width });
     }
     if (event.type === "resizeend" && (this.previousW !== this.innerW || this.previousH !== this.innerH)) {
-      // this.$emit("resized", this.i, pos.h, pos.w, newSize.height, newSize.width);
-      this.gridLayoutService.gridLayout$.next({
-        type: 'resizeend',
-        value: { i: this.i, y: pos.h, x: pos.w, h: newSize.height, w: newSize.width },
-      });
+      this.resized.emit({ i: this.i, h: pos.h, w: pos.w, hPx: newSize.height, wPx: newSize.width });
     }
-    this.gridLayoutService.resizeEvent(event.type, this.i, this.innerX, this.innerY, pos.h, pos.w);
+    this.setClassMap();
+    // this.eventBus.$emit("resizeEvent", event.type, this.i, this.innerX, this.innerY, pos.h, pos.w);
+    this.gridLayoutService.eventBus$.next({
+      type: 'resizeEvent',
+      eventName: event.type,
+      value: {
+        i: this.i,
+        x: this.innerX,
+        y: this.innerY,
+        h: pos.h,
+        w: pos.w
+      }
+    });
   }
 
   public emitContainerResized(): void {
@@ -398,7 +571,29 @@ export class NgxGridItemComponent implements OnInit, OnChanges {
         return;
       styleProps[prop] = matches[1];
     }
-    this.containerResized.emit({i: this.i, h: this.h, w: this.w, hPx: styleProps.height, wPx: styleProps.width})
+    this.containerResized.emit({ i: this.i, h: this.h, w: this.w, hPx: styleProps.height, wPx: styleProps.width })
+  }
+
+  private calcXY(top: number, left: number): { x: number; y: number } {
+    const colWidth = this.calcColWidth();
+
+    // left = colWidth * x + margin * (x + 1)
+    // l = cx + m(x+1)
+    // l = cx + mx + m
+    // l - m = cx + mx
+    // l - m = x(c + m)
+    // (l - m) / (c + m) = x
+    // x = (left - margin) / (coldWidth + margin)
+
+    const { rowHeight } = this.gridLayoutService;
+    let x = Math.round((left - this.margin[0]) / (colWidth + this.margin[0]));
+    let y = Math.round((top - this.margin[1]) / (rowHeight + this.margin[1]));
+
+    // Capping
+    x = Math.max(Math.min(x, this.cols - this.innerW), 0);
+    y = Math.max(Math.min(y, this.maxRows - this.innerH), 0);
+
+    return { x, y };
   }
 
 
@@ -409,4 +604,6 @@ export class NgxGridItemComponent implements OnInit, OnChanges {
       this.gridLayoutService.resizeEvent();
     }
   }
+
+
 }

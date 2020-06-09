@@ -3,3 +3,7 @@ ngx-grid-item {
   background: #ccc;
   border    : 1px solid black;
 }
+
+:host ::ng-deep .ngx-grid-static {
+  background-color: #cce;
+}

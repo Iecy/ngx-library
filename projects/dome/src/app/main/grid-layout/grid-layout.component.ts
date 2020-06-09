@@ -36,4 +36,8 @@ export class GridLayoutComponent implements OnInit {
   ngOnInit() {
   }
 
+  layoutChange(layout: any): void {
+    console.log('LAYOUT CHANGE:', layout);
+  }
+
 }

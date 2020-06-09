@@ -295,3 +295,64 @@ export function setTopRight(top: number, right: number, width: number, height: n
     position: 'absolute'
   };
 }
+
+export function moveElement(layout: ILayout[], l: ILayout,x: number, y: number, isUserAction: boolean, preventCollision?: boolean): ILayout[] {
+  if (l.static) return layout;
+  const oldX = l.x;
+  const oldY = l.y;
+
+  const movingUp = y && l.y > y;
+  // This is quite a bit faster than extending the object
+  if (typeof x === 'number') l.x = x;
+  if (typeof y === 'number') l.y = y;
+  l.moved = true;
+  let sorted = sortLayoutItemsByRowCol(layout);
+  if (movingUp) sorted = sorted.reverse();
+  const collisions = getAllCollisions(sorted, l);
+
+  if (preventCollision && collisions.length) {
+    l.x = oldX;
+    l.y = oldY;
+    l.moved = false;
+    return layout;
+  }
+  for (let i = 0, len = collisions.length; i < len; i++) {
+    const collision = collisions[i];
+    // console.log('resolving collision between', l.i, 'at', l.y, 'and', collision.i, 'at', collision.y);
+
+    // Short circuit so we can't infinite loop
+    if (collision.moved) continue;
+
+    // This makes it feel a bit more precise by waiting to swap for just a bit when moving up.
+    if (l.y > collision.y && l.y - collision.y > collision.h / 4) continue;
+
+    // Don't move static items - we have to move *this* element away
+    if (collision.static) {
+      layout = moveElementAwayFromCollision(layout, collision, l, isUserAction);
+    } else {
+      layout = moveElementAwayFromCollision(layout, l, collision, isUserAction);
+    }
+  }
+
+  return layout;
+}
+
+export function moveElementAwayFromCollision(layout: ILayout[], collidesWith: ILayout, itemToMove: ILayout, isUserAction?: boolean): ILayout[] {
+  const preventCollision = false 
+  if (isUserAction) {
+    // Make a mock item so we don't modify the item here, only modify in moveElement.
+    const fakeItem: ILayout = {
+      x: itemToMove.x,
+      y: itemToMove.y,
+      w: itemToMove.w,
+      h: itemToMove.h,
+      i: '-1'
+    };
+    fakeItem.y = Math.max(collidesWith.y - itemToMove.h, 0);
+    if (!getFirstCollision(layout, fakeItem)) {
+      return moveElement(layout, itemToMove, undefined, fakeItem.y, preventCollision);
+    }
+  }
+
+  return moveElement(layout, itemToMove, undefined, itemToMove.y + 1, preventCollision);
+}

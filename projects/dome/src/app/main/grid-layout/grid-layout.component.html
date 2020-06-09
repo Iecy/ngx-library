@@ -15,6 +15,7 @@
 <ngx-grid-layout
   [(layout)]="layout"
   [responsive]="true"
+  (layoutChange)="layoutChange($event)"
 >
   <ngx-grid-item 
     *ngFor="let item of layout"
@@ -25,7 +26,9 @@
     [w]="item.w"
     [i]="item.i"
   >
-    {{item | json}}
+    <div class="ngx-grid-item-draggable--box">
+      {{item | json}}
+    </div>
   </ngx-grid-item>
 </ngx-grid-layout>
 
