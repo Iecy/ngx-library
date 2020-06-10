@@ -11,7 +11,6 @@ import { WaterMarkerModule } from 'water-marker';
 import { ViewInfoModule } from 'view-info';
 import { FullscreenModule } from 'fullscreen';
 import { AngularCreatePdfModule } from 'angular-create-pdf';
-import { GridLayoutModule } from 'grid-layout';
 import { NgxGridLayoutModule } from 'ngx-grid-layout';
 
 @NgModule({
@@ -29,7 +28,6 @@ import { NgxGridLayoutModule } from 'ngx-grid-layout';
     ViewInfoModule,
     FullscreenModule,
     AngularCreatePdfModule,
-    GridLayoutModule,
     NgxGridLayoutModule,
   ],
   exports: [
@@ -42,7 +40,6 @@ import { NgxGridLayoutModule } from 'ngx-grid-layout';
     WaterMarkerModule,
     ViewInfoModule,
     FullscreenModule,
-    GridLayoutModule,
     NgxGridLayoutModule,
   ]
 })
