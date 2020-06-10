@@ -1,21 +1,45 @@
-<!-- <c-grid-layout class="custom-layout" [layout]="layout">
-  <c-grid-item 
-    *ngFor="let item of layout"
-    [static]="item.static"
-    [x]="item.x"
-    [y]="item.y"
-    [h]="item.h"
-    [w]="item.w"
-    [i]="item.i"
-  >
-    {{item.i}}
-  </c-grid-item>
-</c-grid-layout> -->
-
+<h1 style="text-align: center;">Angular Grid Layout</h1>
+<div>
+  <div class="layoutJSON">
+    Displayed as <code>[x, y, w, h]</code>:
+    <div class="columns">
+      <div class="layoutItem" *ngFor="let item of layout">
+          <b>{{item.i}}</b>: [{{item.x}}, {{item.y}}, {{item.w}}, {{item.h}}]
+      </div>
+    </div>
+  </div>
+  <div class="conditions" style="padding: 16px 0 0;">
+    <nz-button-group>
+      <button nz-button nzType="primary" (click)="decreaseWidth()">Decrease Width</button>
+      <button nz-button nzType="primary" (click)="increaseWidth()">Increase Width</button>
+      <button nz-button nzType="primary" (click)="addItem()">Add an item</button>
+      <!-- Add to show rtl support -->
+      <button nz-button nzType="primary" (click)="changeDirection()">Change Direction</button>
+    </nz-button-group>
+    <input type="checkbox" [(ngModel)]="draggable"/> Draggable
+    <input type="checkbox" [(ngModel)]="resizable"/> Resizable
+    <input type="checkbox" [(ngModel)]="mirrored"/> Mirrored
+    <input type="checkbox" [(ngModel)]="responsive"/> Responsive
+    <input type="checkbox" [(ngModel)]="preventCollision"/> Prevent Collision
+    <div style="margin-top: 10px;margin-bottom: 10px;">
+        Row Height: <input style="display: inline-block; width: 200px;" nz-input type="number" [(ngModel)]="rowHeight"/>
+        Col nums: <input style="display: inline-block; width: 200px;"  nz-input type="number" [(ngModel)]="colNum"/>
+    </div>
+  </div>
+</div>
 <ngx-grid-layout
   [(layout)]="layout"
+  [colNum]="colNum"
+  [rowHeight]="rowHeight"
+  [isDraggable]="draggable"
+  [isResizable]="resizable"
+  [isMirrored]="mirrored"
+  [preventCollision]="preventCollision"
+  [verticalCompact]="true"
+  [useCssTransforms]="true"
   [responsive]="true"
   (layoutChange)="layoutChange($event)"
+  (layoutReady)="layoutReady($event)"
 >
   <ngx-grid-item 
     *ngFor="let item of layout"

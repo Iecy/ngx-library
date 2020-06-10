@@ -10,6 +10,7 @@ import { UpdateHostClassService } from './update-host-class.service';
 import { getControlPosition, createCoreData } from './draggableUtils';
 import { setTransformRtl, setTransform, setTopRight, setTopLeft, compact } from './utils';
 
+import { equals } from '@interaction/eagle';
 @Component({
   selector: 'ngx-grid-item',
   templateUrl: './ngx-grid-item.component.html',
@@ -87,9 +88,6 @@ export class NgxGridItemComponent implements OnInit, OnChanges {
       takeUntil(this.destroyedSubject$)
     ).subscribe((result: { type: string; value: any }) => {
       switch (result.type) {
-        case 'useCssTransforms':
-          console.log('this is use useCssTransforms.');
-          break;
         case 'setColNum':
           if (result.value !== this.cols) {
             this.cols = result.value;
@@ -112,6 +110,7 @@ export class NgxGridItemComponent implements OnInit, OnChanges {
           break;
       }
     })
+
     this.gridLayoutService.eventBus$.pipe(
       takeUntil(this.destroyedSubject$)
     ).subscribe((result: { type: string; value: any }) => {
@@ -137,17 +136,8 @@ export class NgxGridItemComponent implements OnInit, OnChanges {
 
     this.initDragable();
     this.initResizable();
-    this.gridLayoutService.containerWidth = this.getParentWidth();
-
-    compact(this.gridLayoutService.layout, this.gridLayoutService.verticalCompact);
-
     this.setClassMap();
-
     this.createStyle();
-    if (!this.gridLayoutService.responsive) {
-      this.gridLayoutService.changeGridLayoutOptions$.next({ type: 'setCol', value: this.gridLayoutService.colNum });
-    }
-    this.gridLayoutService.resizeEvent();
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -314,10 +304,6 @@ export class NgxGridItemComponent implements OnInit, OnChanges {
     return (this.gridLayoutService.containerWidth - (this.margin[0] * (this.cols + 1))) / this.cols;
   }
 
-  private getParentWidth(): number {
-    return this.ele.parentElement.offsetWidth;
-  }
-
   private tryMakeResizable(): void {
     if (this.interactObj === null || this.interactObj === undefined) {
       this.interactObj = interact(this.ele);
@@ -327,7 +313,6 @@ export class NgxGridItemComponent implements OnInit, OnChanges {
       let minimum = this.calcPosition(0, 0, this.minW, this.minH);
       const opts = {
         preserveAspectRatio: true,
-        // allowFrom: "." + this.resizableHandleClass,
         edges: {
           left: false,
           right: "." + (this.renderRtl ? 'ngx-resizable-handle' : 'ngx-resizable-handle'),
@@ -475,7 +460,6 @@ export class NgxGridItemComponent implements OnInit, OnChanges {
   }
 
   public handleResize(event: any) {
-    console.log(this.i, 'this is handleResize.');
     if (this.static) return;
     const position = getControlPosition(event);
     if (position == null) return; // not possible but satisfies flow
@@ -577,14 +561,6 @@ export class NgxGridItemComponent implements OnInit, OnChanges {
   private calcXY(top: number, left: number): { x: number; y: number } {
     const colWidth = this.calcColWidth();
 
-    // left = colWidth * x + margin * (x + 1)
-    // l = cx + m(x+1)
-    // l = cx + mx + m
-    // l - m = cx + mx
-    // l - m = x(c + m)
-    // (l - m) / (c + m) = x
-    // x = (left - margin) / (coldWidth + margin)
-
     const { rowHeight } = this.gridLayoutService;
     let x = Math.round((left - this.margin[0]) / (colWidth + this.margin[0]));
     let y = Math.round((top - this.margin[1]) / (rowHeight + this.margin[1]));
@@ -595,15 +571,5 @@ export class NgxGridItemComponent implements OnInit, OnChanges {
 
     return { x, y };
   }
-
-
-  @HostListener('window:resize') onResize(): void {
-    if (this.getParentWidth() !== this.gridLayoutService.containerWidth) {
-      this.gridLayoutService.containerWidth = this.getParentWidth();
-
-      this.gridLayoutService.resizeEvent();
-    }
-  }
-
 
 }

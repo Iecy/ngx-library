@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { ILayout, ILayoutCols, IResponsiveLayout } from './grid.interface';
-import { Subject } from 'rxjs';
+import { Subject, from } from 'rxjs';
 import { getLayoutItem, getAllCollisions, cloneLayout, bootom, moveElement } from './utils';
 import { getBreakpointFromWidth, getColsFromBreakpoint, findOrGenerateResponsiveLayout } from './responsiveUtils';
-import { compact } from 'projects/grid-layout/src/utils';
+import { compact } from './utils';
+import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 
 @Injectable()
 export class NgxGridLayoutService {
@@ -65,9 +66,9 @@ export class NgxGridLayoutService {
         this.lastLayoutLength = this.layout.length;
         this.initResponsiveFeatures();
       }
+      // console.table(this.layout);
       compact(this.layout, this.verticalCompact);
-      this.eventBus$.next({type: 'updateWidth'});
-      // this.changeGridLayoutOptions$.next({ type: 'updateLayout', value: layout });
+      this.eventBus$.next({ type: 'updateWidth' });
       this.updateHeight();
     }
   }
@@ -89,30 +90,28 @@ export class NgxGridLayoutService {
   }
 
   public responsiveGridLayout(eventName?: string): void {
-    const { breakpoints, cols, lastBreakpoint, layouts, layout, originalLayout, verticalCompact } = this;
-    let newBreakpoint = getBreakpointFromWidth(breakpoints, this.containerWidth);
-    let newCols = getColsFromBreakpoint(newBreakpoint, cols);
+    // const { breakpoints, cols, lastBreakpoint, layouts, layout, originalLayout, verticalCompact } = this;
+    let newBreakpoint = getBreakpointFromWidth(this.breakpoints, this.containerWidth);
+    let newCols = getColsFromBreakpoint(newBreakpoint, this.cols);
 
-    if (lastBreakpoint != null && !layouts[lastBreakpoint]) {
-      this.layouts[lastBreakpoint] = cloneLayout(layout);
+    if (this.lastBreakpoint != null && !this.layouts[this.lastBreakpoint]) {
+      this.layouts[this.lastBreakpoint] = cloneLayout(this.layout);
     }
 
-    let _layout = findOrGenerateResponsiveLayout(
-      originalLayout,
-      layouts,
-      breakpoints,
+    let layout = findOrGenerateResponsiveLayout(
+      this.originalLayout,
+      this.layouts,
+      this.breakpoints,
       newBreakpoint,
-      lastBreakpoint,
+      this.lastBreakpoint,
       newCols,
-      verticalCompact
+      this.verticalCompact
     );
-    this.layouts[newBreakpoint] = _layout;
-    this.gridLayout$.next({ type: 'update:layout', value: _layout });
-    console.log(_layout, 'this is test.');
-    // this.layout = _layout;
+    this.layouts[newBreakpoint] = layout;
+    this.gridLayout$.next({ type: 'update:layout', value: layout });
 
     this.lastBreakpoint = newBreakpoint;
-    const colNum = getColsFromBreakpoint(newBreakpoint, cols);
+    const colNum = getColsFromBreakpoint(newBreakpoint, this.cols);
     this.colNum = colNum;
     this.changeGridLayoutOptions$.next({ type: 'setColNum', value: colNum });
   }
