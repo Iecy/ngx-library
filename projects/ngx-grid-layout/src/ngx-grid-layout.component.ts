@@ -1,4 +1,4 @@
-import { Component, OnInit, Renderer2, ElementRef, Input, ViewEncapsulation, OnChanges, SimpleChanges, Output, EventEmitter, HostBinding, AfterViewChecked, HostListener, AfterViewInit } from '@angular/core';
+import { Component, OnInit, Renderer2, ElementRef, Input, ViewEncapsulation, OnChanges, SimpleChanges, Output, EventEmitter, HostBinding, AfterViewChecked, HostListener, AfterViewInit, AfterContentInit } from '@angular/core';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
@@ -18,7 +18,7 @@ import { validateLayout, compact } from './utils';
     UpdateHostClassService
   ]
 })
-export class NgxGridLayoutComponent implements OnInit, OnChanges, AfterViewInit {
+export class NgxGridLayoutComponent implements OnInit, OnChanges, AfterViewInit, AfterContentInit {
   private ele: HTMLElement = this.elementRef.nativeElement;
   private destroyed$: Subject<any> = new Subject();
 
@@ -164,11 +164,13 @@ export class NgxGridLayoutComponent implements OnInit, OnChanges, AfterViewInit 
       this.ngxGridLayoutService.layoutUpdate();
     }
   }
-
-  ngAfterViewInit(): void {
+  ngAfterContentInit(): void {
     this.onWindowResize();
     this.ngxGridLayoutService.initResponsiveFeatures();
     this.ngxGridLayoutService.updateHeight();
+  }
+
+  ngAfterViewInit(): void {
     this.layoutReady.emit(this.layout);
   }
 
@@ -184,7 +186,7 @@ export class NgxGridLayoutComponent implements OnInit, OnChanges, AfterViewInit 
     });
   }
 
-  @HostListener('window:resize') onResize(){
+  @HostListener('window:resize') onResize() {
     this.onWindowResize();
   }
 
