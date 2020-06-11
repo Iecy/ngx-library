@@ -152,15 +152,15 @@ export class NgxGridLayoutComponent implements OnInit, OnChanges, AfterViewInit,
     validateLayout(this.layout);
     this.ngxGridLayoutService.originalLayout = JSON.parse(JSON.stringify(this.layout));
     this.setClassMap();
+    this.onWindowResize();
   }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.useCssTransforms) {
       this.setClassMap();
     }
-    if (changes.layout) {
+    if (changes.layout.currentValue && changes.layout.previousValue) {
       validateLayout(changes.layout.currentValue);
-      this.ngxGridLayoutService.originalLayout = JSON.parse(JSON.stringify(changes.layout.currentValue));
       this.ngxGridLayoutService.layoutUpdate();
     }
   }
@@ -175,8 +175,13 @@ export class NgxGridLayoutComponent implements OnInit, OnChanges, AfterViewInit,
   }
 
   onWindowResize(): void {
-    this.ngxGridLayoutService.containerWidth = this.ele.offsetWidth;
+    this.setWidth(this.ele.offsetWidth);
     this.ngxGridLayoutService.resizeEvent();
+  }
+
+  setWidth(width: number): void {
+    this.ngxGridLayoutService.containerWidth = width;
+    this.ngxGridLayoutService.eventBus$.next({ type: 'updateWidth', value: width });
   }
 
   setClassMap(): void {

@@ -32,8 +32,8 @@ export class GridLayoutComponent implements OnInit {
   public layout = JSON.parse(JSON.stringify(testLayout));
   public index: number = 0;
   public draggable = true;
-  public resizable =  true;
-  public mirrored =  false;
+  public resizable = true;
+  public mirrored = false;
   public responsive = true;
   public preventCollision = false;
   public rowHeight = 30;
@@ -52,6 +52,10 @@ export class GridLayoutComponent implements OnInit {
 
   layoutReady(layout: any): void {
     console.log('LAYOUT READY: ', layout);
+  }
+
+  containerResized(layoutItem: any): void {
+    console.log('CONTAINER RESIZED:', layoutItem);
   }
 
   public decreaseWidth(): void {

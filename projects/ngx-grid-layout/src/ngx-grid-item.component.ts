@@ -93,7 +93,7 @@ export class NgxGridItemComponent implements OnInit, OnChanges {
             this.cols = result.value;
             this.tryMakeResizable();
             this.createStyle();
-            this.emitContainerResized();
+            // this.emitContainerResized();
           }
           break;
         case 'margin':
@@ -108,6 +108,11 @@ export class NgxGridItemComponent implements OnInit, OnChanges {
           compact(this.gridLayoutService.layout, this.gridLayoutService.verticalCompact);
           this.createStyle();
           break;
+        case 'containerWidth':
+          this.tryMakeResizable();
+          this.createStyle();
+          // this.emitContainerResized();
+          break;
       }
     })
 
@@ -119,9 +124,7 @@ export class NgxGridItemComponent implements OnInit, OnChanges {
           this.createStyle();
           break;
         case 'updateWidth':
-          this.tryMakeResizable();
-          this.createStyle();
-          this.emitContainerResized();
+          this.updateWidth(result.value);
           break;
       }
     })
@@ -305,6 +308,7 @@ export class NgxGridItemComponent implements OnInit, OnChanges {
   }
 
   private tryMakeResizable(): void {
+    this.interactObj = null;
     if (this.interactObj === null || this.interactObj === undefined) {
       this.interactObj = interact(this.ele);
     }
@@ -570,6 +574,11 @@ export class NgxGridItemComponent implements OnInit, OnChanges {
     y = Math.max(Math.min(y, this.maxRows - this.innerH), 0);
 
     return { x, y };
+  }
+
+  private updateWidth(width: number): void {
+    this.gridLayoutService.containerWidth = width;
+    this.gridLayoutService.changeGridLayoutOptions$.next({ type: 'containerWidth', value: width });
   }
 
 }

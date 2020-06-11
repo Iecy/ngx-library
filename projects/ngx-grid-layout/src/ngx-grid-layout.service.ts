@@ -68,7 +68,7 @@ export class NgxGridLayoutService {
       }
       // console.table(this.layout);
       compact(this.layout, this.verticalCompact);
-      this.eventBus$.next({ type: 'updateWidth' });
+      this.eventBus$.next({ type: 'updateWidth', value: this.containerWidth });
       this.updateHeight();
     }
   }
@@ -109,6 +109,7 @@ export class NgxGridLayoutService {
     );
     this.layouts[newBreakpoint] = layout;
     this.gridLayout$.next({ type: 'update:layout', value: layout });
+    // this.gridLayout$.next({ type: 'layout-updated', value: layout })
 
     this.lastBreakpoint = newBreakpoint;
     const colNum = getColsFromBreakpoint(newBreakpoint, this.cols);
@@ -154,7 +155,7 @@ export class NgxGridLayoutService {
       this.placeholder.h = l.h;
 
       this.isDragging = true;
-      this.eventBus$.next('updateWidth');
+      this.eventBus$.next({ type: 'updateWidth', value: this.containerWidth });
     } else {
       this.isDragging = false;
     }
@@ -184,7 +185,7 @@ export class NgxGridLayoutService {
       this.placeholder.h = h;
 
       this.isDragging = true;
-      this.eventBus$.next('updateWidth');
+      this.eventBus$.next({ type: 'updateWidth', value: this.containerWidth });
     } else {
       this.isDragging = false;
     }
