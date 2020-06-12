@@ -69,4 +69,6 @@ export class GridLayoutComponent implements OnInit {
   public changeDirection(): void {
 
   }
+
+  trackByFn(index) { return index }
 }

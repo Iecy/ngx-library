@@ -124,10 +124,10 @@ export class NgxGridLayoutComponent implements OnInit, OnChanges, AfterViewInit,
     ).subscribe((result: { type: string; value: any }) => {
       switch (result.type) {
         case 'layout-updated':
-          this.layoutChange.emit(result.value);
+          this.ngxGridLayoutService.layoutUpdate();
           break;
         case 'update:layout':
-          this.ngxGridLayoutService.layoutUpdate();
+          this.layoutChange.emit(result.value);
           break;
       }
     })
@@ -145,6 +145,9 @@ export class NgxGridLayoutComponent implements OnInit, OnChanges, AfterViewInit,
           this.ngxGridLayoutService.resizeEvent(result.eventName, resize.i, resize.x, resize.y, resize.h, resize.w);
           break;
       }
+    });
+    this.ngxGridLayoutService.layout$.subscribe(res => {
+      this.layoutChange.emit(res);
     })
   }
 

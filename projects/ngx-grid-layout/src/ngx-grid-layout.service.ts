@@ -40,6 +40,7 @@ export class NgxGridLayoutService {
   public changeGridLayoutOptions$: Subject<any> = new Subject();
   public eventBus$: Subject<any> = new Subject();
   public gridLayout$: Subject<any> = new Subject();
+  public layout$: Subject<any> = new Subject();
 
   constructor() { }
 
@@ -114,6 +115,12 @@ export class NgxGridLayoutService {
     this.lastBreakpoint = newBreakpoint;
     const colNum = getColsFromBreakpoint(newBreakpoint, this.cols);
     this.colNum = colNum;
+    // for(let index in this.layout) {
+    //   Object.keys(this.layout[index]).forEach(key => {
+    //     this.layout[index][key] = layout[index][key];
+    //   })
+    // }
+    this.layout$.next(layout);
     this.changeGridLayoutOptions$.next({ type: 'setColNum', value: colNum });
   }
 

@@ -42,7 +42,7 @@
   (layoutReady)="layoutReady($event)"
 >
   <ngx-grid-item 
-    *ngFor="let item of layout"
+    *ngFor="let item of layout; trackBy: trackByFn"
     [static]="item.static"
     [x]="item.x"
     [y]="item.y"
