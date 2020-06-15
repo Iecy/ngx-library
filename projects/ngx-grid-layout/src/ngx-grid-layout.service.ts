@@ -175,6 +175,7 @@ export class NgxGridLayoutService {
 
     if (eventName === 'resizeend') {
       this.gridLayout$.next({ type: 'layout-updated', value: this.layout });
+      this.gridLayout$.next({ type: 'layout-changed', value: this.layout });
     }
   }
 
@@ -203,6 +204,7 @@ export class NgxGridLayoutService {
     this.updateHeight();
     if (eventName === 'dragend') {
       this.gridLayout$.next({ type: 'layout-updated', value: this.layout });
+      this.gridLayout$.next({ type: 'layout-changed', value: this.layout });
     }
   }
 

@@ -46,8 +46,8 @@ export class GridLayoutComponent implements OnInit {
     console.log(this.layout, 'this is demo init layout');
   }
 
-  layoutChange(layout: any): void {
-    // console.log('LAYOUT CHANGE:', layout);
+  layoutChanged(layout: any): void {
+    console.log('LAYOUT CHANGED:', layout);
   }
 
   layoutReady(layout: any): void {

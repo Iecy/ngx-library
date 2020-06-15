@@ -111,6 +111,7 @@ export class NgxGridLayoutComponent implements OnInit, OnChanges, AfterViewInit,
 
   @Output() layoutChange: EventEmitter<ILayout[]> = new EventEmitter<ILayout[]>();
   @Output() layoutReady: EventEmitter<ILayout[]> = new EventEmitter<ILayout[]>();
+  @Output() layoutChanged: EventEmitter<ILayout[]> = new EventEmitter<ILayout[]>();
 
   constructor(
     private renderer: Renderer2,
@@ -126,7 +127,10 @@ export class NgxGridLayoutComponent implements OnInit, OnChanges, AfterViewInit,
         case 'layout-updated':
           this.ngxGridLayoutService.layoutUpdate();
           break;
-        case 'update:layout':
+        case 'layout-changed': // layout 改变之后的回调
+          this.layoutChanged.emit(result.value);
+          break;
+        case 'update:layout': // layout 实现双向绑定, 由于放大过于频繁，不适合外部改变监听
           this.layoutChange.emit(result.value);
           break;
       }
