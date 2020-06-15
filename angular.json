@@ -386,46 +386,6 @@
         }
       }
     },
-    "grid-layout": {
-      "root": "projects/grid-layout",
-      "sourceRoot": "projects/grid-layout/src",
-      "projectType": "library",
-      "prefix": "c",
-      "schematics": {
-        "@schematics/angular:component": {
-          "styleext": "scss"
-        }
-      },
-      "architect": {
-        "build": {
-          "builder": "@angular-devkit/build-ng-packagr:build",
-          "options": {
-            "tsConfig": "projects/grid-layout/tsconfig.lib.json",
-            "project": "projects/grid-layout/ng-package.json"
-          }
-        },
-        "test": {
-          "builder": "@angular-devkit/build-angular:karma",
-          "options": {
-            "main": "projects/grid-layout/src/test.ts",
-            "tsConfig": "projects/grid-layout/tsconfig.spec.json",
-            "karmaConfig": "projects/grid-layout/karma.conf.js"
-          }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "projects/grid-layout/tsconfig.lib.json",
-              "projects/grid-layout/tsconfig.spec.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
-          }
-        }
-      }
-    },
     "ngx-grid-layout": {
       "root": "projects/ngx-grid-layout",
       "sourceRoot": "projects/ngx-grid-layout/src",

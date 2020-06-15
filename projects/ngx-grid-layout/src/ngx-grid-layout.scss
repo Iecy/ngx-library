@@ -5,7 +5,6 @@ $baseClass: 'ngx-grid';
     position  : relative;
     transition: height 200ms ease;
     display   : block;
-    overflow  : hidden;
 
     &.cssTransforms {
       .#{$baseClass}-item {
@@ -31,16 +30,11 @@ $baseClass: 'ngx-grid';
       touch-action: none;
     }
 
-    // &.cssTransforms {
-    //   transition-property: transform;
-    //   left               : 0;
-    //   right              : auto;
+    &--hide {
+      display: none;
+    }
 
-    //   &.render-rtl {
-    //     left : auto;
-    //     right: 0;
-    //   }
-    // }
+
 
     &.resizing {
       opacity: .6;

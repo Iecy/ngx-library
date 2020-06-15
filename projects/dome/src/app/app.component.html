@@ -1,8 +1,8 @@
 <nz-layout>
-  <nz-sider nzCollapsible [(nzCollapsed)]="isCollapsed" [nzTrigger]="null" [nzCollapsedWidth]="48" nzWidth="180">
+  <!-- <nz-sider nzCollapsible [(nzCollapsed)]="isCollapsed" [nzTrigger]="null" [nzCollapsedWidth]="48" nzWidth="180">
     <c-layout-side [cMenuList]="leftMenu" [(cCollapsed)]="isCollapsed" [cLogoRender]="null"></c-layout-side>
-    <!-- <c-layout-slider [cMenuList]="leftMenu" [(cCollapsed)]="isCollapsed"></c-layout-slider> -->
-  </nz-sider>
+  </nz-sider> -->
+  <!-- <c-layout-slider [cMenuList]="leftMenu" [(cCollapsed)]="isCollapsed"></c-layout-slider> -->
   <nz-layout>
     <c-layout-header
       [cMenuList]="menuList"
@@ -13,8 +13,8 @@
       [cMenuLeftBefore]="cMenuLeftBefore"
       [cMenuRight]="rightMenu"></c-layout-header>
     <nz-content
-      [style.marginLeft.px]="isCollapsed ? 48 : 180"
     >
+    <!-- [style.marginLeft.px]="isCollapsed ? 48 : 180" -->
       <router-outlet></router-outlet>
     </nz-content>
   </nz-layout>

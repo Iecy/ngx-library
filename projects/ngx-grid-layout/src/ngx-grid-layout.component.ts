@@ -1,12 +1,12 @@
-import { Component, OnInit, Renderer2, ElementRef, ViewChildren, QueryList, Input, ViewEncapsulation, OnChanges, SimpleChanges, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Renderer2, ElementRef, Input, ViewEncapsulation, OnChanges, SimpleChanges, Output, EventEmitter, HostBinding, AfterViewChecked, HostListener, AfterViewInit, AfterContentInit } from '@angular/core';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 
 import { UpdateHostClassService } from './update-host-class.service';
-import { NgxGridItemComponent } from './ngx-grid-item.component';
 import { ILayout, ILayoutCols } from './grid.interface';
 import { NgxGridLayoutService } from './ngx-grid-layout.service';
 import { validateLayout, compact } from './utils';
-
 
 @Component({
   selector: 'ngx-grid-layout',
@@ -18,95 +18,100 @@ import { validateLayout, compact } from './utils';
     UpdateHostClassService
   ]
 })
-export class NgxGridLayoutComponent implements OnInit, OnChanges {
+export class NgxGridLayoutComponent implements OnInit, OnChanges, AfterViewInit, AfterContentInit {
   private ele: HTMLElement = this.elementRef.nativeElement;
-  private _useCssTransforms: boolean = true;
-  private _margin: number[] = [10, 10];
-  private _colNum: number = 12;
-  private _autoSize: boolean = true;
-  private _isResizable: boolean = true;
-  private _isDraggable: boolean = true;
+  private destroyed$: Subject<any> = new Subject();
 
-  @ViewChildren(NgxGridItemComponent) listOfNgxGridItemComponent: QueryList<NgxGridItemComponent>;
   @Input() set layout(layout: ILayout[]) {
     this.ngxGridLayoutService.layout = layout;
-    this.changeOption('layout', layout);
   }
   get layout(): ILayout[] {
     return this.ngxGridLayoutService.layout;
   }
   @Input() set breakpoints(breakpoints: ILayoutCols) {
     this.ngxGridLayoutService.breakpoints = breakpoints;
-    this.changeOption('breakpoints', breakpoints);
   }
   get breakpoints(): ILayoutCols {
     return this.ngxGridLayoutService.breakpoints;
   }
   @Input() set cols(cols: ILayoutCols) {
     this.ngxGridLayoutService.cols = cols;
-    this.changeOption('cols', cols);
   }
   get cols(): ILayoutCols {
     return this.ngxGridLayoutService.cols;
   }
   @Input() set useCssTransforms(use: boolean) {
-    this._useCssTransforms = use;
-    this.changeOption('useCssTransforms', use);
+    this.ngxGridLayoutService.useCssTransforms = use;
   }
   get useCssTransforms(): boolean {
-    return this._useCssTransforms;
+    return this.ngxGridLayoutService.useCssTransforms;
   }
   @Input() set margin(m: number[]) {
-    this._margin = m;
-    this.changeOption('margin', m);
+    this.ngxGridLayoutService.margin = m;
   }
   get margin(): number[] {
-    return this._margin;
+    return this.ngxGridLayoutService.margin;
   }
   @Input() set colNum(num: number) {
-    this._colNum = num;
-    this.changeOption('colNum', num);
+    this.ngxGridLayoutService.colNum = num;
   }
   get colNum(): number {
-    return this._colNum;
+    return this.ngxGridLayoutService.colNum;
   }
   @Input() set autoSize(auto: boolean) {
-    this._autoSize = auto;
-    this.changeOption('autoSize', auto);
+    this.ngxGridLayoutService.autoSize = auto;
   }
   get autoSize(): boolean {
-    return this._autoSize;
+    return this.ngxGridLayoutService.autoSize;
+  }
+  @Input() set rowHeight(height: number) {
+    this.ngxGridLayoutService.rowHeight = height;
+  }
+  get rowHeight() {
+    return this.ngxGridLayoutService.rowHeight;
   }
   @Input() set isMirrored(isMi: boolean) {
     this.ngxGridLayoutService.isMirrored = isMi;
-    this.changeOption('isMirrored', isMi);
   }
   get isMirrored(): boolean {
     return this.ngxGridLayoutService.isMirrored;
   }
   @Input() set isResizable(isRe: boolean) {
-    this._isResizable = isRe;
-    this.changeOption('isResizable', isRe);
+    this.ngxGridLayoutService.isResizable = isRe;
   }
   get isResizable(): boolean {
-    return this._isResizable;
+    return this.isResizable;
   }
   @Input() set isDraggable(isDr: boolean) {
-    this._isDraggable = isDr;
-    this.changeOption('isDraggable', isDr);
+    this.ngxGridLayoutService.isDraggable = isDr;
   }
   get isDraggable(): boolean {
-    return this._isDraggable;
+    return this.ngxGridLayoutService.isDraggable;
   }
   @Input() set verticalCompact(vertical: boolean) {
     this.ngxGridLayoutService.verticalCompact = vertical;
-    this.changeOption('verticalCompact', vertical);
   }
   get verticalCompact(): boolean {
     return this.ngxGridLayoutService.verticalCompact;
   }
+  @Input() set preventCollision(prevent: boolean) {
+    this.ngxGridLayoutService.preventCollision = prevent;
+  }
+  get preventCollision(): boolean {
+    return this.ngxGridLayoutService.preventCollision;
+  }
+
+  @Input() set responsive(respon: boolean) {
+    this.ngxGridLayoutService.responsive = respon;
+  }
+
+  get responsive(): boolean {
+    return this.ngxGridLayoutService.responsive;
+  }
 
   @Output() layoutChange: EventEmitter<ILayout[]> = new EventEmitter<ILayout[]>();
+  @Output() layoutReady: EventEmitter<ILayout[]> = new EventEmitter<ILayout[]>();
+  @Output() layoutChanged: EventEmitter<ILayout[]> = new EventEmitter<ILayout[]>();
 
   constructor(
     private renderer: Renderer2,
@@ -114,10 +119,39 @@ export class NgxGridLayoutComponent implements OnInit, OnChanges {
     private updateClassService: UpdateHostClassService,
     public ngxGridLayoutService: NgxGridLayoutService
   ) {
-    this.ngxGridLayoutService.changeGridLayoutOptions$.subscribe((result: { type: string; value: any }) => {
-      if (result.type === 'updateLayout') {
-        this.layoutChange.emit(result.value)
+
+    this.ngxGridLayoutService.gridLayout$.pipe(
+      takeUntil(this.destroyed$)
+    ).subscribe((result: { type: string; value: any }) => {
+      switch (result.type) {
+        case 'layout-updated':
+          this.ngxGridLayoutService.layoutUpdate();
+          break;
+        case 'layout-changed': // layout 改变之后的回调
+          this.layoutChanged.emit(result.value);
+          break;
+        case 'update:layout': // layout 实现双向绑定, 由于放大过于频繁，不适合外部改变监听
+          this.layoutChange.emit(result.value);
+          break;
       }
+    })
+
+    this.ngxGridLayoutService.eventBus$.pipe(
+      takeUntil(this.destroyed$)
+    ).subscribe((result: { type: string; eventName: string; value: any }) => {
+      switch (result.type) {
+        case 'dragEvent':
+          const { i, x, y, h, w } = result.value;
+          this.ngxGridLayoutService.dragEvent(result.eventName, i, x, y, h, w);
+          break;
+        case 'resizeEvent':
+          const resize = result.value;
+          this.ngxGridLayoutService.resizeEvent(result.eventName, resize.i, resize.x, resize.y, resize.h, resize.w);
+          break;
+      }
+    });
+    this.ngxGridLayoutService.layout$.subscribe(res => {
+      this.layoutChange.emit(res);
     })
   }
 
@@ -125,12 +159,36 @@ export class NgxGridLayoutComponent implements OnInit, OnChanges {
     validateLayout(this.layout);
     this.ngxGridLayoutService.originalLayout = JSON.parse(JSON.stringify(this.layout));
     this.setClassMap();
+    this.onWindowResize();
   }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.useCssTransforms) {
       this.setClassMap();
     }
+    if (changes.layout.currentValue && changes.layout.previousValue) {
+      validateLayout(changes.layout.currentValue);
+      this.ngxGridLayoutService.layoutUpdate();
+    }
+  }
+  ngAfterContentInit(): void {
+    this.onWindowResize();
+    this.ngxGridLayoutService.initResponsiveFeatures();
+    this.ngxGridLayoutService.updateHeight();
+  }
+
+  ngAfterViewInit(): void {
+    this.layoutReady.emit(this.layout);
+  }
+
+  onWindowResize(): void {
+    this.setWidth(this.ele.offsetWidth);
+    this.ngxGridLayoutService.resizeEvent();
+  }
+
+  setWidth(width: number): void {
+    this.ngxGridLayoutService.containerWidth = width;
+    this.ngxGridLayoutService.eventBus$.next({ type: 'updateWidth', value: width });
   }
 
   setClassMap(): void {
@@ -140,50 +198,8 @@ export class NgxGridLayoutComponent implements OnInit, OnChanges {
     });
   }
 
-  private findDifference(layout: ILayout[], originalLayout: ILayout[]): ILayout[] {
-    let uniqueResultOne = layout.filter(function (obj) {
-      return !originalLayout.some(function (obj2) {
-        return obj.i === obj2.i;
-      });
-    });
-
-    let uniqueResultTwo = originalLayout.filter(function (obj) {
-      return !layout.some(function (obj2) {
-        return obj.i === obj2.i;
-      });
-    });
-
-    return uniqueResultOne.concat(uniqueResultTwo);
-  }
-
-  private initResponsiveFeatures() {
-    this.ngxGridLayoutService.layouts = {};
-  }
-
-  private layoutUpdate(): void {
-    const { layout, originalLayout } = this.ngxGridLayoutService;
-    if (layout !== undefined && originalLayout !== undefined) {
-      if (layout.length !== originalLayout.length) {
-        let diff = this.findDifference(layout, originalLayout);
-        if (diff.length > 0) {
-          if (layout.length > originalLayout.length) {
-            this.ngxGridLayoutService.originalLayout = originalLayout.concat(diff);
-          } else {
-            this.ngxGridLayoutService.originalLayout = originalLayout.filter(obj => {
-              return !diff.some(obj2 => {
-                return obj.i === obj2.i;
-              });
-            });
-          }
-        }
-        this.ngxGridLayoutService.lastLayoutLength = this.ngxGridLayoutService.layout.length;
-      }
-      compact(this.ngxGridLayoutService.layout, this.ngxGridLayoutService.verticalCompact);
-    }
-  }
-
-  private changeOption(type: string, value: any) {
-    this.ngxGridLayoutService.changeGridLayoutOptions$.next({ type, value });
+  @HostListener('window:resize') onResize() {
+    this.onWindowResize();
   }
 
 }

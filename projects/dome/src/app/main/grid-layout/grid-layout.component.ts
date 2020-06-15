@@ -30,10 +30,45 @@ const testLayout = [
 })
 export class GridLayoutComponent implements OnInit {
   public layout = JSON.parse(JSON.stringify(testLayout));
+  public index: number = 0;
+  public draggable = true;
+  public resizable = true;
+  public mirrored = false;
+  public responsive = true;
+  public preventCollision = false;
+  public rowHeight = 30;
+  public colNum = 12;
 
   constructor() { }
 
   ngOnInit() {
+    this.index = this.layout.length;
+    console.log(this.layout, 'this is demo init layout');
   }
 
+  layoutChanged(layout: any): void {
+    console.log('LAYOUT CHANGED:', layout);
+  }
+
+  layoutReady(layout: any): void {
+    console.log('LAYOUT READY: ', layout);
+  }
+
+  containerResized(layoutItem: any): void {
+    console.log('CONTAINER RESIZED:', layoutItem);
+  }
+
+  public decreaseWidth(): void {
+
+  }
+
+  public increaseWidth(): void { }
+
+  public addItem(): void { }
+
+  public changeDirection(): void {
+
+  }
+
+  trackByFn(index) { return index }
 }
