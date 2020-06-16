@@ -20,7 +20,6 @@
     <input type="checkbox" [(ngModel)]="responsive"/> Responsive
     <input type="checkbox" [(ngModel)]="preventCollision"/> Prevent Collision
     <input type="checkbox" [(ngModel)]="useCssTransform"/> Use Css Transform
-    <input type="checkbox" [(ngModel)]="setCol" (ngModelChange)="onChangeModel($event)"/> setCol
     <div style="margin-top: 10px;margin-bottom: 10px;">
         Row Height: <input style="display: inline-block; width: 200px;" nz-input type="number" [(ngModel)]="rowHeight"/>
         Col nums: <input style="display: inline-block; width: 200px;"  nz-input type="number" [(ngModel)]="colNum"/>
@@ -37,7 +36,6 @@
     [isMirrored]="mirrored"
     [preventCollision]="preventCollision"
     [verticalCompact]="true"
-    [cols]="cols"
     [useCssTransforms]="useCssTransform"
     [responsive]="responsive"
     (layoutChanged)="layoutChanged($event)"
