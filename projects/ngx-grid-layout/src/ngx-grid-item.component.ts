@@ -31,13 +31,13 @@ export class NgxGridItemComponent implements OnInit, OnChanges {
   public cols: number = 12;
   public margin: number[] = [10, 10];
   public maxRows: number = Infinity;
-  public draggable: any;
-  public resizable: any;
+  public draggable: any = null;
+  public resizable: any = null;
   public useCssTransforms: boolean = true;
   public isDragging: boolean = false;
-  public dragging: any;
+  public dragging: any = null;
   public isResizing: boolean = false;
-  public resizing: any;
+  public resizing: any = null;
   public lastX: number = NaN;
   public lastY: number = NaN;
   public lastW: number = NaN;
@@ -55,9 +55,9 @@ export class NgxGridItemComponent implements OnInit, OnChanges {
   public innerW: number;
   public innerH: number;
 
-  @Input() isDraggable: boolean;
-  @Input() isResizable: boolean;
-  @Input() static: boolean;
+  @Input() isDraggable: boolean = null;
+  @Input() isResizable: boolean = null;
+  @Input() static: boolean = false;
   @Input() minH: number = 1;
   @Input() minW: number = 1;
   @Input() maxH: number = Infinity;
@@ -96,6 +96,12 @@ export class NgxGridItemComponent implements OnInit, OnChanges {
             // this.emitContainerResized();
           }
           break;
+        case 'setCols':
+          // compact(this.gridLayoutService.layout, this.gridLayoutService.verticalCompact);
+          this.tryMakeDraggable();
+          this.tryMakeResizable();
+          this.createStyle();
+          break;
         case 'margin':
           this.margin = result.value;
           break;
@@ -103,6 +109,9 @@ export class NgxGridItemComponent implements OnInit, OnChanges {
           if (this.ele.parentElement) {
             this.renderer.setStyle(this.ele.parentElement, 'height', result.value);
           }
+          break;
+        case 'layout-size-changed':
+          this.createStyle();
           break;
         case 'updateLayout':
           compact(this.gridLayoutService.layout, this.gridLayoutService.verticalCompact);
@@ -112,6 +121,32 @@ export class NgxGridItemComponent implements OnInit, OnChanges {
           this.tryMakeResizable();
           this.createStyle();
           // this.emitContainerResized();
+          break;
+        case 'setDraggable':
+          if (this.isDraggable === null) {
+            this.draggable = result.value;
+            this.tryMakeDraggable();
+          }
+          break;
+        case 'setResizable':
+          if (this.isResizable === null) {
+            this.resizable = result.value;
+            this.tryMakeResizable();
+          }
+          break;
+        case 'setMirrord':
+          this.setClassMap();
+          this.tryMakeResizable();
+          this.tryMakeDraggable();
+          this.createStyle();
+          break;
+        case 'setRowHeight':
+          this.createStyle();
+          break;
+        case 'setUseCssTransforms':
+          this.useCssTransforms = result.value;
+          this.setClassMap();
+          this.createStyle();
           break;
       }
     })
@@ -136,6 +171,11 @@ export class NgxGridItemComponent implements OnInit, OnChanges {
     this.innerW = this.w;
     this.innerH = this.h;
     this.dragEventSet = false;
+    this.minH = this.minH || 1;
+    this.minW = this.minW || 1;
+    this.maxW = this.maxW || Infinity;
+    this.maxH = this.maxH || Infinity;
+    this.useCssTransforms = this.gridLayoutService.useCssTransforms;
 
     this.initDragable();
     this.initResizable();
@@ -144,6 +184,10 @@ export class NgxGridItemComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
+    if (changes.static) {
+      this.tryMakeDraggable();
+      this.tryMakeResizable();
+    }
     if (changes.x) {
       this.innerX = changes.x.currentValue;
       this.tryMakeDraggable();
@@ -168,16 +212,44 @@ export class NgxGridItemComponent implements OnInit, OnChanges {
       this.tryMakeResizable();
       this.createStyle();
     }
+    if (changes.minW) {
+      if (this.w < changes.minW.currentValue) {
+        this.minW = this.w;
+      } else {
+        this.minW = changes.minW.currentValue;
+      }
+      this.tryMakeResizable();
+    }
+    if (changes.minH) {
+      if (this.h < changes.minH.currentValue) {
+        this.minH = this.h;
+      } else {
+        this.minH = changes.minH.currentValue;
+      }
+      this.tryMakeResizable();
+    }
+    if (changes.maxW) {
+      if (this.w > changes.minW.currentValue) {
+        this.maxW = this.w;
+      } else {
+        this.maxW = changes.maxW.currentValue;
+      }
+      this.tryMakeResizable();
+    }
+    if (changes.maxH) {
+      if (this.h > changes.maxH.currentValue) {
+        this.maxH = this.h;
+      } else {
+        this.maxH = changes.maxH.currentValue;
+      }
+      this.tryMakeResizable();
+    }
     if (changes.isDraggable) {
       this.draggable = changes.isDraggable.currentValue;
       this.tryMakeDraggable();
     }
     if (changes.isResizable) {
       this.resizable = changes.isResizable.currentValue;
-      this.tryMakeResizable();
-    }
-    if (changes.static) {
-      this.tryMakeDraggable();
       this.tryMakeResizable();
     }
   }
@@ -228,6 +300,7 @@ export class NgxGridItemComponent implements OnInit, OnChanges {
       'ngx-draggable-dragging': this.isDragging,
       'resizing': this.isResizing,
       'disable-userselect': this.isDragging,
+      'render-rtl': this.renderRtl,
     });
   }
 

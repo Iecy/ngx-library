@@ -66,6 +66,8 @@ export class NgxGridLayoutService {
         }
         this.lastLayoutLength = this.layout.length;
         this.initResponsiveFeatures();
+        // this.changeGridLayoutOptions$.next({ type: 'layout-size-changed', value: this.layout });
+        this.gridLayout$.next({ type: 'layout-size-changed', value: this.layout })
       }
       // console.table(this.layout);
       compact(this.layout, this.verticalCompact);
@@ -90,8 +92,7 @@ export class NgxGridLayoutService {
     return uniqueResultOne.concat(uniqueResultTwo);
   }
 
-  public responsiveGridLayout(eventName?: string): void {
-    // const { breakpoints, cols, lastBreakpoint, layouts, layout, originalLayout, verticalCompact } = this;
+  public responsiveGridLayout(): void {
     let newBreakpoint = getBreakpointFromWidth(this.breakpoints, this.containerWidth);
     let newCols = getColsFromBreakpoint(newBreakpoint, this.cols);
 
@@ -110,16 +111,10 @@ export class NgxGridLayoutService {
     );
     this.layouts[newBreakpoint] = layout;
     this.gridLayout$.next({ type: 'update:layout', value: layout });
-    // this.gridLayout$.next({ type: 'layout-updated', value: layout })
 
     this.lastBreakpoint = newBreakpoint;
     const colNum = getColsFromBreakpoint(newBreakpoint, this.cols);
     this.colNum = colNum;
-    // for(let index in this.layout) {
-    //   Object.keys(this.layout[index]).forEach(key => {
-    //     this.layout[index][key] = layout[index][key];
-    //   })
-    // }
     this.layout$.next(layout);
     this.changeGridLayoutOptions$.next({ type: 'setColNum', value: colNum });
   }
@@ -168,8 +163,9 @@ export class NgxGridLayoutService {
     }
 
     if (this.responsive) {
-      this.responsiveGridLayout(eventName);
+      this.responsiveGridLayout();
     }
+    compact(this.layout, this.verticalCompact);
     this.eventBus$.next({ type: 'compact' });
     this.updateHeight();
 

@@ -7,6 +7,7 @@ import { UpdateHostClassService } from './update-host-class.service';
 import { ILayout, ILayoutCols } from './grid.interface';
 import { NgxGridLayoutService } from './ngx-grid-layout.service';
 import { validateLayout, compact } from './utils';
+import elemenResizeDetector from 'element-resize-detector';
 
 @Component({
   selector: 'ngx-grid-layout',
@@ -21,6 +22,7 @@ import { validateLayout, compact } from './utils';
 export class NgxGridLayoutComponent implements OnInit, OnChanges, AfterViewInit, AfterContentInit {
   private ele: HTMLElement = this.elementRef.nativeElement;
   private destroyed$: Subject<any> = new Subject();
+  private erd: any;
 
   @Input() set layout(layout: ILayout[]) {
     this.ngxGridLayoutService.layout = layout;
@@ -133,6 +135,10 @@ export class NgxGridLayoutComponent implements OnInit, OnChanges, AfterViewInit,
         case 'update:layout': // layout 实现双向绑定, 由于放大过于频繁，不适合外部改变监听
           this.layoutChange.emit(result.value);
           break;
+        case 'layout-size-changed': // layout size 更改后，需要重新resize页面布局
+          compact(this.layout, this.verticalCompact)
+          setTimeout(() => this.onWindowResize(), 0);
+          break;
       }
     })
 
@@ -160,15 +166,59 @@ export class NgxGridLayoutComponent implements OnInit, OnChanges, AfterViewInit,
     this.ngxGridLayoutService.originalLayout = JSON.parse(JSON.stringify(this.layout));
     this.setClassMap();
     this.onWindowResize();
+    this.erd = elemenResizeDetector({
+      strategy: "scroll",
+      callOnAdd: false,
+    });
+    this.erd.listenTo(this.ele, () => {
+      this.onWindowResize();
+    });
   }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.useCssTransforms) {
       this.setClassMap();
     }
-    if (changes.layout.currentValue && changes.layout.previousValue) {
+    if (changes.layout && changes.layout.currentValue && changes.layout.previousValue) {
       validateLayout(changes.layout.currentValue);
       this.ngxGridLayoutService.layoutUpdate();
+    }
+    if (changes.isDraggable && changes.isDraggable.previousValue !== undefined) {
+      this.ngxGridLayoutService.isDraggable = changes.isDraggable.currentValue;
+      this.ngxGridLayoutService.changeGridLayoutOptions$.next({ type: 'setDraggable', value: changes.isDraggable.currentValue });
+    }
+    if (changes.isResizable && changes.isResizable.previousValue !== undefined) {
+      this.ngxGridLayoutService.isResizable = changes.isResizable.currentValue;
+      this.ngxGridLayoutService.changeGridLayoutOptions$.next({ type: 'setResizable', value: changes.isResizable.currentValue });
+    }
+    if (changes.responsive && changes.responsive.previousValue !== undefined) {
+      if (!this.responsive) {
+        this.ngxGridLayoutService.gridLayout$.next({ type: 'update:layout', value: this.ngxGridLayoutService.originalLayout });
+        this.ngxGridLayoutService.changeGridLayoutOptions$.next({ type: 'setColNum', value: this.colNum });
+        this.ngxGridLayoutService.layoutUpdate();
+      }
+      this.onWindowResize();
+    }
+    if (changes.isMirrored && changes.isMirrored.previousValue !== undefined) {
+      this.ngxGridLayoutService.isMirrored = changes.isMirrored.currentValue;
+      this.ngxGridLayoutService.changeGridLayoutOptions$.next({ type: 'setMirrord', value: changes.isMirrored.currentValue });
+    }
+    if (changes.rowHeight && changes.rowHeight.previousValue !== undefined) {
+      this.ngxGridLayoutService.rowHeight = changes.rowHeight.currentValue;
+      this.ngxGridLayoutService.changeGridLayoutOptions$.next({ type: 'setRowHeight', value: changes.rowHeight.currentValue });
+    }
+    if (changes.colNum && changes.colNum.previousValue !== undefined) {
+      this.ngxGridLayoutService.colNum = changes.colNum.currentValue;
+      this.ngxGridLayoutService.changeGridLayoutOptions$.next({ type: 'setColNum', value: changes.colNum.currentValue });
+    }
+    if (changes.useCssTransforms && changes.useCssTransforms.previousValue !== undefined) {
+      this.ngxGridLayoutService.useCssTransforms = changes.useCssTransforms.currentValue;
+      this.ngxGridLayoutService.changeGridLayoutOptions$.next({ type: 'setUseCssTransforms', value: changes.useCssTransforms.currentValue });
+    }
+    if (changes.cols && changes.cols.previousValue !== undefined) {
+      this.ngxGridLayoutService.cols = changes.cols.currentValue;
+      this.ngxGridLayoutService.changeGridLayoutOptions$.next({ type: 'setCols', value: changes.cols.currentValue });
+      this.onWindowResize()
     }
   }
   ngAfterContentInit(): void {

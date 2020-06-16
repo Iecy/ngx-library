@@ -75,8 +75,8 @@ export function cloneLayoutItem(layoutItem: ILayout): ILayout {
 /**
  * Helper to convert a number to a percentage string.
  *
- * @param  {Number} num Any number
- * @return {String}     That number as a percentage.
+ * @param  num Any number
+ * @return     That number as a percentage.
  */
 export function perc(num: number): string {
   return num * 100 + '%';
@@ -135,8 +135,8 @@ export function compact(layout: ILayout[], verticalCompact: boolean): ILayout[] 
 
 /**
  * Given a layout, make sure all elements fit within its bounds.
- * @param  {Array} layout Layout array.
- * @param  {Number} bounds Number of columns.
+ * @param layout Layout array.
+ * @param  bounds Number of columns.
  */
 export function correctBounds(layout: ILayout[], bounds: {cols: number}): ILayout[] {
   const collidesWith = getStatics(layout);
@@ -195,8 +195,8 @@ export function compactItem(compareWith: ILayout[], l: ILayout, verticalCompact:
  * It doesn't appear to matter which order we approach this from, although
  * perhaps that is the wrong thing to do.
  *
- * @param  {Object} layoutItem Layout item.
- * @return {Object|undefined}  A colliding layout item, or undefined.
+ * @param  layoutItem Layout item.
+ * @return  A colliding layout item, or undefined.
  */
 export function getFirstCollision(layout: ILayout[], layoutItem: ILayout): ILayout {
   for (let i = 0, len = layout.length; i < len; i++) {
@@ -211,9 +211,9 @@ export function getAllCollisions(layout: ILayout[], layoutItem: ILayout): ILayou
 /**
  * Get a layout item by ID. Used so we can override later on if necessary.
  *
- * @param  {Array}  layout Layout array.
- * @param  {String} id     ID
- * @return {LayoutItem}    Item at ID.
+ * @param  layout Layout array.
+ * @param  id     ID
+ * @return Item at ID.
  */
 export function getLayoutItem(layout: ILayout[], id: string): ILayout {
   for (let i = 0, len = layout.length; i < len; i++) {
@@ -251,7 +251,6 @@ export function setTransform(top: number, left: number, width: number, height: n
  * @param right
  * @param width
  * @param height
- * @returns {{transform: string, WebkitTransform: string, MozTransform: string, msTransform: string, OTransform: string, width: string, height: string, position: string}}
  */
 export function setTransformRtl(top: number, right: number, width: number, height: number): Object {
   const translate = "translate3d(" + right * -1 + "px," + top + "px, 0)";
@@ -284,7 +283,6 @@ export function setTopLeft(top: number, left: number, width: number, height: num
  * @param right
  * @param width
  * @param height
- * @returns {{top: string, right: string, width: string, height: string, position: string}}
  */
 export function setTopRight(top: number, right: number, width: number, height: number): Object {
   return {

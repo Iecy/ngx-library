@@ -18,3 +18,6 @@
 
 ## 项目六：
 <a href="https://github.com/Iecy/ngx-library/blob/master/projects/angular-create-pdf/README.md">angular creat pdf</a>
+
+## 项目七：
+[ngx-grid-layout](https://github.com/Iecy/ngx-library/blob/master/projects/ngx-grid-layout/README.md)

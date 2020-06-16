@@ -6,7 +6,7 @@ $baseClass: 'ngx-grid';
     transition: height 200ms ease;
     display   : block;
 
-    &.cssTransforms {
+    &.useCssTransforms {
       .#{$baseClass}-item {
         transition-property: transform;
         left               : 0;

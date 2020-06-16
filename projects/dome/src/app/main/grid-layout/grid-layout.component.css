@@ -2,6 +2,7 @@ c-grid-item,
 ngx-grid-item {
   background: #ccc;
   border    : 1px solid black;
+  text-align: center;
 }
 ngx-grid-layout {
   background-color: #fff;

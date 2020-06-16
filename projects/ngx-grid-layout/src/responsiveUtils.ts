@@ -29,15 +29,15 @@ export function getColsFromBreakpoint(breakpoint: IBreakpoint, cols: ILayoutCols
 /**
  * Given existing layouts and a new breakpoint, find or generate a new layout.
  * This finds the layout above the new one and generates from it, if it exists.
- * @param  {Array} orgLayout     Original layout.
- * @param  {Object} layouts     Existing layouts.
- * @param  {Array} breakpoints All breakpoints.
- * @param  {String} breakpoint New breakpoint.
- * @param  {String} breakpoint Last breakpoint (for fallback).
- * @param  {Number} cols       Column count at new breakpoint.
- * @param  {Boolean} verticalCompact Whether or not to compact the layout
+ * @param  orgLayout     Original layout.
+ * @param  layouts     Existing layouts.
+ * @param  breakpoints All breakpoints.
+ * @param  breakpoint New breakpoint.
+ * @param  breakpoint Last breakpoint (for fallback).
+ * @param  cols       Column count at new breakpoint.
+ * @param  verticalCompact Whether or not to compact the layout
  *   vertically.
- * @return {Array}             New layout.
+ * @return             New layout.
  */
 export function findOrGenerateResponsiveLayout(orgLayout: ILayout[], layouts: IResponsiveLayout, breakpoints: ILayoutCols,
   breakpoint: IBreakpoint, lastBreakpoint: IBreakpoint,

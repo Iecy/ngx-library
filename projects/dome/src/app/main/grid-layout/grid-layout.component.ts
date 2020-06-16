@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, Renderer2 } from '@angular/core';
 
 const testLayout = [
-  { "x": 0, "y": 0, "w": 2, "h": 2, "i": "0", resizable: false, draggable: false, static: false },
+  { "x": 0, "y": 0, "w": 2, "h": 2, "i": "0", minW: 3, resizable: false, draggable: false, static: false },
   { "x": 2, "y": 0, "w": 2, "h": 4, "i": "1", resizable: false, draggable: false, static: false },
   { "x": 4, "y": 0, "w": 2, "h": 5, "i": "2", resizable: false, draggable: false, static: false },
   { "x": 6, "y": 0, "w": 2, "h": 3, "i": "3", resizable: false, draggable: false, static: false },
@@ -29,17 +29,22 @@ const testLayout = [
   styleUrls: ['./grid-layout.component.css']
 })
 export class GridLayoutComponent implements OnInit {
+  @ViewChild('content') public contentEl: ElementRef;
   public layout = JSON.parse(JSON.stringify(testLayout));
   public index: number = 0;
   public draggable = true;
   public resizable = true;
   public mirrored = false;
   public responsive = true;
+  public useCssTransform = true;
   public preventCollision = false;
   public rowHeight = 30;
   public colNum = 12;
+  public cols = { lg: 12, md: 10, sm: 6, xs: 4, xxs: 2 };
 
-  constructor() { }
+  constructor(
+    private renderer: Renderer2
+  ) { }
 
   ngOnInit() {
     this.index = this.layout.length;
@@ -59,16 +64,32 @@ export class GridLayoutComponent implements OnInit {
   }
 
   public decreaseWidth(): void {
-
+    const conentHtml: HTMLElement = this.contentEl.nativeElement;
+    let width = conentHtml.offsetWidth;
+    width -= 20;
+    this.renderer.setStyle(this.contentEl.nativeElement, 'width', `${width}px`);
   }
 
-  public increaseWidth(): void { }
-
-  public addItem(): void { }
-
-  public changeDirection(): void {
-
+  public increaseWidth(): void {
+    const conentHtml: HTMLElement = this.contentEl.nativeElement;
+    let width = conentHtml.offsetWidth;
+    width += 20;
+    this.renderer.setStyle(this.contentEl.nativeElement, 'width', `${width}px`);
   }
 
+  public addItem(): void {
+    const item = { "x": 0, "y": 0, "w": 2, "h": 2, "i": this.index + "", whatever: "bbb" };
+    this.index++;
+    this.layout = [...this.layout, item];
+  }
+
+  onChangeModel(e: any): void {
+    if (e) {
+      this.cols = { lg: 2, md: 2, sm: 2, xs: 2, xxs: 2 };
+    } else {
+      this.cols = { lg: 12, md: 10, sm: 6, xs: 4, xxs: 2 };
+    }
+    console.log(e, 'this is onChangeModel.')
+  }
   trackByFn(index) { return index }
 }
