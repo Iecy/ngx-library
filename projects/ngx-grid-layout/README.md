@@ -265,38 +265,44 @@ export class GridLayoutComponent implements OnInit {
 
 ## `ngx-grid-layout` API
 
-| name                 | DESCRIPTION                                                  | TYPE        | DEFAULT    | REQUIRED                               |
-| -------------------- | ------------------------------------------------------------ | ----------- | ---------- | -------------------------------------- |
-| `[(layout)]`         | 数据源；                                                     | `ILayout[]` | `-`        | `true`                                 |
-| `[colNum]`           | 定义栅格系统的列数，其值需为自然如                           | `number`    | `12`       | `false`                                |
-| `[rowHeight]`        | 每行的高度，单位像素                                         | `number`    | `150`      | `false`                                |
-| `[margin]`           | 定义栅格中的元素边距；数组中的一个元素表示水平边距，第二个表示垂直边距，单位为`像素` | `number[]`  | `[10, 10]` | `false`                                |
-| `[isDraggable]`      | 标识栅格中的元素是否可以拖拽。                               | `boolean`   | `true`     | `false`                                |
-| `[isResizable]`      | 标识栅格中的元素是否可以调整大小。                           | `boolean`   | `true`     | `false`                                |
-| `[isMirrored]`       | 标识栅格中的元素是否可镜像反转。                             | `boolean`   | `false`    | `false`                                |
-| `[autoSize]`         | 标识容器是否自动调整大小。                                   | `boolean`   | `true`     | `false`                                |
-| `[verticalCompact]`  | 标识布局是否垂直压缩。                                       | `boolean`   | `true`     | `false`                                |
-| `[useCssTransforms]` | 标识是否使用css属性`transition-property: transform`          | `boolean`   | `true`     | `false`                                |
-| `[responsive]`       | 标识布局是否为响应式。                                       | `boolean`   | `false`    | `false`                                |
+| name                 | DESCRIPTION                                                  | TYPE                      | DEFAULT    | REQUIRED |
+| -------------------- | ------------------------------------------------------------ | ------------------------- | ---------- | -------- |
+| `[(layout)]`         | 数据源；                                                     | `ILayout[]`               | `-`        | `true`   |
+| `[colNum]`           | 定义栅格系统的列数，其值需为自然如                           | `number`                  | `12`       | `false`  |
+| `[rowHeight]`        | 每行的高度，单位像素                                         | `number`                  | `150`      | `false`  |
+| `[margin]`           | 定义栅格中的元素边距；数组中的一个元素表示水平边距，第二个表示垂直边距，单位为`像素` | `number[]`                | `[10, 10]` | `false`  |
+| `[isDraggable]`      | 标识栅格中的元素是否可以拖拽。                               | `boolean`                 | `true`     | `false`  |
+| `[isResizable]`      | 标识栅格中的元素是否可以调整大小。                           | `boolean`                 | `true`     | `false`  |
+| `[isMirrored]`       | 标识栅格中的元素是否可镜像反转。                             | `boolean`                 | `false`    | `false`  |
+| `[autoSize]`         | 标识容器是否自动调整大小。                                   | `boolean`                 | `true`     | `false`  |
+| `[verticalCompact]`  | 标识布局是否垂直压缩。                                       | `boolean`                 | `true`     | `false`  |
+| `[useCssTransforms]` | 标识是否使用css属性`transition-property: transform`          | `boolean`                 | `true`     | `false`  |
+| `[responsive]`       | 标识布局是否为响应式。                                       | `boolean`                 | `false`    | `false`  |
+| `(layoutReady)`      | layout最近加载完成                                           | `EventEmitter<ILayout[]>` | `-`        | `false`  |
+| `(layoutChanged)`    | layout数据有所改变的回调函数。                               | `EventEmitter<ILayout[]>` | `-`        | `false`  |
 
 
 ## `ngx-grid-item` API
 
-| NAME                 | DESCRIPTION                                                  | TYPE      | DEFAULT    | REQUIRED |
-| -------------------- | ------------------------------------------------------------ | --------- | ---------- | -------- |
-| `[i]`                | 栅格中元素的ID                                               | `string`  | `-`        | `true`   |
-| `[x]`                | 标识栅格元素位于第几列，需为自然数。                         | `number`  | `-`        | `true`   |
-| `[y]`                | 标识栅格元素位于第几行，需为自然数                           | `number`  | `-`        | `true`   |
-| `[w]`                | 标识栅格元素的初始宽度，值为`colWidth`的倍数。               | `number`  | `-`        | `true`   |
-| `[h]`                | 标识栅格元素的初始高度，值为`rowHeight`的倍数。              | `number`  | `-`        | `true`   |
-| `[minW]`             | 栅格元素的最小宽度，值为`colWidth`的倍数。如果`w`小于`minW`,则`minW`的值会被`w`覆盖。 | `number`  | `1`        | `false`  |
-| `[minH]`             | 格栅元素的最小高度，值为`rowHeight`的倍数。如果`h`小于`minH`,则`minH`的值会被`h`覆盖。 | `number`  | `1`        | `false`  |
-| `[maxW]`             | 栅格元素的最大宽度，值为`colWidth`的倍数。如果`w`大于`maxW`，则`maxW`的值会被`w`覆盖 | `number`  | `Infinity` | `false`  |
-| `[maxH]`             | 栅格元素的最大高度，值为`rowHeight`的倍数。如果`h`大于`maxH`，则`maxH`的值会被`h`覆盖。 | `number`  | `Infinity` | `false`  |
-| `[isDraggable]`      | 标识栅格元素是否可拖拽。如果值为`null`则取决于父容器。       | `boolean` | `null`     | `false`  |
-| `[isResizable]`      | 标识栅格元素是否可调整大小。如果值为`null`则取决于父容器。   | `boolean` | `null`     | `false`  |
-| `[static]`           | 标识栅格元素是否为静态的（无法拖拽、调整大小或被其他元素移动）。 | `boolean` | `false`    | `false`  |
-| `[dragIgnoreFrom]`   | 标识栅格元素中哪些子元素无法触发拖拽事件，值为`css-like`选择器。请参考 [interact.js docs](http://interactjs.io/docs/#ignorable-selectors)中的`ignoreFrom`。 | `string`  | `a,button` | `false`  |
-| `[dragAllowFrom]`    | 标识栅格元素中哪些子元素可以触发拖拽事件，值为`css-like`选择器。如果值为`null`则表示所有子元素（`dragIgnoreFrom`的除外）。请参考 [interact.js docs](http://interactjs.io/docs/#ignorable-selectors)中的`allowFrom`。 | `string`  | `null`     | `false`  |
-| `[resizeIgnoreFrom]` | 标识栅格元素中哪些子元素无法触发调整大小的事件，值为`css-like`选择器。请参考 [interact.js docs](http://interactjs.io/docs/#ignorable-selectors)中的`ignoreFrom`。 | `string`  | `a,button` | `false`  |
+| NAME                 | DESCRIPTION                                                  | TYPE                                          | DEFAULT    | REQUIRED |
+| -------------------- | ------------------------------------------------------------ | --------------------------------------------- | ---------- | -------- |
+| `[i]`                | 栅格中元素的ID                                               | `string`                                      | `-`        | `true`   |
+| `[x]`                | 标识栅格元素位于第几列，需为自然数。                         | `number`                                      | `-`        | `true`   |
+| `[y]`                | 标识栅格元素位于第几行，需为自然数                           | `number`                                      | `-`        | `true`   |
+| `[w]`                | 标识栅格元素的初始宽度，值为`colWidth`的倍数。               | `number`                                      | `-`        | `true`   |
+| `[h]`                | 标识栅格元素的初始高度，值为`rowHeight`的倍数。              | `number`                                      | `-`        | `true`   |
+| `[minW]`             | 栅格元素的最小宽度，值为`colWidth`的倍数。如果`w`小于`minW`,则`minW`的值会被`w`覆盖。 | `number`                                      | `1`        | `false`  |
+| `[minH]`             | 格栅元素的最小高度，值为`rowHeight`的倍数。如果`h`小于`minH`,则`minH`的值会被`h`覆盖。 | `number`                                      | `1`        | `false`  |
+| `[maxW]`             | 栅格元素的最大宽度，值为`colWidth`的倍数。如果`w`大于`maxW`，则`maxW`的值会被`w`覆盖 | `number`                                      | `Infinity` | `false`  |
+| `[maxH]`             | 栅格元素的最大高度，值为`rowHeight`的倍数。如果`h`大于`maxH`，则`maxH`的值会被`h`覆盖。 | `number`                                      | `Infinity` | `false`  |
+| `[isDraggable]`      | 标识栅格元素是否可拖拽。如果值为`null`则取决于父容器。       | `boolean`                                     | `null`     | `false`  |
+| `[isResizable]`      | 标识栅格元素是否可调整大小。如果值为`null`则取决于父容器。   | `boolean`                                     | `null`     | `false`  |
+| `[static]`           | 标识栅格元素是否为静态的（无法拖拽、调整大小或被其他元素移动）。 | `boolean`                                     | `false`    | `false`  |
+| `[dragIgnoreFrom]`   | 标识栅格元素中哪些子元素无法触发拖拽事件，值为`css-like`选择器。请参考 [interact.js docs](http://interactjs.io/docs/#ignorable-selectors)中的`ignoreFrom`。 | `string`                                      | `a,button` | `false`  |
+| `[dragAllowFrom]`    | 标识栅格元素中哪些子元素可以触发拖拽事件，值为`css-like`选择器。如果值为`null`则表示所有子元素（`dragIgnoreFrom`的除外）。请参考 [interact.js docs](http://interactjs.io/docs/#ignorable-selectors)中的`allowFrom`。 | `string`                                      | `null`     | `false`  |
+| `[resizeIgnoreFrom]` | 标识栅格元素中哪些子元素无法触发调整大小的事件，值为`css-like`选择器。请参考 [interact.js docs](http://interactjs.io/docs/#ignorable-selectors)中的`ignoreFrom`。 | `string`                                      | `a,button` | `false`  |
+| `(move)`             | 移动过程中的回调函数                                         | `EventEmitter<{i: string;x:number;y:number}>` | `-`        | `false`  |
+| `(moved)`            | 移动完成的回调                                               | `EventEmitter<{i: string;x:number;y:number}>` | `-`        | `false`  |
+| `(resize)`           | 放大的过程的回调函数                                         | `EventEmitter<{i: string;x:number;y:number}>` | `-`        | `false`  |
+| `(resized)`          | 放大完成的回调函数                                           | `EventEmitter<{i: string;x:number;y:number}>` | `-`        | `false`  |
 
