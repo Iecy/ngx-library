@@ -13,47 +13,50 @@
       <button nz-button nzType="primary" (click)="decreaseWidth()">Decrease Width</button>
       <button nz-button nzType="primary" (click)="increaseWidth()">Increase Width</button>
       <button nz-button nzType="primary" (click)="addItem()">Add an item</button>
-      <!-- Add to show rtl support -->
-      <button nz-button nzType="primary" (click)="changeDirection()">Change Direction</button>
     </nz-button-group>
     <input type="checkbox" [(ngModel)]="draggable"/> Draggable
     <input type="checkbox" [(ngModel)]="resizable"/> Resizable
     <input type="checkbox" [(ngModel)]="mirrored"/> Mirrored
     <input type="checkbox" [(ngModel)]="responsive"/> Responsive
     <input type="checkbox" [(ngModel)]="preventCollision"/> Prevent Collision
+    <input type="checkbox" [(ngModel)]="useCssTransform"/> Use Css Transform
+    <input type="checkbox" [(ngModel)]="setCol" (ngModelChange)="onChangeModel($event)"/> setCol
     <div style="margin-top: 10px;margin-bottom: 10px;">
         Row Height: <input style="display: inline-block; width: 200px;" nz-input type="number" [(ngModel)]="rowHeight"/>
         Col nums: <input style="display: inline-block; width: 200px;"  nz-input type="number" [(ngModel)]="colNum"/>
     </div>
   </div>
 </div>
-<ngx-grid-layout
-  [(layout)]="layout"
-  [colNum]="colNum"
-  [rowHeight]="rowHeight"
-  [isDraggable]="draggable"
-  [isResizable]="resizable"
-  [isMirrored]="mirrored"
-  [preventCollision]="preventCollision"
-  [verticalCompact]="true"
-  [useCssTransforms]="true"
-  [responsive]="true"
-  (layoutChanged)="layoutChanged($event)"
-  (layoutReady)="layoutReady($event)"
->
-  <ngx-grid-item 
-    *ngFor="let item of layout; trackBy: trackByFn"
-    [static]="item.static"
-    [x]="item.x"
-    [y]="item.y"
-    [h]="item.h"
-    [w]="item.w"
-    [i]="item.i"
-    (containerResized)="containerResized(item)"
+<div #content>
+  <ngx-grid-layout
+    [(layout)]="layout"
+    [colNum]="colNum"
+    [rowHeight]="rowHeight"
+    [isDraggable]="draggable"
+    [isResizable]="resizable"
+    [isMirrored]="mirrored"
+    [preventCollision]="preventCollision"
+    [verticalCompact]="true"
+    [cols]="cols"
+    [useCssTransforms]="useCssTransform"
+    [responsive]="responsive"
+    (layoutChanged)="layoutChanged($event)"
+    (layoutReady)="layoutReady($event)"
   >
-    <div class="ngx-grid-item-draggable--box">
-      {{item | json}}
-    </div>
-  </ngx-grid-item>
-</ngx-grid-layout>
+    <ngx-grid-item 
+      *ngFor="let item of layout; trackBy: trackByFn"
+      [static]="item.static"
+      [x]="item.x"
+      [y]="item.y"
+      [h]="item.h"
+      [w]="item.w"
+      [i]="item.i"
+      [minW]="item.minW"
+    >
+      <div class="ngx-grid-item-draggable--box">
+        {{item.i}}
+      </div>
+    </ngx-grid-item>
+  </ngx-grid-layout>
+</div>
 

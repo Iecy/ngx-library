@@ -1,4 +1,4 @@
 <div class="ngx-grid-item--body">
   <ng-content></ng-content>
 </div>
-<span class="ngx-resizable-handle"></span>
+<span *ngIf="resizable" class="ngx-resizable-handle" [class.ngx-rtl-resizable-handle]="renderRtl"></span>
