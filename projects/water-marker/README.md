@@ -55,3 +55,5 @@ export class AppComponent {
   water: WaterMarkerOption = { text: '卢西奥', setting: { fontSize: 40 } };
 }
 ```
+
+<img src="./view.png">

@@ -22,4 +22,8 @@ export class MainComponent implements OnInit {
     }
   }
 
+  public deleteCookie(): void {
+    this.cookieService.remove('cookieTest');
+  }
+
 }

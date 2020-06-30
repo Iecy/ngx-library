@@ -2,6 +2,7 @@
   <span style="display: inline-block;width: 100px;">cookie值：</span>
   <input nz-input type="text" [(ngModel)]="cookieValue">
   <button nz-button (click)="setCookie()">设置</button>
+  <button nz-button (click)="deleteCookie()">删除</button>
 </div>
 <p>
   打开控制台查看写入的cookie值：'cookie test' <a href="https://www.npmjs.com/package/ngx-cookie-icy">具体使用方法</a>

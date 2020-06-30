@@ -1,6 +1,6 @@
 # NgxGridLayout
 
-ngx-grid-layout是一个类似于[Gridster](http://dsmorse.github.io/gridster.js/)适用于angular7.X之上。
+ngx-grid-layout是一个类似于[Gridster](http://dsmorse.github.io/gridster.js/)适用于angular7.X之上。[demo地址](https://ngx-library.now.sh/tools/grid-layout)
 
 ## 开始使用
 
@@ -50,6 +50,7 @@ npm i c-ngx-grid-layout
 > app.module.ts
 
 ```typescript
+// app.module.ts
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
@@ -113,8 +114,9 @@ export class SharedModule { }
 > grid-layout.component.ts
 
 ```typescript
+// grid-layout.component.ts
 import { Component, OnInit, ViewChild, ElementRef, Renderer2 } from '@angular/core';
-
+// 测试数据
 const testLayout = [
   { "x": 0, "y": 0, "w": 2, "h": 2, "i": "0", minW: 3, resizable: false, draggable: false, static: false },
   { "x": 2, "y": 0, "w": 2, "h": 4, "i": "1", resizable: false, draggable: false, static: false },
@@ -230,6 +232,7 @@ export class GridLayoutComponent implements OnInit {
 > grid-layout.compnent.html
 
 ```html
+<!-- grid-layout.compnent.html 模板 -->
 <div #content>
   <ngx-grid-layout
     [(layout)]="layout"
@@ -262,6 +265,7 @@ export class GridLayoutComponent implements OnInit {
   </ngx-grid-layout>
 </div>
 ```
+<img src="./review.gif" width="100%">
 
 ## `ngx-grid-layout` API
 
@@ -305,4 +309,3 @@ export class GridLayoutComponent implements OnInit {
 | `(moved)`            | 移动完成的回调                                               | `EventEmitter<{i: string;x:number;y:number}>` | `-`        | `false`  |
 | `(resize)`           | 放大的过程的回调函数                                         | `EventEmitter<{i: string;x:number;y:number}>` | `-`        | `false`  |
 | `(resized)`          | 放大完成的回调函数                                           | `EventEmitter<{i: string;x:number;y:number}>` | `-`        | `false`  |
-

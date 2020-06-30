@@ -40,3 +40,5 @@ export class AppModule { }
   <button *cIfNotFullscreen [cFullscreenEnter]="takeMeFullscreen2">全屏</button>
 </div>
 ```
+
+<img src="./review.gif" width="100%">
