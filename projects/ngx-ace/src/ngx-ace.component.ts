@@ -6,7 +6,7 @@ declare var ace: any;
 @Component({
   selector: 'c-ngx-ace',
   template: '',
-  styles: [':host { display:block;width:100%;box-sizing: content-box;}'],
+  styles: [':host { display:block;box-sizing: content-box;}'],
   providers: [{
     provide: NG_VALUE_ACCESSOR,
     useExisting: forwardRef(() => NgxAceComponent),
@@ -86,8 +86,8 @@ export class NgxAceComponent implements ControlValueAccessor, OnInit, OnDestroy 
       this.zone.run(() => {
         this.textChange.emit(newVal);
         this.textChanged.emit(newVal);
+        this.onChange(newVal);
       });
-      this._onChange(newVal);
     } else {
       if (this.timeoutSaving) {
         clearTimeout(this.timeoutSaving);
@@ -160,19 +160,21 @@ export class NgxAceComponent implements ControlValueAccessor, OnInit, OnDestroy 
   }
 
   // tslint:disable-next-line:variable-name
-  private _onChange = (_: any) => {
-  }
+  // private _onChange = (_: any) => {
+  // }
+  private onChange: (value: string) => void = () => null;
 
   registerOnChange(fn: any) {
-    this._onChange = fn;
+    this.onChange = fn;
   }
 
   // tslint:disable-next-line:variable-name
-  private _onTouched = () => {
-  }
+  // private _onTouched = () => {
+  // }
+  private onTouched: () => void = () => null;
 
   registerOnTouched(fn: any) {
-    this._onTouched = fn;
+    this.onTouched = fn;
   }
 
   get text() {
@@ -191,7 +193,7 @@ export class NgxAceComponent implements ControlValueAccessor, OnInit, OnDestroy 
     if (this._text !== text && this._autoUpdateContent === true) {
       this._text = text;
       this._editor.setValue(text);
-      this._onChange(text);
+      this.onChange(text);
       this._editor.clearSelection();
     }
     this.emptyMessage();
@@ -215,7 +217,6 @@ export class NgxAceComponent implements ControlValueAccessor, OnInit, OnDestroy 
 
   /** 为空时增加placeholder提示信息 */
   private emptyMessage(): void {
-    console.log(this._text, 'this is emptyMessage.');
     const shouldShow = !this._text.length;
     let node = this._editor.renderer.emptyMessageNode;
     if (!shouldShow && node) {

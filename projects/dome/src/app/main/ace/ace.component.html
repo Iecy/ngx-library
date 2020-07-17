@@ -1,5 +1,23 @@
-<c-ngx-ace
+<!-- <c-ngx-ace
 [options]="aclOptions"
 [(ngModel)]="aceText"
 (ngModelChange)="change($event)"
-></c-ngx-ace>
+></c-ngx-ace> -->
+
+<form nz-form [formGroup]="validateForm">
+  <nz-form-item>
+    <nz-form-control>
+      <c-ngx-ace
+      formControlName="ace" 
+      id="ace"
+      [options]="aclOptions"
+      ></c-ngx-ace>
+      <nz-form-explain *ngIf="validateForm.get('ace')?.dirty && validateForm.get('ace')?.errors"
+        >Please input your username!</nz-form-explain
+      >
+    </nz-form-control>
+  </nz-form-item>
+  <footer>
+    <button nz-button nzType="primary" [disabled]="!validateForm.valid" (click)="submitForm()">保存</button>
+  </footer>
+</form>

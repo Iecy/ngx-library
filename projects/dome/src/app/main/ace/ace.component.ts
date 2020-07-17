@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-ace',
@@ -6,24 +7,28 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./ace.component.css']
 })
 export class AceComponent implements OnInit {
+  public validateForm: FormGroup;
   public aclOptions = {
-    // enableBasicAutocompletion: true,
-    // enableSnippets: true,
-    // enableLiveAutocompletion: true,
-    // showGutter: false,
-    // maxLines: 3,
-    // minLines: 4,
-    // autoScrollEditorIntoView: false,
+    maxLines: 4,
+    minLines: 4,
   };
-
   public aceText = '';
-  constructor() { }
+  constructor(
+    private fb: FormBuilder,
+  ) { }
 
   ngOnInit() {
+    this.validateForm = this.fb.group({
+      ace: ['select * from t', [Validators.required]]
+    });
   }
 
   public change(value): void {
     console.log(value);
+  }
+
+  public submitForm(): void {
+    console.log(this.validateForm.value);
   }
 
 }
