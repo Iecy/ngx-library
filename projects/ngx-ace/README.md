@@ -4,21 +4,17 @@
 
 ## 开始使用
 
-- <a href="#install">安装</a>
-- <a href="#use">使用</a>
-- <a href="#api">API</a>
+- <a name="install">安装</a>
+- <a name="use">使用</a>
+- <a name="api"> Api说明</a>
 
-
-
-## <a href="install">安装</a>
+## [安装](#install)
 
 ```bash
 npm i ngx-ace-icy
 ```
 
-
-
-## <a href="use">使用</a>
+## [使用](#use)
 
 安装成功后需要在项目中引入对应的`ace`的模式、主题文件。比如：需要的时`sql`语言：
 
@@ -48,8 +44,6 @@ npm i ngx-ace-icy
   }
 }
 ```
-
-
 
 ### 项目引入
 
@@ -135,8 +129,7 @@ export class AppComponent implements OnInit {
 ```
 
 
-
-### <a href="api"> Api说明</a>
+### [API](#api)
 
 | 名称              | 说明                                                         | 类型                   |  必填   |    默认值    |
 | :---------------- | :----------------------------------------------------------- | :--------------------- | :-----: | :----------: |
