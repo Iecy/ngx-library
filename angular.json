@@ -245,7 +245,14 @@
               "node_modules/ant-reset-private/ant-reset-private.min.css",
               "projects/dome/src/styles.scss"
             ],
-            "scripts": [],
+            "scripts": [
+              "./node_modules/ace-builds/src-min/ace.js",
+              "./node_modules/ace-builds/src-min/mode-sql.js",
+              "./node_modules/ace-builds/src-min/theme-xcode.js",
+              "./node_modules/ace-builds/src-min/snippets/text.js",
+              "./node_modules/ace-builds/src-min/snippets/sql.js",
+              "./node_modules/ace-builds/src-min/theme-monokai.js"
+            ],
             "es5BrowserSupport": true
           },
           "configurations": {
@@ -418,6 +425,41 @@
             "tsConfig": [
               "projects/ngx-grid-layout/tsconfig.lib.json",
               "projects/ngx-grid-layout/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "ngx-ace": {
+      "root": "projects/ngx-ace",
+      "sourceRoot": "projects/ngx-ace/src",
+      "projectType": "library",
+      "prefix": "c",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/ngx-ace/tsconfig.lib.json",
+            "project": "projects/ngx-ace/ng-package.json"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/ngx-ace/src/test.ts",
+            "tsConfig": "projects/ngx-ace/tsconfig.spec.json",
+            "karmaConfig": "projects/ngx-ace/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/ngx-ace/tsconfig.lib.json",
+              "projects/ngx-ace/tsconfig.spec.json"
             ],
             "exclude": [
               "**/node_modules/**"

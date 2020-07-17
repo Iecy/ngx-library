@@ -72,6 +72,12 @@
       ],
       "ngx-grid-layout/*": [
         "projects/ngx-grid-layout/src/lib/*"
+      ],
+      "ngx-ace": [
+        "projects/ngx-ace/src"
+      ],
+      "ngx-ace/*": [
+        "projects/ngx-ace/src/*"
       ]
     }
   }

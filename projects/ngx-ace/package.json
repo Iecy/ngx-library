@@ -1,0 +1,39 @@
+{
+  "name": "ngx-ace-icy",
+  "version": "0.0.4",
+  "peerDependencies": {
+    "@angular/common": "^7.2.0",
+    "@angular/core": "^7.2.0",
+    "ace-builds": "^1.4.11"
+  },
+  "dependencies": {
+    "ace-builds": "^1.4.11"
+  },
+  "description": "angular7+版本以上ace语法编辑器",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Iecy/ngx-library/tree/master/projects/ngx-ace"
+  },
+  "license": "MIT",
+  "homepage": "https://github.com/Iecy/ngx-library/tree/master/projects/ngx-ace",
+  "bugs": {
+    "url": "https://github.com/Iecy/ngx-library/issues"
+  },
+  "keywords": [
+    "angular2",
+    "angular",
+    "ng2",
+    "ng",
+    "ace",
+    "angular ace",
+    "angular2 ace",
+    "ng2 ace",
+    "ng2-ace",
+    "ngx-ace",
+    "ace-builds",
+    "angular ace-builds",
+    "angular2 ace-builds",
+    "ng2 ace-builds",
+    "ngx ace-builds"
+  ]
+}

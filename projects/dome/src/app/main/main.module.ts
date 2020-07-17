@@ -10,6 +10,7 @@ import { FullScreenComponent } from './full-screen/full-screen.component';
 import { ViewInfoComponent } from './view-info/view-info.component';
 import { AngularCreatePdfComponent } from './angular-create-pdf/angular-create-pdf.component';
 import { GridLayoutComponent } from './grid-layout/grid-layout.component';
+import { AceComponent } from './ace/ace.component';
 
 const routes: Routes = [
   {
@@ -40,13 +41,15 @@ const routes: Routes = [
   {
     path: 'grid-layout',
     component: GridLayoutComponent,
+  }, {
+    path: 'ace',
+    component: AceComponent,
   }
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule],
-  declarations: []
+  exports: [RouterModule]
 })
 export class AppRoutingModule { }
 
@@ -57,7 +60,8 @@ export class AppRoutingModule { }
     FullScreenComponent,
     ViewInfoComponent,
     AngularCreatePdfComponent,
-    GridLayoutComponent
+    GridLayoutComponent,
+    AceComponent,
   ],
   imports: [
     CommonModule,

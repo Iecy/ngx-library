@@ -28,14 +28,14 @@ const icons: IconDefinition[] = [MenuFoldOutline, MenuOutline];
     NzMenuModule,
   ],
   declarations: [
-    LayoutSideComponent, 
-    LayoutSideRouterComponent, 
-    LayoutHeaderComponent, 
+    LayoutSideComponent,
+    LayoutSideRouterComponent,
+    LayoutHeaderComponent,
     LayoutSliderComponent
   ],
   exports: [
-    LayoutSideComponent, 
-    LayoutSideRouterComponent, 
+    LayoutSideComponent,
+    LayoutSideRouterComponent,
     LayoutHeaderComponent,
     LayoutSliderComponent,
   ],
