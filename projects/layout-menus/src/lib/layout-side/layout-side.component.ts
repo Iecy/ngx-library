@@ -16,9 +16,9 @@ export class LayoutSideComponent implements OnInit {
   private data: Menu[] = [];
   private unsubscribe$ = new Subject<void>();
   /** 自定义菜单顶部template */
-  @ViewChild('menuTop', { read: ViewContainerRef }) menuTopContainer: ViewContainerRef;
+  @ViewChild('menuTop', { read: ViewContainerRef, static: true }) menuTopContainer: ViewContainerRef;
   /** 自定义菜单底部template */
-  @ViewChild('menuBottom', { read: ViewContainerRef }) menuBottomContainer: ViewContainerRef;
+  @ViewChild('menuBottom', { read: ViewContainerRef, static: true }) menuBottomContainer: ViewContainerRef;
   @Input() public cShowTrigger = true;
   @Input() openStrictly = false;
   @Input() recursivePath = true;
@@ -54,11 +54,11 @@ export class LayoutSideComponent implements OnInit {
   }
   /** 自定义头部 */
   @Input()
-  @ViewChild('renderLogoTemplate')
+  @ViewChild('renderLogoTemplate', { static: true })
   cLogoRender: TemplateRef<void>;
   /** 自定义菜单元素 */
   @Input()
-  @ViewChild('menuItemRouterTemplate')
+  @ViewChild('menuItemRouterTemplate', { static: true })
   cMenuItemRouter: TemplateRef<{ $implicit: any, size: number }>;
 
   @Input() public isOutSideMenuOpen = false;

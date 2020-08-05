@@ -29,7 +29,7 @@ const testLayout = [
   styleUrls: ['./grid-layout.component.css']
 })
 export class GridLayoutComponent implements OnInit {
-  @ViewChild('content') public contentEl: ElementRef;
+  @ViewChild('content', { static: true }) public contentEl: ElementRef;
   public layout = JSON.parse(JSON.stringify(testLayout));
   public index: number = 0;
   public draggable = true;

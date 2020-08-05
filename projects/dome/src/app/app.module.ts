@@ -17,11 +17,11 @@ const routes: Routes = [
   },
   {
       path: 'tools',
-      loadChildren: './main/main.module#MainModule',
+      loadChildren: () => import('./main/main.module').then(m => m.MainModule),
   },
   {
       path: 'water-marker',
-      loadChildren: './home/home.module#HomeModule',
+      loadChildren: () => import('./home/home.module').then(m => m.HomeModule),
   },
   {
       path: '**',

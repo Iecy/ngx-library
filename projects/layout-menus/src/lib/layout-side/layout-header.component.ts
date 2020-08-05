@@ -20,9 +20,9 @@ export class LayoutHeaderComponent {
   /** 是否显示Logo区域 */
   @Input() public cIsLogo = false;
   /** 自定义菜单右侧template */
-  @ViewChild('rightTemplate', { read: ViewContainerRef }) menuRightContainer: ViewContainerRef;
+  @ViewChild('rightTemplate', { read: ViewContainerRef, static: true }) menuRightContainer: ViewContainerRef;
   /** 自定义菜单左侧头部template */
-  @ViewChild('leftBeforeTemplate', { read: ViewContainerRef }) menuLeftBeforeContainer: ViewContainerRef;
+  @ViewChild('leftBeforeTemplate', { read: ViewContainerRef, static: true }) menuLeftBeforeContainer: ViewContainerRef;
   /** 自定义菜单左侧头部 */
   @Input() set cMenuLeftBefore(template: TemplateRef<void>) {
     if (template) {
@@ -36,7 +36,7 @@ export class LayoutHeaderComponent {
   @Input() public cLogoConfig: LogoConfig;
   /** 自定义头部 */
   @Input()
-  @ViewChild('renderLogoTemplate')
+  @ViewChild('renderLogoTemplate', { static: true })
   cLogoRender: TemplateRef<void>;
   /** 右侧 */
   @Input() set cMenuRight(template: TemplateRef<void>) {
@@ -47,7 +47,7 @@ export class LayoutHeaderComponent {
   }
   /** 左侧菜单自定义 */
   @Input()
-  @ViewChild('renderLeftTemplate')
+  @ViewChild('renderLeftTemplate', { static: true })
   cMenuLeft: TemplateRef<void>;
   /** 系统统一外部菜单是否展开 */
   @Input() public isOutSideMenuOpen = false;

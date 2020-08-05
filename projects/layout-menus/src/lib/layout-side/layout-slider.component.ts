@@ -18,9 +18,9 @@ export class LayoutSliderComponent implements OnInit, OnDestroy {
   public data: Menu[] = [];
   private unsubscribe$ = new Subject<void>();
   /** 自定义菜单顶部template */
-  @ViewChild('menuTop') menuTopContainer: ViewContainerRef;
+  @ViewChild('menuTop', { static: true }) menuTopContainer: ViewContainerRef;
   /** 自定义菜单底部template */
-  @ViewChild('menuBottom') menuBottomContainer: ViewContainerRef;
+  @ViewChild('menuBottom', { static: true }) menuBottomContainer: ViewContainerRef;
 
   @Input() cCollapsed: boolean;
   @Input() recursivePath = true;
@@ -57,7 +57,7 @@ export class LayoutSliderComponent implements OnInit, OnDestroy {
   /** 系统logo控制 */
   @Input() public cLogoConfig: LogoConfig;
   @Input()
-  @ViewChild('renderLogoTemplate')
+  @ViewChild('renderLogoTemplate', { static: true })
   cLogoRender: TemplateRef<void>;
 
   @Output() outsideMouseover = new EventEmitter<any>();
