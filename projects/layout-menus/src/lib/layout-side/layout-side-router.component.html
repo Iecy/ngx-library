@@ -3,8 +3,8 @@
   [attr.href]="menu.attributes.router"
   [attr.target]="menu.attributes.target ? menu.attributes.target : '_blank'"
   nz-tooltip
-  [nzTitle]="cCollapsed ? menu?.attributes?.title : ''"
-  nzPlacement="right"
+  [nzTooltipTitle]="cCollapsed ? menu?.attributes?.title : ''"
+  nzTooltipPlacement="right"
   class="menu-item"
 >
   <img *ngIf="menu.attributes.iconImage" [style.width.px]="imgSize" [src]="sanitizer.bypassSecurityTrustUrl(menu.attributes.iconImage)">
@@ -14,8 +14,8 @@
 <ng-template  #routerLinkTemplate>
   <a
     nz-tooltip
-    [nzTitle]="cCollapsed ? menu?.attributes?.title : ''"
-    nzPlacement="right"
+    [nzTooltipTitle]="cCollapsed ? menu?.attributes?.title : ''"
+    nzTooltipPlacement="right"
     [routerLink]="menu.attributes.router"
     routerLinkActive
     #routerRef="routerLinkActive"

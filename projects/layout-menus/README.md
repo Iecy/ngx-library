@@ -336,8 +336,8 @@ import { Component } from '@angular/core';
       <ng-container *ngIf="menu.attributes.subMenu">
         <div
           nz-tooltip
-          [nzTitle]="isCollapsed ? menu?.attributes?.title : ''"
-          nzPlacement="right"
+          [nzTooltipTitle]="isCollapsed ? menu?.attributes?.title : ''"
+          nzTooltipPlacement="right"
           class="menu-item"
           [routerLink]="menu.attributes.router"
           routerLinkActive

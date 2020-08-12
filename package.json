@@ -25,6 +25,7 @@
     "html2canvas": "^1.0.0-rc.1",
     "interactjs": "^1.4.0",
     "jspdf": "^1.5.3",
+    "ng-zorro-antd": "^9.3.0",
     "rxjs": "~6.6.2",
     "tslib": "^1.13.0",
     "zone.js": "~0.10.3"

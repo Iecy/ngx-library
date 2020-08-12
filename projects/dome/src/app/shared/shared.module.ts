@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
-import { NgZorroAntdModule } from 'ant-reset-private';
+import { NgZorroAntdModule } from 'ng-zorro-antd';
 import { CookieModule } from 'cookie';
 import { LoggerModule } from 'logger';
 import { LayoutMenusModule } from 'layout-menus';

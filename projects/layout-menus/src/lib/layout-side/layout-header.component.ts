@@ -35,9 +35,15 @@ export class LayoutHeaderComponent {
   /** 系统logo控制 */
   @Input() public cLogoConfig: LogoConfig;
   /** 自定义头部 */
-  @Input()
-  @ViewChild('renderLogoTemplate', { static: true })
-  cLogoRender: TemplateRef<void>;
+  @ViewChild('renderLogoTemplate', { static: true }) private renderLogoTemp: TemplateRef<void>;
+  @Input() set cLogoRender(logoTmp: TemplateRef<void>) {
+    if (logoTmp !== null) {
+      this.renderLogoTemp = logoTmp;
+    }
+  }
+  get cLogoRender(): TemplateRef<void> {
+    return this.renderLogoTemp;
+  }
   /** 右侧 */
   @Input() set cMenuRight(template: TemplateRef<void>) {
     if (template) {
@@ -46,7 +52,7 @@ export class LayoutHeaderComponent {
     }
   }
   /** 左侧菜单自定义 */
-  @Input()
+  // @Input()
   @ViewChild('renderLeftTemplate', { static: true })
   cMenuLeft: TemplateRef<void>;
   /** 系统统一外部菜单是否展开 */

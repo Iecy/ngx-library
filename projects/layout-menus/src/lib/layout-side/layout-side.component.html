@@ -1,9 +1,10 @@
-<div *ngIf="cLogoRender" class="side-menu-logo-content">
+<div *ngIf="cShowLogoRender"  class="side-menu-logo-content">
+  你好
   <ng-template
     [ngTemplateOutlet]="cLogoRender"
   ></ng-template>
 </div>
-<div class="side-menu-container" [style.top.px]="cLogoRender ? 48 : 0" [style.bottom.px]="cShowTrigger ? 30 : 0">
+<div class="side-menu-container" [style.top.px]="cShowLogoRender ? 48 : 0" [style.bottom.px]="cShowTrigger ? 30 : 0">
   <ng-template #menuTop></ng-template>
   <ul class="menu-list">
     <ng-container *ngTemplateOutlet="menuTpl; context: { $implicit: cMenuList, imgSize: 16 }"></ng-container>
@@ -15,8 +16,8 @@
           [class.selected]="menu._selected"
           *ngIf="!menu.children || menu.children.length === 0"
           nz-tooltip
-          [nzTitle]="(cCollapsed) ? menu?.attributes?.title : ''"
-          nzPlacement="right"
+          [nzTooltipTitle]="(cCollapsed) ? menu?.attributes?.title : ''"
+          nzTooltipPlacement="right"
           (click)="to($event, menu)"
         >
           <ng-template [ngTemplateOutlet]="cMenuItemRouter" [ngTemplateOutletContext]="{ $implicit: menu, size: imgSize, fold: cCollapsed }"></ng-template>
@@ -35,17 +36,6 @@
             </ul>
           </ng-container>
         </li>
-        <!-- <li
-        (click)="expand($event, menu)"
-        [class.collapsed]="cCollapsed"
-        >
-          <ng-template [ngTemplateOutlet]="cMenuItemRouter" [ngTemplateOutletContext]="{ $implicit: menu, size: imgSize, fold: cCollapsed }"></ng-template>
-          <ng-container *ngIf="menu.show && menu.children && menu.children.length">
-            <ul>
-              <ng-container *ngTemplateOutlet="menuTpl; context: { $implicit: menu.children, imgSize: imgSize - 4 }"></ng-container>
-            </ul>
-          </ng-container>
-        </li> -->
       </ng-container>
     </ng-template>
   </ul>

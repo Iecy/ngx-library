@@ -2,11 +2,16 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
+import { NZ_I18N, zh_CN, NzNotificationService } from 'ng-zorro-antd';
 
-import { AppComponent } from './app.component';
-// import { SharedModule } from 'shared/shared.module';
 import { SharedModule } from './shared/shared.module';
-import { NZ_I18N, zh_CN, NZ_NOTIFICATION_CONFIG } from 'ant-reset-private';
+import { AppComponent } from './app.component';
+
+import { registerLocaleData } from '@angular/common';
+import zh from '@angular/common/locales/zh';
+registerLocaleData(zh);
+
+
 
 import { RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
@@ -50,7 +55,7 @@ export class AppRoutingModule { }
   ],
   providers: [
     { provide: NZ_I18N, useValue: zh_CN },
-    { provide: NZ_NOTIFICATION_CONFIG, useValue: { nzDuration: 3000, nzPlacement: 'bottomRight', } }
+    { provide: NzNotificationService, useValue: { nzDuration: 3000, nzPlacement: 'bottomRight', } }
   ],
   bootstrap: [AppComponent]
 })

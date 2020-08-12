@@ -29,15 +29,13 @@ export class LayoutSideComponent implements OnInit {
     this.resume();
     this.openedByUrl(this.router.url);
     console.log(this.data, 'this is data.');
-  };
+  }
   get cMenuList(): Menu[] {
     return this.data;
   }
   /** 左侧菜单是否展开 */
   @Input() public cCollapsed: boolean;
   @Output() public cCollapsedChange: EventEmitter<boolean> = new EventEmitter();
-  /** 系统logo控制 */
-  @Input() public cLogoConfig: LogoConfig;
   /** 头部 */
   @Input() set cMenuTop(template: TemplateRef<void>) {
     if (template) {
@@ -53,13 +51,30 @@ export class LayoutSideComponent implements OnInit {
     }
   }
   /** 自定义头部 */
-  @Input()
-  @ViewChild('renderLogoTemplate', { static: true })
-  cLogoRender: TemplateRef<void>;
+  @Input() cShowLogoRender: boolean;
+  /** 系统logo控制 */
+  @Input() public cLogoConfig: LogoConfig;
+  @ViewChild('renderLogoTemplate', { static: true }) public renderLogoTem: TemplateRef<void>;
+  @Input() set cLogoRender(cLogo: TemplateRef<void>) {
+    if (cLogo !== null) {
+      this.renderLogoTem = cLogo;
+    }
+  }
+  get cLogoRender() {
+    return this.renderLogoTem;
+  }
   /** 自定义菜单元素 */
-  @Input()
   @ViewChild('menuItemRouterTemplate', { static: true })
-  cMenuItemRouter: TemplateRef<{ $implicit: any, size: number }>;
+  private _cMenuItemRouter: TemplateRef<{ $implicit: any, size: number }>;
+  @Input() set cMenuItemRouter(item: TemplateRef<{ $implicit: any, size: number }>) {
+    if (item !== null) {
+      this._cMenuItemRouter = item;
+    }
+  }
+
+  get cMenuItemRouter() {
+    return this._cMenuItemRouter;
+  }
 
   @Input() public isOutSideMenuOpen = false;
   @Output() outsideMouseover = new EventEmitter<any>();
@@ -73,6 +88,8 @@ export class LayoutSideComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    console.log('this is layout side.');
+
     this.router.events.pipe(takeUntil(this.unsubscribe$)).subscribe(e => {
       if (e instanceof NavigationEnd) {
         this.openedByUrl(e.urlAfterRedirects);

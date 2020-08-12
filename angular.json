@@ -242,7 +242,7 @@
               "projects/dome/src/assets"
             ],
             "styles": [
-              "node_modules/ant-reset-private/ant-reset-private.min.css",
+              "node_modules/ng-zorro-antd/ng-zorro-antd.min.css",
               "projects/dome/src/styles.scss"
             ],
             "scripts": [

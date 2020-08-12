@@ -15,8 +15,8 @@
           [nzPaddingLeft]="menu._depth * 48"
           *ngIf="!menu.children || menu.children.length === 0"
           nz-tooltip
-          [nzTitle]="(cCollapsed && menu._depth === 0) ? menu?.attributes?.title : ''"
-          nzPlacement="right"
+          [nzTooltipTitle]="(cCollapsed && menu._depth === 0) ? menu?.attributes?.title : ''"
+          nzTooltipPlacement="right"
           [nzDisabled]="menu.disabled"
           [nzSelected]="menu._selected"
           (click)="to(menu)"
