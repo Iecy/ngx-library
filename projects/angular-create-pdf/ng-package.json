@@ -2,6 +2,14 @@
   "$schema": "../../node_modules/ng-packagr/ng-package.schema.json",
   "dest": "../../dist/angular-create-pdf",
   "lib": {
-    "entryFile": "src/public-api.ts"
-  }
+    "entryFile": "src/public-api.ts",
+    "umdModuleIds": {
+      "jspdf": "^1.5.3",
+      "html2canvas": "^1.0.0-rc.1"
+    }
+  },
+  "whitelistedNonPeerDependencies": [
+    "html2canvas",
+    "jspdf"
+  ]
 }

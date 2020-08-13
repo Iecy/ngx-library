@@ -1,11 +1,11 @@
 {
   "name": "ngx-water-marker",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "author": "paopao",
-  "description": "angular7+ 水印背景",
+  "description": "angular9+ 水印背景",
   "peerDependencies": {
-    "@angular/common": "^7.2.0",
-    "@angular/core": "^7.2.0"
+    "@angular/core": "^9.1.12",
+    "@angular/common": "^9.1.12"
   },
   "license": "MIT",
   "repository": {

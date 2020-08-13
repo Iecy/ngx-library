@@ -3,6 +3,9 @@
   "exclude": [
     "Scripts/app"
   ],
+  "angularCompilerOptions": {
+    "enableIvy": false,
+  },
   "compilerOptions": {
     "baseUrl": "./",
     "downlevelIteration": true,

@@ -14,8 +14,8 @@ import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
 import { NzIconModule, NZ_ICON_DEFAULT_TWOTONE_COLOR, NZ_ICONS } from 'ng-zorro-antd/icon';
 // 引入你需要的图标，比如你需要 fill 主题的 AccountBook Alert 和 outline 主题的 Alert，推荐 ✔️
 import { MenuFoldOutline, MenuOutline } from '@ant-design/icons-angular/icons';
-import { NzMenuModule, NzMenuService, NzMenuBaseService } from 'ng-zorro-antd';
-// import {NzMenuModule, MenuService} from 'ng-zorro-antd';
+// import { NzMenuModule, NzMenuService, NzMenuBaseService } from 'ng-zorro-antd';
+import {NzMenuModule, MenuService} from 'ng-zorro-antd';
 
 const icons: IconDefinition[] = [MenuFoldOutline, MenuOutline];
 
@@ -43,7 +43,7 @@ const icons: IconDefinition[] = [MenuFoldOutline, MenuOutline];
   providers: [
     { provide: NZ_ICON_DEFAULT_TWOTONE_COLOR, useValue: '#00ff00' }, // 不提供的话，即为 Ant Design 的主题蓝色
     { provide: NZ_ICONS, useValue: icons },
-    NzMenuService,
+    MenuService,
   ],
 })
 export class LayoutMenusModule { }

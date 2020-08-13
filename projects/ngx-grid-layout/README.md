@@ -1,6 +1,6 @@
 # NgxGridLayout
 
-ngx-grid-layout是一个类似于[Gridster](http://dsmorse.github.io/gridster.js/)适用于angular7.X之上。[demo地址](https://ngx-library.now.sh/tools/grid-layout)
+ngx-grid-layout是一个类似于[Gridster](http://dsmorse.github.io/gridster.js/)适用于angular9.X之上。[demo地址](https://ngx-library.now.sh/tools/grid-layout)
 
 ## 开始使用
 

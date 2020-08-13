@@ -6,15 +6,12 @@
 
 <form nz-form [formGroup]="validateForm">
   <nz-form-item>
-    <nz-form-control>
+    <nz-form-control nzErrorTip="Please input your username!">
       <c-ngx-ace
       formControlName="ace" 
       id="ace"
       [options]="aclOptions"
       ></c-ngx-ace>
-      <nz-form-explain *ngIf="validateForm.get('ace')?.dirty && validateForm.get('ace')?.errors"
-        >Please input your username!</nz-form-explain
-      >
     </nz-form-control>
   </nz-form-item>
   <footer>

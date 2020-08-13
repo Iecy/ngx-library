@@ -12,7 +12,7 @@
       <ng-container *ngFor="let menu of menus">
         <li
           nz-menu-item
-          [nzPaddingLeft]="menu._depth * 48"
+          [nzPaddingLeft]="!cCollapsed ? menu._depth * 48 : 16"
           *ngIf="!menu.children || menu.children.length === 0"
           nz-tooltip
           [nzTooltipTitle]="(cCollapsed && menu._depth === 0) ? menu?.attributes?.title : ''"
@@ -63,7 +63,7 @@
       [nzIconfont]="icon.iconfont"
     ></i>
     <i *ngSwitchCase="'iconfont'" nz-icon [nzIconfont]="icon.iconfont"></i>
-    <img [style.width.px]="imgSize" *ngSwitchCase="'img'" [src]="icon.value" />
+    <img class="side-menu-icon--img" [style.width.px]="imgSize" *ngSwitchCase="'img'" [src]="icon.value" />
     <i *ngSwitchDefault class=" {{ icon.value }}"></i>
   </ng-container>
 </ng-template>

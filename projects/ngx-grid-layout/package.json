@@ -1,8 +1,13 @@
 {
   "name": "c-ngx-grid-layout",
-  "version": "0.0.5",
+  "version": "2.0.0",
   "peerDependencies": {
-    "@angular/common": "^7.2.0",
-    "@angular/core": "^7.2.0"
+    "@angular/core": "^9.1.12",
+    "@angular/common": "^9.1.12"
+  },
+  "dependencies": {
+    "@interactjs/types": "^1.4.0",
+    "interactjs": "^1.4.0",
+    "element-resize-detector": "^1.2.1"
   }
 }

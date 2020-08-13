@@ -1,11 +1,11 @@
 {
   "name": "ngx-logger-icy",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "author": "paopao",
-  "description": "angular4+以上的版本可以使用；继承console上的方法，可以根据环境变量控制log是否输出，解决开发环境需要打印一些log日志但是生产环境并不需要",
+  "description": "angular9+以上的版本可以使用；继承console上的方法，可以根据环境变量控制log是否输出，解决开发环境需要打印一些log日志但是生产环境并不需要",
   "peerDependencies": {
-    "@angular/common": "^7.2.0",
-    "@angular/core": "^7.2.0"
+    "@angular/core": "^9.1.12",
+    "@angular/common": "^9.1.12"
   },
   "license": "MIT",
   "repository": {

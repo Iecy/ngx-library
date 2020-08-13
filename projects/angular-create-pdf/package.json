@@ -1,10 +1,14 @@
 {
   "name": "angular-create-pdf",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "author": "miyoko",
   "peerDependencies": {
-    "@angular/common": "^7.2.0",
-    "@angular/core": "^7.2.0"
+    "@angular/core": "^9.1.12",
+    "@angular/common": "^9.1.12"
+  },
+  "dependencies": {
+    "jspdf": "^1.5.3",
+    "html2canvas": "^1.0.0-rc.1"
   },
   "description": "angular7.0+ ViewInfo",
   "repository": {

@@ -1,5 +1,5 @@
 # ngx-water-marker
-> angular7+ 水印背景[demo地址](https://ngx-library.now.sh/water-marker/main)
+> angular9+ 水印背景[demo地址](https://ngx-library.now.sh/water-marker/main)
 ## 1、开始使用
   - <a href="#install">安装</a>
   - <a href="#use">使用</a>

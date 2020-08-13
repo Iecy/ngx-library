@@ -3,7 +3,9 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
-import { NgZorroAntdModule } from 'ng-zorro-antd';
+import { NzButtonModule, NzInputModule, NzLayoutModule, NzSelectModule, NzFormModule} from 'ng-zorro-antd';
+// import { NgZorroAntdModule } from 'ng-zorro-antd';
+// import { } from 'ng-zorro-antd/buttons';
 import { CookieModule } from 'cookie';
 import { LoggerModule } from 'logger';
 import { LayoutMenusModule } from 'layout-menus';
@@ -21,7 +23,12 @@ import { NgxAceModule } from 'ngx-ace';
     RouterModule,
     FormsModule,
     ReactiveFormsModule,
-    NgZorroAntdModule,
+    // NgZorroAntdModule,
+    NzButtonModule,
+    NzLayoutModule,
+    NzInputModule,
+    NzSelectModule,
+    NzFormModule,
     CookieModule.forRoot(),
     LoggerModule.forRoot(),
     LayoutMenusModule,
@@ -35,7 +42,12 @@ import { NgxAceModule } from 'ngx-ace';
   exports: [
     FormsModule,
     ReactiveFormsModule,
-    NgZorroAntdModule,
+    // NgZorroAntdModule,
+    NzButtonModule,
+    NzLayoutModule,
+    NzSelectModule,
+    NzInputModule,
+    NzFormModule,
     CookieModule,
     LoggerModule,
     LayoutMenusModule,

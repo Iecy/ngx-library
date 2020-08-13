@@ -1,6 +1,6 @@
 # angular ace编辑器
 
-基于angular7、ace-builds构建的ace编辑器组件。[demo地址](https://ngx-library.now.sh/tools/ace)
+基于angular9、ace-builds构建的ace编辑器组件。[demo地址](https://ngx-library.now.sh/tools/ace)
 
 ## 开始使用
 
