@@ -1,6 +1,6 @@
 {
   "name": "layout-menus",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "peerDependencies": {
     "@angular/core": "^9.1.12",
     "@angular/common": "^9.1.12"

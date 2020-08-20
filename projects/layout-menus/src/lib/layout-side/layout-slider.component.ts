@@ -56,9 +56,15 @@ export class LayoutSliderComponent implements OnInit, OnDestroy {
   @Input() cShowLogoRender: boolean;
   /** 系统logo控制 */
   @Input() public cLogoConfig: LogoConfig;
-  // @ViewChild('renderLogoTemplate', { static: true })
-  @Input()
-  cLogoRender: TemplateRef<void>;
+  @ViewChild('renderLogoTemplate', { static: true }) public renderLogoTemp: TemplateRef<void>;
+  @Input() set cLogoRender(logoRender: TemplateRef<void>) {
+    if (logoRender) {
+      this.renderLogoTemp = logoRender;
+    }
+  }
+  get cLogoRender(): TemplateRef<void> {
+    return this.renderLogoTemp;
+  }
 
   @Output() outsideMouseover = new EventEmitter<any>();
   @Output() outsideMouseleave = new EventEmitter<any>();

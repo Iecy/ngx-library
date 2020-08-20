@@ -52,9 +52,15 @@ export class LayoutHeaderComponent {
     }
   }
   /** 左侧菜单自定义 */
-  // @Input()
-  @ViewChild('renderLeftTemplate', { static: true })
-  cMenuLeft: TemplateRef<void>;
+  @ViewChild('renderLeftTemplate', { static: true }) public renderLeftTemp: TemplateRef<void>;
+  @Input() set cMenuLeft(menuLeft: TemplateRef<void>) {
+    if (menuLeft) {
+      this.renderLeftTemp = menuLeft;
+    }
+  }
+  get cMenuLeft(): TemplateRef<void> {
+    return this.renderLeftTemp;
+  }
   /** 系统统一外部菜单是否展开 */
   @Input() public isOutSideMenuOpen = false;
   @Output() outsideMouseover = new EventEmitter<any>();
